@@ -62,4 +62,5 @@ public class GarageController {
         billPhoto.transferTo(new File(destination, billPhoto.getOriginalFilename()));
         return new ResponseEntity<>("File Uploaded Successfully.", HttpStatus.OK);
     }
+    //asdfasdfsafds
 }
