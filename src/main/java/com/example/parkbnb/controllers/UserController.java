@@ -156,5 +156,8 @@ public class UserController {
     public String goToMain(){
         return "main";
     } 
- 
+ @GetMapping(value="/forTest_delete_after")
+    public String forTest_delete_after(){
+        return "main";
+    } 
 }
