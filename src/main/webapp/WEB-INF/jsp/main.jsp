@@ -15,5 +15,7 @@
         <h1>Hello World!</h1>
         
         ${userSession.userName}
+        
+        <a href="/addNewGarage">addGarage</a>
     </body>
 </html>
