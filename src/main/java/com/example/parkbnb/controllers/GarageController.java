@@ -32,13 +32,13 @@ public class GarageController {
 
     @Autowired
     HttpServletRequest request;
-    
+
     @GetMapping(value = "/addNewGarageForm")
     public String def() {
-        
+
         return "addGarage";
     }
-    
+
     @RequestMapping(value = "addGarage", method = RequestMethod.POST)
     public ResponseEntity<String> fileUpload(@RequestParam("entrancePic") MultipartFile entrancePic,
             @RequestParam("billPhoto") MultipartFile billPhoto,
@@ -49,15 +49,11 @@ public class GarageController {
             throws IOException {
 
         String dest = request.getSession().getServletContext().getRealPath("/"); //in project folder -> parkbnb\target\parkbnb-0.0.1-SNAPSHOT\static\images\
-//        String dest = System.getProperty("user.dir");
-User sessionUser = (User)session.getAttribute("userSession");
-        File destination = new File(new File(new File(dest).getParent()).getParent()+"\\src\\main\\resources\\static\\assets\\garageImages\\"+sessionUser.getUserId());
-        System.out.println("dest:"+destination.getAbsolutePath());
-        System.out.println(dest);
-//        File destination = new File(dest + "1"); //TODO cahnge dir to id from garage
-//        System.out.println(destination.mkdirs());
-//        entrancePic.transferTo(new File(destination, entrancePic.getOriginalFilename()));
-//        billPhoto.transferTo(new File(destination, billPhoto.getOriginalFilename()));
+        User sessionUser = (User) session.getAttribute("userSession");
+        File destination = new File(new File(new File(dest).getParent()).getParent() + "\\src\\main\\resources\\static\\assets\\garageImages\\" + sessionUser.getUserId());
+        destination.mkdirs();
+        entrancePic.transferTo(new File(destination, entrancePic.getOriginalFilename()));
+        billPhoto.transferTo(new File(destination, billPhoto.getOriginalFilename()));
         return new ResponseEntity<>("File Uploaded Successfully.", HttpStatus.OK);
     }
 
@@ -67,12 +63,16 @@ User sessionUser = (User)session.getAttribute("userSession");
             @RequestParam("billPhoto") MultipartFile billPhoto,
             @RequestParam("coordinates") String coordinates,
             @RequestParam("address") String address,
-            @RequestParam("comment") String comment)
+            @RequestParam("comment") String comment,
+            HttpSession session)
             throws IOException {
 
-        File destination = new File("C:\\mymusic\\1"); //TODO cahnge dir to id from garage
-        System.out.println(destination.mkdirs());
+        String dest = request.getSession().getServletContext().getRealPath("/"); //in project folder -> parkbnb\target\parkbnb-0.0.1-SNAPSHOT\static\images\
+        User sessionUser = (User) session.getAttribute("userSession");
+        File destination = new File(new File(new File(dest).getParent()).getParent() + "\\src\\main\\resources\\static\\assets\\garageImages\\" + sessionUser.getUserId());
+        destination.mkdirs();
         entrancePic.transferTo(new File(destination, entrancePic.getOriginalFilename()));
+        spotPic.transferTo(new File(destination, spotPic.getOriginalFilename()));
         billPhoto.transferTo(new File(destination, billPhoto.getOriginalFilename()));
         return new ResponseEntity<>("File Uploaded Successfully.", HttpStatus.OK);
     }
