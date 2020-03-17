@@ -33,6 +33,12 @@ public class GarageController {
     @Autowired
     HttpServletRequest request;
     
+    @GetMapping(value = "/addNewGarageForm")
+    public String def() {
+        
+        return "addGarage";
+    }
+    
     @RequestMapping(value = "addGarage", method = RequestMethod.POST)
     public ResponseEntity<String> fileUpload(@RequestParam("entrancePic") MultipartFile entrancePic,
             @RequestParam("billPhoto") MultipartFile billPhoto,
