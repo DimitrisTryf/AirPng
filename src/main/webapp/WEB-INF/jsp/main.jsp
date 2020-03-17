@@ -16,6 +16,6 @@
         
         ${userSession.userName}
         
-        <a href="/addNewGarage">addGarage</a>
+        <a href="/addNewGarageForm">addGarage</a>
     </body>
 </html>
