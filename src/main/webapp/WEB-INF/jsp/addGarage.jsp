@@ -121,7 +121,7 @@
         <label for="multi">Multiple Spot Parking</label><br>
 
         <form action="/addGarage" method="POST"  enctype="multipart/form-data">
-            <input type="text" id="coordinates" name="coordinates" hidden>
+            <input type="text" id="coordinates" required="required" name="coordinates" hidden>
             <label for="address">Address: </label>
             <input type="text" required="required" id="address" name="address">
             <br/>
@@ -200,7 +200,7 @@
                     marker.setVisible(true);
 
                     //-------------------------------
-                    alert(marker.position);
+                    $('#coordinates').val(marker.position);
                     //-------------------------------
 
 
@@ -235,9 +235,9 @@
                 });
             }
         </script>
-<!--        <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSIaiFhO2rKFuM4YB9YbwatBt5u9Nk1Tk&libraries=places&callback=initMap"
-        async defer></script>-->
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnclN8JPTxPIwYqNZ1A2gQgrF-cdt95y4&libraries=places&callback=initMap"
+        async defer></script>
 
         <script type="text/javascript">
             $(document).ready((function () {
