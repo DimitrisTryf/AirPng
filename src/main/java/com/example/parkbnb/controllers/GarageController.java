@@ -5,7 +5,10 @@
  */
 package com.example.parkbnb.controllers;
 
+import com.example.parkbnb.models.Garage;
 import com.example.parkbnb.models.User;
+import com.example.parkbnb.services.GarageServiceInterface;
+import com.example.parkbnb.utils.GarageUtils;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -32,6 +35,8 @@ public class GarageController {
 
     @Autowired
     HttpServletRequest request;
+    @Autowired
+    GarageServiceInterface gsi;
 
     @GetMapping(value = "/addNewGarageForm")
     public String def() {
@@ -48,12 +53,25 @@ public class GarageController {
             HttpSession session)
             throws IOException {
 
-        String dest = request.getSession().getServletContext().getRealPath("/"); //in project folder -> parkbnb\target\parkbnb-0.0.1-SNAPSHOT\static\images\
         User sessionUser = (User) session.getAttribute("userSession");
-        File destination = new File(new File(new File(dest).getParent()).getParent() + "\\src\\main\\resources\\static\\assets\\garageImages\\" + sessionUser.getUserId());
+
+        Garage temp = new Garage();
+        temp.setGarageAddress(address);
+        GarageUtils garageUtils = new GarageUtils();
+        String[] tempCoords = garageUtils.manageLotLat(coordinates);
+        temp.setGarageLongtitude(tempCoords[0]);
+        temp.setGarageLatitude(tempCoords[1]);
+        temp.setGarageOwnercomment(comment);
+        temp.setGarageUserid(sessionUser);
+
+        temp = gsi.addGarage(temp);
+        
+        String dest = request.getSession().getServletContext().getRealPath("/"); //in project folder -> parkbnb\target\parkbnb-0.0.1-SNAPSHOT\static\images\
+        File destination = new File(new File(new File(dest).getParent()).getParent() + "\\src\\main\\resources\\static\\assets\\garageImages\\" + temp.getGarageId());
         destination.mkdirs();
         entrancePic.transferTo(new File(destination, entrancePic.getOriginalFilename()));
         billPhoto.transferTo(new File(destination, billPhoto.getOriginalFilename()));
+
         return new ResponseEntity<>("File Uploaded Successfully.", HttpStatus.OK);
     }
 
@@ -67,13 +85,26 @@ public class GarageController {
             HttpSession session)
             throws IOException {
 
+       User sessionUser = (User) session.getAttribute("userSession");
+
+        Garage temp = new Garage();
+        temp.setGarageAddress(address);
+        GarageUtils garageUtils = new GarageUtils();
+        String[] tempCoords = garageUtils.manageLotLat(coordinates);
+        temp.setGarageLongtitude(tempCoords[0]);
+        temp.setGarageLatitude(tempCoords[1]);
+        temp.setGarageOwnercomment(comment);
+        temp.setGarageUserid(sessionUser);
+
+        temp = gsi.addGarage(temp);
+        
         String dest = request.getSession().getServletContext().getRealPath("/"); //in project folder -> parkbnb\target\parkbnb-0.0.1-SNAPSHOT\static\images\
-        User sessionUser = (User) session.getAttribute("userSession");
-        File destination = new File(new File(new File(dest).getParent()).getParent() + "\\src\\main\\resources\\static\\assets\\garageImages\\" + sessionUser.getUserId());
+        File destination = new File(new File(new File(dest).getParent()).getParent() + "\\src\\main\\resources\\static\\assets\\garageImages\\" + temp.getGarageId());
         destination.mkdirs();
         entrancePic.transferTo(new File(destination, entrancePic.getOriginalFilename()));
-        spotPic.transferTo(new File(destination, spotPic.getOriginalFilename()));
         billPhoto.transferTo(new File(destination, billPhoto.getOriginalFilename()));
+        spotPic.transferTo(new File(destination, spotPic.getOriginalFilename()));
+
         return new ResponseEntity<>("File Uploaded Successfully.", HttpStatus.OK);
     }
 }
