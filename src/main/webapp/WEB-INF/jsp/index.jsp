@@ -275,15 +275,15 @@ somewhere in Athens that was not prohibitively expensive.
                                     <img src="assets/images/face2.jpg">
                                 </div>
                                 <p class="mbr-text mbr-fonts-style display-7">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, aspernatur, voluptatibus, atque, tempore molestiae.
+                                    Everything was as planned. Thanks a lot. AirPng is a great website!
                                 </p>
                             </div>
                             <div class="card-footer">
                                 <div class="mbr-author-name mbr-bold mbr-fonts-style display-7">
-                                    John Smith
+                                    Marina Williams
                                 </div>
                                 <small class="mbr-author-desc mbr-italic mbr-light mbr-fonts-style display-7">
-                                    Developer
+                                    Travel Enthusiast
                                 </small>
                             </div>
                         </div>
@@ -296,15 +296,15 @@ somewhere in Athens that was not prohibitively expensive.
                                     <img src="assets/images/face3.jpg">
                                 </div>
                                 <p class="mbr-text mbr-fonts-style display-7">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, aspernatur, voluptatibus, atque, tempore molestiae.
+                                    Such a higher quality than other places nearby! Really easy to find and the staff are very professional and friendly
                                 </p>
                             </div>
                             <div class="card-footer">
                                 <div class="mbr-author-name mbr-bold mbr-fonts-style display-7">
-                                    John Smith
+                                    Nick Anderson
                                 </div>
                                 <small class="mbr-author-desc mbr-italic mbr-light mbr-fonts-style display-7">
-                                    Developer
+                                    Lawyer
                                 </small>
                             </div>
                         </div>
