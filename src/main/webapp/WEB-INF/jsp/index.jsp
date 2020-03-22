@@ -253,7 +253,8 @@
                                     <img src="assets/images/face1.jpg">
                                 </div>
                                 <p class="mbr-text mbr-fonts-style display-7">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, aspernatur, voluptatibus, atque, tempore molestiae.
+                                    Was extremely easy, no need to stress about where I will park anymore. Before it was a complete nightmare to find 
+somewhere in Athens that was not prohibitively expensive.
                                 </p>
                             </div>
                             <div class="card-footer">
