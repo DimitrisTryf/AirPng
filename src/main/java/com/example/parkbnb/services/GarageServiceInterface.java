@@ -14,4 +14,6 @@ import com.example.parkbnb.models.Garage;
 public interface GarageServiceInterface {
     
     public Garage addGarage(Garage garage); 
+    
+    public Garage[] getGaragesByConfirmation(Integer confirmationType);
 }

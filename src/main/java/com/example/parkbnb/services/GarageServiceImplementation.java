@@ -27,5 +27,10 @@ public class GarageServiceImplementation implements GarageServiceInterface{
     public Garage addGarage(Garage garage) {
         return gr.save(garage);
     }
+
+    @Override
+    public Garage[] getGaragesByConfirmation(Integer confirmationType) {
+        return gr.findByGarageConfirmed(confirmationType);
+    }
     
 }

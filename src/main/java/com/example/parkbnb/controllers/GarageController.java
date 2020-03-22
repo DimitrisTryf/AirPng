@@ -20,6 +20,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,6 +45,13 @@ public class GarageController {
         return "addGarage";
     }
 
+    @GetMapping(value = "/confirmGarages")
+    public String confGarages(ModelMap mm) {
+        mm.addAttribute("unconfirmedGarages", gsi.getGaragesByConfirmation(0));
+
+        return "confirmGarages";
+    }
+
     @RequestMapping(value = "addGarage", method = RequestMethod.POST)
     public ResponseEntity<String> fileUpload(@RequestParam("entrancePic") MultipartFile entrancePic,
             @RequestParam("billPhoto") MultipartFile billPhoto,
@@ -65,13 +73,21 @@ public class GarageController {
         temp.setGarageUserid(sessionUser);
 
         temp = gsi.addGarage(temp);
-        
-        String dest = request.getSession().getServletContext().getRealPath("/"); //in project folder -> parkbnb\target\parkbnb-0.0.1-SNAPSHOT\static\images\
-        File destination = new File(new File(new File(dest).getParent()).getParent() + "\\src\\main\\resources\\static\\assets\\garageImages\\" + temp.getGarageId());
-        destination.mkdirs();
-        entrancePic.transferTo(new File(destination, entrancePic.getOriginalFilename()));
-        billPhoto.transferTo(new File(destination, billPhoto.getOriginalFilename()));
 
+        String entrancePicName = garageUtils.handleFileName(entrancePic.getOriginalFilename());
+        String billPicName = garageUtils.handleFileName(billPhoto.getOriginalFilename());
+
+        String dest = request.getSession().getServletContext().getRealPath("/"); //in project folder -> parkbnb\target\parkbnb-0.0.1-SNAPSHOT\static\images\
+        File destination = new File(new File(new File(dest).getParent()).getParent() + "/src/main/resources/static/assets/garageImages/" + temp.getGarageId());
+        destination.mkdirs();
+
+        entrancePic.transferTo(new File(destination, "entrance" + entrancePicName));
+        billPhoto.transferTo(new File(destination, "bill" + billPicName));
+
+        temp.setGarageBillimageurl(destination + "/" + "bill" + billPicName);
+        temp.setGarageEntranceimageurl(destination + "/" + "entrance" + entrancePicName);
+
+        gsi.addGarage(temp);
         return new ResponseEntity<>("File Uploaded Successfully.", HttpStatus.OK);
     }
 
@@ -85,7 +101,7 @@ public class GarageController {
             HttpSession session)
             throws IOException {
 
-       User sessionUser = (User) session.getAttribute("userSession");
+        User sessionUser = (User) session.getAttribute("userSession");
 
         Garage temp = new Garage();
         temp.setGarageAddress(address);
@@ -95,9 +111,9 @@ public class GarageController {
         temp.setGarageLatitude(tempCoords[1]);
         temp.setGarageOwnercomment(comment);
         temp.setGarageUserid(sessionUser);
-temp.setGarageConfirmed(0);
+        temp.setGarageConfirmed(0);
         temp = gsi.addGarage(temp);
-        
+
         String dest = request.getSession().getServletContext().getRealPath("/"); //in project folder -> parkbnb\target\parkbnb-0.0.1-SNAPSHOT\static\images\
         File destination = new File(new File(new File(dest).getParent()).getParent() + "\\src\\main\\resources\\static\\assets\\garageImages\\" + temp.getGarageId());
         destination.mkdirs();

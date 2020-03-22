@@ -16,4 +16,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GarageRepository extends CrudRepository<Garage,Integer>{
     
+    Garage[] findByGarageConfirmed(Integer garageConfirmed);
+    
 }

@@ -39,7 +39,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Garage.findByGarageLongtitude", query = "SELECT g FROM Garage g WHERE g.garageLongtitude = :garageLongtitude"),
     @NamedQuery(name = "Garage.findByGarageLatitude", query = "SELECT g FROM Garage g WHERE g.garageLatitude = :garageLatitude"),
     @NamedQuery(name = "Garage.findByGarageOwnercomment", query = "SELECT g FROM Garage g WHERE g.garageOwnercomment = :garageOwnercomment"),
-    @NamedQuery(name = "Garage.findByGarageConfirmed", query = "SELECT g FROM Garage g WHERE g.garageConfirmed = :garageConfirmed")})
+    @NamedQuery(name = "Garage.findByGarageConfirmed", query = "SELECT g FROM Garage g WHERE g.garageConfirmed = :garageConfirmed"),
+    @NamedQuery(name = "Garage.findByGarageBillimageurl", query = "SELECT g FROM Garage g WHERE g.garageBillimageurl = :garageBillimageurl"),
+    @NamedQuery(name = "Garage.findByGarageSpotimageurl", query = "SELECT g FROM Garage g WHERE g.garageSpotimageurl = :garageSpotimageurl"),
+    @NamedQuery(name = "Garage.findByGarageEntranceimageurl", query = "SELECT g FROM Garage g WHERE g.garageEntranceimageurl = :garageEntranceimageurl")})
 public class Garage implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,6 +73,15 @@ public class Garage implements Serializable {
     @NotNull
     @Column(name = "garage_confirmed")
     private int garageConfirmed;
+    @Size(max = 200)
+    @Column(name = "garage_billimageurl")
+    private String garageBillimageurl;
+    @Size(max = 200)
+    @Column(name = "garage_spotimageurl")
+    private String garageSpotimageurl;
+    @Size(max = 200)
+    @Column(name = "garage_entranceimageurl")
+    private String garageEntranceimageurl;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "greviewGarageid")
     private Collection<GarageReview> garageReviewCollection;
     @JoinColumn(name = "garage_userid", referencedColumnName = "user_id")
@@ -139,6 +151,30 @@ public class Garage implements Serializable {
 
     public void setGarageConfirmed(int garageConfirmed) {
         this.garageConfirmed = garageConfirmed;
+    }
+
+    public String getGarageBillimageurl() {
+        return garageBillimageurl;
+    }
+
+    public void setGarageBillimageurl(String garageBillimageurl) {
+        this.garageBillimageurl = garageBillimageurl;
+    }
+
+    public String getGarageSpotimageurl() {
+        return garageSpotimageurl;
+    }
+
+    public void setGarageSpotimageurl(String garageSpotimageurl) {
+        this.garageSpotimageurl = garageSpotimageurl;
+    }
+
+    public String getGarageEntranceimageurl() {
+        return garageEntranceimageurl;
+    }
+
+    public void setGarageEntranceimageurl(String garageEntranceimageurl) {
+        this.garageEntranceimageurl = garageEntranceimageurl;
     }
 
     @XmlTransient

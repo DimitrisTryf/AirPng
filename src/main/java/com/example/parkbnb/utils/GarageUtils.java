@@ -21,4 +21,10 @@ public class GarageUtils {
         return coords;
     }
 
+    public String handleFileName(String fileName) {
+        String[] temp = fileName.split("\\.");
+        return "." + temp[1];
+
+    }
+
 }
