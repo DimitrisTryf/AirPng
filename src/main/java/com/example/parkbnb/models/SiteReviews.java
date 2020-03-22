@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author kmbco
+ * @author dimit
  */
 @Entity
 @Table(name = "site_reviews")

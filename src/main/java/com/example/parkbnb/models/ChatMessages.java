@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author kmbco
+ * @author dimit
  */
 @Entity
 @Table(name = "chat_messages")

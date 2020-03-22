@@ -10,16 +10,15 @@ package com.example.parkbnb.utils;
  * @author dimit
  */
 public class GarageUtils {
-    
-    public String[] manageLotLat(String lotLat){
-        String temp = lotLat.replace("(", "");
-        temp = lotLat.replace(")", "");
-        temp = temp.trim();
+
+    public String[] manageLotLat(String lotLat) {
+
+        String temp = lotLat.replace("(", "").replace(")", "").trim();
         String[] coords = temp.split(",");
-        for(String i : coords){
+        for (String i : coords) {
             i = i.trim();
         }
         return coords;
     }
-    
+
 }

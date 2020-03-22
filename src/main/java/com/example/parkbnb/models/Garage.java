@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author kmbco
+ * @author dimit
  */
 @Entity
 @Table(name = "garage")
@@ -38,7 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Garage.findByGarageAddress", query = "SELECT g FROM Garage g WHERE g.garageAddress = :garageAddress"),
     @NamedQuery(name = "Garage.findByGarageLongtitude", query = "SELECT g FROM Garage g WHERE g.garageLongtitude = :garageLongtitude"),
     @NamedQuery(name = "Garage.findByGarageLatitude", query = "SELECT g FROM Garage g WHERE g.garageLatitude = :garageLatitude"),
-    @NamedQuery(name = "Garage.findByGarageOwnercomment", query = "SELECT g FROM Garage g WHERE g.garageOwnercomment = :garageOwnercomment")})
+    @NamedQuery(name = "Garage.findByGarageOwnercomment", query = "SELECT g FROM Garage g WHERE g.garageOwnercomment = :garageOwnercomment"),
+    @NamedQuery(name = "Garage.findByGarageConfirmed", query = "SELECT g FROM Garage g WHERE g.garageConfirmed = :garageConfirmed")})
 public class Garage implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,10 +66,14 @@ public class Garage implements Serializable {
     @Size(max = 200)
     @Column(name = "garage_ownercomment")
     private String garageOwnercomment;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "garage_confirmed")
+    private int garageConfirmed;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "greviewGarageid")
     private Collection<GarageReview> garageReviewCollection;
     @JoinColumn(name = "garage_userid", referencedColumnName = "user_id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private User garageUserid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rentalGarageid")
     private Collection<Rental> rentalCollection;
@@ -80,11 +85,12 @@ public class Garage implements Serializable {
         this.garageId = garageId;
     }
 
-    public Garage(Integer garageId, String garageAddress, String garageLongtitude, String garageLatitude) {
+    public Garage(Integer garageId, String garageAddress, String garageLongtitude, String garageLatitude, int garageConfirmed) {
         this.garageId = garageId;
         this.garageAddress = garageAddress;
         this.garageLongtitude = garageLongtitude;
         this.garageLatitude = garageLatitude;
+        this.garageConfirmed = garageConfirmed;
     }
 
     public Integer getGarageId() {
@@ -125,6 +131,14 @@ public class Garage implements Serializable {
 
     public void setGarageOwnercomment(String garageOwnercomment) {
         this.garageOwnercomment = garageOwnercomment;
+    }
+
+    public int getGarageConfirmed() {
+        return garageConfirmed;
+    }
+
+    public void setGarageConfirmed(int garageConfirmed) {
+        this.garageConfirmed = garageConfirmed;
     }
 
     @XmlTransient
