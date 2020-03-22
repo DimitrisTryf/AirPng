@@ -47,5 +47,7 @@
 	background: url("../assets/custom/images/dotgrain.gif") repeat scroll left top rgba(0, 0, 0, .6);
 	opacity: 0.2
 }
+
+    body { padding-top: 40px; }
   </style>
   

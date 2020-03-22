@@ -162,7 +162,8 @@
 
 
 
-            <div class="google-map"><iframe frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3144.8604212201917!2d23.7308631151806!3d37.98038657972255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1bd3a2e02f23b%3A0xb6bec9a194fa0343!2zzqDOsc69zrXPgM65z4PPhM6uzrzOuc6_!5e0!3m2!1sen!2sgr!4v1583605800668!5m2!1sen!2sgr" allowfullscreen=""></iframe></div>
+            <div class="google-map"><iframe frameborder="0" style="border:0" 
+                                            src="../assets/custom/map/indexMap.html" allowfullscreen=""></iframe></div>
         </section>
 
         <section class="features15 cid-rSzyFAz4oe" id="features15-5">
