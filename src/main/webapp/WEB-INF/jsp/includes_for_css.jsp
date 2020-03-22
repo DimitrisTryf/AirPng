@@ -36,5 +36,16 @@
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     border-radius: 10px!important;
 }
+
+ /*Making the photo moving*/ 
+ 
+.header12 .bg {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	background: url("../assets/custom/images/dotgrain.gif") repeat scroll left top rgba(0, 0, 0, .6);
+	opacity: 0.2
+}
   </style>
   

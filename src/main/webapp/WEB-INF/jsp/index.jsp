@@ -22,12 +22,12 @@
         </head>
         <body>
             
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
+<!--<div class="alert alert-warning alert-dismissible fade show" role="alert">
   <strong>Holy guacamole!</strong> You should check in on some of those fields below.
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
-</div>
+</div>-->
             <div class="preloader"></div>
 
         <jsp:include page = "modalLoginForm.jsp"></jsp:include>  
@@ -77,8 +77,10 @@
             </nav>
         </section>
 
-        <section class="engine"><a href="">best html templates</a></section><section class="header12 cid-rSzxKBDqj1 mbr-fullscreen mbr-parallax-background" id="header12-1">
-
+        <!--<section class="engine"><a href="">best html templates</a></section>-->
+        
+        <section class="header12 cid-rSzxKBDqj1 mbr-fullscreen mbr-parallax-background" id="header12-1">
+            <div class="bg"></div>
 
 
             <div class="mbr-overlay" style="opacity: 0.6; background-color: rgb(35, 35, 35);">
