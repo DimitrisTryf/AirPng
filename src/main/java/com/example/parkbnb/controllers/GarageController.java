@@ -95,7 +95,7 @@ public class GarageController {
         temp.setGarageLatitude(tempCoords[1]);
         temp.setGarageOwnercomment(comment);
         temp.setGarageUserid(sessionUser);
-
+temp.setGarageConfirmed(0);
         temp = gsi.addGarage(temp);
         
         String dest = request.getSession().getServletContext().getRealPath("/"); //in project folder -> parkbnb\target\parkbnb-0.0.1-SNAPSHOT\static\images\
