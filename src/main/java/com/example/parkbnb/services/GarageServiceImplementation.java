@@ -7,6 +7,7 @@ package com.example.parkbnb.services;
 
 import com.example.parkbnb.models.Garage;
 import com.example.parkbnb.repositories.GarageRepository;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,16 @@ public class GarageServiceImplementation implements GarageServiceInterface{
     @Override
     public Garage[] getGaragesByConfirmation(Integer confirmationType) {
         return gr.findByGarageConfirmed(confirmationType);
+    }
+
+    @Override
+    public Garage findById(Integer id) {
+        Optional<Garage> garage = gr.findById(id);
+        if (garage.isPresent()){
+            return garage.get();
+        }else{
+            return null;
+        }
     }
     
 }

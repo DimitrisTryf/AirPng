@@ -66,11 +66,16 @@
                     <td>${gar.garageAddress}</td>
                     <td>${gar.garageOwnercomment}</td>
                     
-                    <td><image src ="${gar.garageBillimageurl}"></td>
-                    <image src ="file://assets/garageImages/12/1.png">
+                    <td><image src ="${gar.garageBillimageurl}"  width="100" height="100"><br/>
+                    <a href="${gar.garageBillimageurl}" target="_blank">Open in new tab</a></td>
+                    <td><image src ="${gar.garageSpotimageurl}"  width="100" height="100" alt="not available"><br/>
+                    <a href="${gar.garageSpotimageurl}" target="_blank">Open in new tab</a></td>
+                    <td><image src ="${gar.garageEntranceimageurl}"  width="100" height="100"><br/>
+                    <a href="${gar.garageEntranceimageurl}" target="_blank">Open in new tab</a></td>
+                    
+                    <td><a href="garageConfirm/${gar.garageId}">Confirm</a></td>
                     
                     
-                    <td>src ="${gar.garageBillimageurl}"</td>
                     
                     
                     

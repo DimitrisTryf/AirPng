@@ -201,6 +201,7 @@
 
                     //-------------------------------
                     $('#coordinates').val(marker.position);
+                    $('#address').val($('#pac-input').val());
                     //-------------------------------
 
 
@@ -236,7 +237,7 @@
             }
         </script>
         <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnclN8JPTxPIwYqNZ1A2gQgrF-cdt95y4&libraries=places&callback=initMap"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8qRPhyc7-fZIBqRsCVHWBBf32ysHRB54&libraries=places&callback=initMap"
         async defer></script>
 
         <script type="text/javascript">

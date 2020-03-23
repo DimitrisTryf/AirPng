@@ -22,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,6 +46,14 @@ public class GarageController {
         return "addGarage";
     }
 
+    @GetMapping(value = "/garageConfirm/{id}")
+    public String garageConf(@PathVariable (name = "id") Integer garageId){
+        Garage temp = gsi.findById(garageId);
+        temp.setGarageConfirmed(1);
+        gsi.addGarage(temp);
+        return"redirect:/confirmGarages";
+    }
+    
     @GetMapping(value = "/confirmGarages")
     public String confGarages(ModelMap mm) {
         mm.addAttribute("unconfirmedGarages", gsi.getGaragesByConfirmation(0));
@@ -77,15 +86,15 @@ public class GarageController {
         String entrancePicName = garageUtils.handleFileName(entrancePic.getOriginalFilename());
         String billPicName = garageUtils.handleFileName(billPhoto.getOriginalFilename());
 
-        String dest = request.getSession().getServletContext().getRealPath("/"); //in project folder -> parkbnb\target\parkbnb-0.0.1-SNAPSHOT\static\images\
-        File destination = new File(new File(new File(dest).getParent()).getParent() + "/src/main/resources/static/assets/garageImages/" + temp.getGarageId());
+        String dest = request.getSession().getServletContext().getRealPath("/"); //in project folder -> parkbnb\target\parkbnb-0.0.1-SNAPSHOT\
+        File destination = new File(dest+"/garageImages/" + temp.getGarageId());
         destination.mkdirs();
 
         entrancePic.transferTo(new File(destination, "entrance" + entrancePicName));
         billPhoto.transferTo(new File(destination, "bill" + billPicName));
 
-        temp.setGarageBillimageurl(destination + "/" + "bill" + billPicName);
-        temp.setGarageEntranceimageurl(destination + "/" + "entrance" + entrancePicName);
+        temp.setGarageBillimageurl("\\garageImages\\"+ temp.getGarageId() + "\\" + "bill" + billPicName);
+        temp.setGarageEntranceimageurl("\\garageImages\\"+ temp.getGarageId() + "\\" + "entrance" + entrancePicName);
 
         gsi.addGarage(temp);
         return new ResponseEntity<>("File Uploaded Successfully.", HttpStatus.OK);
