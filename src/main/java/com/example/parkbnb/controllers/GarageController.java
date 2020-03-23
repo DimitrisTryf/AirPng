@@ -109,8 +109,7 @@ public class GarageController {
             @RequestParam("comment") String comment,
             HttpSession session)
             throws IOException {
-
-        User sessionUser = (User) session.getAttribute("userSession");
+ User sessionUser = (User) session.getAttribute("userSession");
 
         Garage temp = new Garage();
         temp.setGarageAddress(address);
@@ -120,16 +119,25 @@ public class GarageController {
         temp.setGarageLatitude(tempCoords[1]);
         temp.setGarageOwnercomment(comment);
         temp.setGarageUserid(sessionUser);
-        temp.setGarageConfirmed(0);
+
         temp = gsi.addGarage(temp);
 
-        String dest = request.getSession().getServletContext().getRealPath("/"); //in project folder -> parkbnb\target\parkbnb-0.0.1-SNAPSHOT\static\images\
-        File destination = new File(new File(new File(dest).getParent()).getParent() + "\\src\\main\\resources\\static\\assets\\garageImages\\" + temp.getGarageId());
-        destination.mkdirs();
-        entrancePic.transferTo(new File(destination, entrancePic.getOriginalFilename()));
-        billPhoto.transferTo(new File(destination, billPhoto.getOriginalFilename()));
-        spotPic.transferTo(new File(destination, spotPic.getOriginalFilename()));
+        String entrancePicName = garageUtils.handleFileName(entrancePic.getOriginalFilename());
+        String billPicName = garageUtils.handleFileName(billPhoto.getOriginalFilename());
+        String spotPicName = garageUtils.handleFileName(spotPic.getOriginalFilename());
 
+        String dest = request.getSession().getServletContext().getRealPath("/"); //in project folder -> parkbnb\target\parkbnb-0.0.1-SNAPSHOT\
+        File destination = new File(dest+"/garageImages/" + temp.getGarageId());
+        destination.mkdirs();
+
+        entrancePic.transferTo(new File(destination, "entrance" + entrancePicName));
+        billPhoto.transferTo(new File(destination, "bill" + billPicName));
+
+        temp.setGarageBillimageurl("\\garageImages\\"+ temp.getGarageId() + "\\" + "bill" + billPicName);
+        temp.setGarageEntranceimageurl("\\garageImages\\"+ temp.getGarageId() + "\\" + "entrance" + entrancePicName);
+        temp.setGarageEntranceimageurl("\\garageImages\\"+ temp.getGarageId() + "\\" + "spot" + entrancePicName);
+
+        gsi.addGarage(temp);
         return new ResponseEntity<>("File Uploaded Successfully.", HttpStatus.OK);
     }
 }
