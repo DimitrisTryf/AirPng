@@ -47,13 +47,21 @@ public class GarageController {
     }
 
     @GetMapping(value = "/garageConfirm/{id}")
-    public String garageConf(@PathVariable (name = "id") Integer garageId){
+    public String garageConf(@PathVariable(name = "id") Integer garageId) {
         Garage temp = gsi.findById(garageId);
         temp.setGarageConfirmed(1);
         gsi.addGarage(temp);
-        return"redirect:/confirmGarages";
+        return "redirect:/confirmGarages";
     }
-    
+
+    @GetMapping(value = "/showUsersGarages")
+    public String garageConf(ModelMap mm,
+            HttpSession session) {
+        User sessionUser = (User) session.getAttribute("userSession");
+        mm.addAttribute("userGarages",  gsi.getUserGarages(sessionUser));
+        return "myGarages";
+    }
+
     @GetMapping(value = "/confirmGarages")
     public String confGarages(ModelMap mm) {
         mm.addAttribute("unconfirmedGarages", gsi.getGaragesByConfirmation(0));
@@ -87,14 +95,14 @@ public class GarageController {
         String billPicName = garageUtils.handleFileName(billPhoto.getOriginalFilename());
 
         String dest = request.getSession().getServletContext().getRealPath("/"); //in project folder -> parkbnb\target\parkbnb-0.0.1-SNAPSHOT\
-        File destination = new File(dest+"/garageImages/" + temp.getGarageId());
+        File destination = new File(dest + "/garageImages/" + temp.getGarageId());
         destination.mkdirs();
 
         entrancePic.transferTo(new File(destination, "entrance" + entrancePicName));
         billPhoto.transferTo(new File(destination, "bill" + billPicName));
 
-        temp.setGarageBillimageurl("\\garageImages\\"+ temp.getGarageId() + "\\" + "bill" + billPicName);
-        temp.setGarageEntranceimageurl("\\garageImages\\"+ temp.getGarageId() + "\\" + "entrance" + entrancePicName);
+        temp.setGarageBillimageurl("\\garageImages\\" + temp.getGarageId() + "\\" + "bill" + billPicName);
+        temp.setGarageEntranceimageurl("\\garageImages\\" + temp.getGarageId() + "\\" + "entrance" + entrancePicName);
 
         gsi.addGarage(temp);
         return new ResponseEntity<>("File Uploaded Successfully.", HttpStatus.OK);
@@ -109,7 +117,7 @@ public class GarageController {
             @RequestParam("comment") String comment,
             HttpSession session)
             throws IOException {
- User sessionUser = (User) session.getAttribute("userSession");
+        User sessionUser = (User) session.getAttribute("userSession");
 
         Garage temp = new Garage();
         temp.setGarageAddress(address);
@@ -127,15 +135,15 @@ public class GarageController {
         String spotPicName = garageUtils.handleFileName(spotPic.getOriginalFilename());
 
         String dest = request.getSession().getServletContext().getRealPath("/"); //in project folder -> parkbnb\target\parkbnb-0.0.1-SNAPSHOT\
-        File destination = new File(dest+"/garageImages/" + temp.getGarageId());
+        File destination = new File(dest + "/garageImages/" + temp.getGarageId());
         destination.mkdirs();
 
         entrancePic.transferTo(new File(destination, "entrance" + entrancePicName));
         billPhoto.transferTo(new File(destination, "bill" + billPicName));
 
-        temp.setGarageBillimageurl("\\garageImages\\"+ temp.getGarageId() + "\\" + "bill" + billPicName);
-        temp.setGarageEntranceimageurl("\\garageImages\\"+ temp.getGarageId() + "\\" + "entrance" + entrancePicName);
-        temp.setGarageEntranceimageurl("\\garageImages\\"+ temp.getGarageId() + "\\" + "spot" + entrancePicName);
+        temp.setGarageBillimageurl("\\garageImages\\" + temp.getGarageId() + "\\" + "bill" + billPicName);
+        temp.setGarageEntranceimageurl("\\garageImages\\" + temp.getGarageId() + "\\" + "entrance" + entrancePicName);
+        temp.setGarageEntranceimageurl("\\garageImages\\" + temp.getGarageId() + "\\" + "spot" + entrancePicName);
 
         gsi.addGarage(temp);
         return new ResponseEntity<>("File Uploaded Successfully.", HttpStatus.OK);

@@ -6,6 +6,7 @@
 package com.example.parkbnb.services;
 
 import com.example.parkbnb.models.Garage;
+import com.example.parkbnb.models.User;
 import com.example.parkbnb.repositories.GarageRepository;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -42,6 +43,11 @@ public class GarageServiceImplementation implements GarageServiceInterface{
         }else{
             return null;
         }
+    }
+
+    @Override
+    public Garage[] getUserGarages(User user) {
+        return gr.findByGarageUserid(user);
     }
     
 }

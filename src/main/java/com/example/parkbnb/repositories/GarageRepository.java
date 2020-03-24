@@ -6,6 +6,7 @@
 package com.example.parkbnb.repositories;
 
 import com.example.parkbnb.models.Garage;
+import com.example.parkbnb.models.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,5 +18,7 @@ import org.springframework.stereotype.Repository;
 public interface GarageRepository extends CrudRepository<Garage,Integer>{
     
     Garage[] findByGarageConfirmed(Integer garageConfirmed);
+    
+    Garage[] findByGarageUserid(User garageUserid);
     
 }
