@@ -1420,3 +1420,63 @@ section.lazy-placeholder:after {
 .cid-rSzz49kirZ .media-container-row .row-copirayt p {
   width: 100%;
 }
+
+.cid-rU8UTzIOoj {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background-color: #f9f9f9;
+}
+.cid-rU8UTzIOoj .mbr-section-text {
+  color: #767676;
+}
+.cid-rU8UTzIOoj .mbr-section-subtitle {
+  color: #767676;
+}
+.cid-rU8UTzIOoj .tabcont {
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.cid-rU8UTzIOoj .mbr-iconfont {
+  font-size: 48px;
+}
+.cid-rU8UTzIOoj .card-img {
+  margin-bottom: 1.5rem;
+}
+.cid-rU8UTzIOoj .tab-content-row {
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.cid-rU8UTzIOoj .tab-content {
+  margin-top: 3rem;
+  width: 100%;
+}
+.cid-rU8UTzIOoj .nav-tabs {
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  border-bottom: none;
+}
+.cid-rU8UTzIOoj .nav-tabs .nav-link {
+  box-sizing: border-box;
+  color: #767676;
+  font-style: normal;
+  font-weight: 500;
+  border-radius: 3px;
+  padding: 1rem 3rem;
+  margin: 0.4rem .8rem !important;
+  transition: color .3s;
+  border: 2px solid #767676;
+}
+.cid-rU8UTzIOoj .nav-tabs .nav-link:hover {
+  background: #149dcc;
+}
+.cid-rU8UTzIOoj .nav-tabs .nav-link.active {
+  color: #ffffff;
+  font-style: normal;
+  border: 2px solid #149dcc;
+  background: #149dcc;
+}
+.cid-rU8UTzIOoj .nav-tabs .nav-link.active:hover {
+  border: 2px solid #149dcc;
+}

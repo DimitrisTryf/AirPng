@@ -53,7 +53,7 @@ public class Garage implements Serializable {
     private Integer garageId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 200)
     @Column(name = "garage_address")
     private String garageAddress;
     @Basic(optional = false)
