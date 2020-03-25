@@ -13,6 +13,9 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +56,7 @@ public class GarageController {
         gsi.addGarage(temp);
         return "redirect:/confirmGarages";
     }
-
+    
     @GetMapping(value = "/showUsersGarages")
     public String garageConf(ModelMap mm,
             HttpSession session) {

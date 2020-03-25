@@ -1,38 +1,38 @@
- #mysidenav a{
-            position:fixed;
-            right: -140px;
-            transition: 0.3s;
-            padding: 15px;
-            width: 180px;
-            text-decoration:none;
-            color: white;
-            border-radius: 5px 0px 0px 5px;
+#mysidenav a{
+    position:fixed;
+    right: -140px;
+    transition: 0.3s;
+    padding: 15px;
+    width: 180px;
+    text-decoration:none;
+    color: white;
+    border-radius: 5px 0px 0px 5px;
 
-        }
+}
 
-        #mysidenav a:hover{
-            right: 0;
-        }
+#mysidenav a:hover{
+    right: 0;
+}
 
-        #addNewGarageForm  {
-            top: 105px;
-            background-color: gray;
-            text-align:end
-        }
-        #showUsersGarages  {
-            top: 165px;
-            background-color: gray;
-            text-align:end
-        }
+#addNewGarageForm  {
+    top: 105px;
+    background-color: gray;
+    text-align:end
+}
+#showUsersGarages  {
+    top: 165px;
+    background-color: gray;
+    text-align:end
+}
 
-        #Projects  {
-            top: 225px;
-            background-color: gray;
-            text-align:end
-        }
+#Projects  {
+    top: 225px;
+    background-color: gray;
+    text-align:end
+}
 
-        #Contact2  {
-            top: 285px;
-            background-color: gray;
-            text-align:end
-        }
+#Contact2  {
+    top: 285px;
+    background-color: gray;
+    text-align:end
+}

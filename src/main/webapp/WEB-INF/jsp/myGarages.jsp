@@ -65,7 +65,10 @@
                         <div class="content">
                             <div class="container">
                                 <form action="/addDates/${gar.garageId}">
+                                    <label for="datetimes">Select dates:</label>
                                     <input type="text" name="datetimes" style="width:250px;"/>
+                                    <label for="pph">Price per Hour:</label>
+                                    <input type="number" step="0.01" name="pph">
                                     <button type="submit">Add dates</button>
                                 </form>
                                 
@@ -84,7 +87,7 @@
                 startDate: moment().startOf('hour'),
                 endDate: moment().startOf('hour').add(32, 'hour'),
                 locale: {
-                  format: 'M/DD hh:mm A'
+                  format: 'MM/DD/YYYY HH:mm'
                 }
               });
             });
