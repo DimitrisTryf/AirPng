@@ -49,5 +49,5 @@ public class GarageServiceImplementation implements GarageServiceInterface{
     public Garage[] getUserGarages(User user) {
         return gr.findByGarageUserid(user);
     }
-    
+
 }

@@ -5,6 +5,8 @@
  */
 package com.example.parkbnb.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -65,9 +67,11 @@ public class Rental implements Serializable {
     private BigDecimal rentalPriceperhour;
     @JoinColumn(name = "rental_garageid", referencedColumnName = "garage_id")
     @ManyToOne(optional = false)
+    @JsonManagedReference
     private Garage rentalGarageid;
     @JoinColumn(name = "rental_userid", referencedColumnName = "user_id")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private User rentalUserid;
 
     public Rental() {

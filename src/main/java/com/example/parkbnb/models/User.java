@@ -5,6 +5,8 @@
  */
 package com.example.parkbnb.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -113,6 +115,7 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cmessageTouserid")
     private Collection<ChatMessages> chatMessagesCollection1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rentalUserid")
+    @JsonManagedReference
     private Collection<Rental> rentalCollection;
 
     public User() {

@@ -13,12 +13,14 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -55,4 +57,11 @@ public class RentalController {
         return "redirect:/showUsersGarages";
     }
 
+    
+    
+    @ResponseBody
+    @GetMapping(value = "/getAvailableGarages")
+    public ArrayList<Rental> getAvailableGarages(){
+        return rsi.getAvailable();
+    }
 }

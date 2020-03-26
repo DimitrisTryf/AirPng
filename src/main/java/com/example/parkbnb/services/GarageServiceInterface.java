@@ -7,6 +7,7 @@ package com.example.parkbnb.services;
 
 import com.example.parkbnb.models.Garage;
 import com.example.parkbnb.models.User;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,4 +22,5 @@ public interface GarageServiceInterface {
     public Garage findById(Integer id);
     
     public Garage[] getUserGarages(User user);
+    
 }

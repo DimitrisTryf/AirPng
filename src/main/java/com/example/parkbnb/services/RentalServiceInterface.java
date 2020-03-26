@@ -6,6 +6,7 @@
 package com.example.parkbnb.services;
 
 import com.example.parkbnb.models.Rental;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,5 +15,7 @@ import com.example.parkbnb.models.Rental;
 public interface RentalServiceInterface {
     
     public void addNewRental(Rental rental);
+    
+    public ArrayList<Rental> getAvailable();
     
 }

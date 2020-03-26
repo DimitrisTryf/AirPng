@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -87,8 +89,8 @@ public class GarageController {
         temp.setGarageAddress(address);
         GarageUtils garageUtils = new GarageUtils();
         String[] tempCoords = garageUtils.manageLotLat(coordinates);
-        temp.setGarageLongtitude(tempCoords[0]);
-        temp.setGarageLatitude(tempCoords[1]);
+        temp.setGarageLongtitude(tempCoords[1]);
+        temp.setGarageLatitude(tempCoords[0]);
         temp.setGarageOwnercomment(comment);
         temp.setGarageUserid(sessionUser);
 
@@ -126,8 +128,8 @@ public class GarageController {
         temp.setGarageAddress(address);
         GarageUtils garageUtils = new GarageUtils();
         String[] tempCoords = garageUtils.manageLotLat(coordinates);
-        temp.setGarageLongtitude(tempCoords[0]);
-        temp.setGarageLatitude(tempCoords[1]);
+        temp.setGarageLongtitude(tempCoords[1]);
+        temp.setGarageLatitude(tempCoords[0]);
         temp.setGarageOwnercomment(comment);
         temp.setGarageUserid(sessionUser);
 
@@ -151,4 +153,5 @@ public class GarageController {
         gsi.addGarage(temp);
         return new ResponseEntity<>("File Uploaded Successfully.", HttpStatus.OK);
     }
+    
 }

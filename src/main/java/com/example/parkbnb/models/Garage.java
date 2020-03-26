@@ -5,6 +5,8 @@
  */
 package com.example.parkbnb.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -86,8 +88,10 @@ public class Garage implements Serializable {
     private Collection<GarageReview> garageReviewCollection;
     @JoinColumn(name = "garage_userid", referencedColumnName = "user_id")
     @ManyToOne
+    @JsonBackReference
     private User garageUserid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rentalGarageid")
+    @JsonBackReference
     private Collection<Rental> rentalCollection;
 
     public Garage() {
