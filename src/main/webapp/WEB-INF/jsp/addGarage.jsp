@@ -236,9 +236,9 @@
                 });
             }
         </script>
-        <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjWdegiIXA-K596kmzqm2v0VSsJeISWl8&libraries=places&callback=initMap"
-        async defer></script>
+        <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2jIaoEKQV45vIJjLC6WYE_hH8c4SbTc8&callback=initMap">
+    </script>
 
         <script type="text/javascript">
             $(document).ready((function () {
