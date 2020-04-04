@@ -150,9 +150,7 @@
                 <div class="media-container-row">
                     <div class="title col-12 col-md-8">
                         <h2 class="align-center pb-3 mbr-fonts-style display-2">
-                            10 Parking Spots Available near you!</h2>
-
-
+                            Parking Spots Available near you!</h2>
                     </div>
                 </div>
             </div>

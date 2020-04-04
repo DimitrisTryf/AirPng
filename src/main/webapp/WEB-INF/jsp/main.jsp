@@ -133,23 +133,25 @@
                         <div id="tab1" class="tab-pane in active mbr-table" role="tabpanel">
                             <div class="row tab-content-row">
                                 <div class="col-xs-12 col-md-10">
-<!--                                    <div class="card-img ">
-                                        <span class="mbri-responsive mbr-iconfont"></span>
-                                    </div>
-                                                                        <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                                                                            MOBILE FRIENDLY
-                                                                        </h4>
-                                                                        <p class="mbr-section-text  align-center mbr-fonts-style display-7">
-                                                                            No special actions required, all sites you make with Mobirise are mobile-friendly. You
-                                                                            don't have to create a special mobile version of your site, it will adapt automagically.
-                                                                        </p>-->
+                                    <!--                                    <div class="card-img ">
+                                                                            <span class="mbri-responsive mbr-iconfont"></span>
+                                                                        </div>
+                                                                                                            <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
+                                                                                                                MOBILE FRIENDLY
+                                                                                                            </h4>
+                                                                                                            <p class="mbr-section-text  align-center mbr-fonts-style display-7">
+                                                                                                                No special actions required, all sites you make with Mobirise are mobile-friendly. You
+                                                                                                                don't have to create a special mobile version of your site, it will adapt automagically.
+                                                                                                            </p>-->
                                     <section class="map1 cid-rSzIQODBwc" id="map1-9">
 
 
 
                                         <div class="google-map"><iframe frameborder="0" style="border:0" 
                                                                         src="../assets/custom/map/mainMap.html" allowfullscreen=""></iframe></div>
+
                                     </section>
+                                    <div id="garageInfo"></div>
                                 </div>
 
 
