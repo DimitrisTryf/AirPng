@@ -152,6 +152,8 @@
 
                                     </section>
                                     <div id="garageInfo"></div>
+                                    
+                                    
                                 </div>
 
 

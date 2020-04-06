@@ -117,7 +117,7 @@
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: 37.9715323, lng: 23.7257492},
-                    zoom: 14
+                    zoom: 7
                 });
                 infoWindow = new google.maps.InfoWindow;
 
@@ -204,7 +204,12 @@
 
                             //--------------------- with this to display details under the map for the selected 
                             //--------------------- garage with an ajax call for reviews
-                            window.parent.document.querySelector("#garageInfo").innerHTML = `safa`;
+                            console.log(this);
+                            window.parent.document.querySelector("#garageInfo").innerHTML = `
+                            <h3>${this.garage.rentalGarageid.garageAddress}</h3>
+                                `;
+                            
+                            
                             
                             //---------------------
 
