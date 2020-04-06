@@ -9,6 +9,7 @@ import com.example.parkbnb.models.Garage;
 import com.example.parkbnb.models.Rental;
 import com.example.parkbnb.repositories.RentalRepository;
 import java.util.ArrayList;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,25 @@ public class RentalServiceImplementation implements RentalServiceInterface{
     public ArrayList<Rental> getAvailable() {
         return (ArrayList<Rental>)rr.findAll();
     }
+
+    @Override
+    public Rental[] getGarageRentals(Garage garage) {
+        return rr.findByRentalGarageid(garage);
+    }
+
+    @Override
+    public void removeRental(Rental rental) {
+        rr.delete(rental);
+    }
+
+    @Override
+    public Rental getRentalById(Integer id) {
+        Optional<Rental> temp = rr.findById(id);
+        if(temp.isPresent()){
+            return temp.get();
+        }
+       return null;
+    }
+
     
 }

@@ -71,7 +71,7 @@ public class Rental implements Serializable {
     private Garage rentalGarageid;
     @JoinColumn(name = "rental_userid", referencedColumnName = "user_id")
     @ManyToOne(optional = false)
-    @JsonBackReference
+    @JsonManagedReference
     private User rentalUserid;
 
     public Rental() {

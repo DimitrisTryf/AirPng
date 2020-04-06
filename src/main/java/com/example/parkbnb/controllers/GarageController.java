@@ -6,6 +6,7 @@
 package com.example.parkbnb.controllers;
 
 import com.example.parkbnb.models.Garage;
+import com.example.parkbnb.models.Rental;
 import com.example.parkbnb.models.User;
 import com.example.parkbnb.services.GarageServiceInterface;
 import com.example.parkbnb.utils.GarageUtils;
@@ -27,6 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,12 +60,12 @@ public class GarageController {
         gsi.addGarage(temp);
         return "redirect:/confirmGarages";
     }
-    
+
     @GetMapping(value = "/showUsersGarages")
     public String garageConf(ModelMap mm,
             HttpSession session) {
         User sessionUser = (User) session.getAttribute("userSession");
-        mm.addAttribute("userGarages",  gsi.getUserGarages(sessionUser));
+        mm.addAttribute("userGarages", gsi.getUserGarages(sessionUser));
         return "myGarages";
     }
 
@@ -153,5 +155,5 @@ public class GarageController {
         gsi.addGarage(temp);
         return new ResponseEntity<>("File Uploaded Successfully.", HttpStatus.OK);
     }
-    
+
 }

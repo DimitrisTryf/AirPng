@@ -115,7 +115,7 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cmessageTouserid")
     private Collection<ChatMessages> chatMessagesCollection1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rentalUserid")
-    @JsonManagedReference
+    @JsonBackReference
     private Collection<Rental> rentalCollection;
 
     public User() {

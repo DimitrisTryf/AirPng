@@ -61,7 +61,7 @@
 
 
                     <c:forEach items="${userGarages}" var="gar">
-                        <button type="button" class="collapsible">${gar.garageAddress}</button>
+                        <button type="button" onclick="getRentals(${gar.garageId})" class="collapsible">${gar.garageAddress}</button>
                         <div class="content">
                             <div class="container">
                                 <form action="/addDates/${gar.garageId}">
@@ -71,9 +71,9 @@
                                     <input type="number" step="0.01" name="pph">
                                     <button type="submit">Add dates</button>
                                 </form>
-                                
+                                <div style="border: 1px solid black;" id="${gar.garageId}"></div>
 
-    
+
                             </div>	
                         </div>
                     </c:forEach>
@@ -81,18 +81,17 @@
             </div>
         </div>
         <script>
-            $(function() {
-              $('input[name="datetimes"]').daterangepicker({
-                timePicker: true,
-                startDate: moment().startOf('hour'),
-                endDate: moment().startOf('hour').add(32, 'hour'),
-                locale: {
-                  format: 'MM/DD/YYYY HH:mm'
-                }
-              });
+            $(function () {
+                $('input[name="datetimes"]').daterangepicker({
+                    timePicker: true,
+                    startDate: moment().startOf('hour'),
+                    endDate: moment().startOf('hour').add(32, 'hour'),
+                    locale: {
+                        format: 'MM/DD/YYYY HH:mm'
+                    }
+                });
             });
-        </script>
-        <script>
+
             var coll = document.getElementsByClassName("collapsible");
             var i;
 
@@ -109,6 +108,38 @@
             }
 
 
+
+            function getRentals(garageId) {
+                const URL = "/garageRentals/" + garageId;
+                const settings = {
+                    url: URL,
+                    success: handleSuccess,
+                    type: "POST"
+                            // handleSuccess( dataFromServer )
+                };
+                $.ajax(settings);
+                function handleSuccess(data) {
+                    let divName = garageId;
+                    document.getElementById(divName).innerHTML = "";
+                    $.each(data, function (i, element) {
+                        let startDate = new Date(element.rentalStart);
+                        let endDate = new Date(element.rentalEnd);
+                        let rentedhours = (endDate - startDate) / 1000 / 60 / 60;
+                        let formatted_startdate = startDate.getDate() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getFullYear() + " " + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds()
+                        let formatted_enddate = endDate.getDate() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getFullYear() + " " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds();
+                        let rented = "No";
+                        if (element.rentalUserid !== null) {
+                            rented = "Yes";
+                        }
+
+                        document.getElementById(divName).innerHTML += "<div>From: " + formatted_startdate + ", to: " + formatted_enddate + "  for " + rentedhours + " hours at " + element.rentalPriceperhour + "$ per hour</div>\n\
+                                                                        <div>Total price : " + rentedhours * element.rentalPriceperhour + "$   Rented: " + rented + "</div>\n\
+                                                                        <a href='removeRental/" + element.rentalId + "'>cancel</a>";
+                    });
+
+
+                }
+            }
 
         </script>
     </body>

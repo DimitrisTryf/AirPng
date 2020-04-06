@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -58,10 +59,23 @@ public class RentalController {
     }
 
     
+    @ResponseBody
+    @PostMapping(value = "/garageRentals/{garagaId}")
+    public Rental[] getGarageRentals(@PathVariable(name = "garagaId") Integer garageId) {
+        Garage temp = gsi.findById(garageId);
+        return rsi.getGarageRentals(temp);
+    }
     
     @ResponseBody
     @GetMapping(value = "/getAvailableGarages")
     public ArrayList<Rental> getAvailableGarages(){
         return rsi.getAvailable();
+    }
+    
+    @GetMapping(value = "removeRental/{rentalid}")
+    public String removeRental(@PathVariable(name = "rentalid") Integer rentalid){
+        
+        rsi.removeRental(rsi.getRentalById(rentalid));
+        return "redirect:/showUsersGarages";
     }
 }
