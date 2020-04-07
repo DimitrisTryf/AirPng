@@ -204,13 +204,32 @@
 
                             //--------------------- with this to display details under the map for the selected 
                             //--------------------- garage with an ajax call for reviews
-                            console.log(this);
                             window.parent.document.querySelector("#garageInfo").innerHTML = `
                             <h3>${this.garage.rentalGarageid.garageAddress}</h3>
                                 `;
-                            
-                            
-                            
+                            $.ajax({
+                                url: "/garageRentals/" + this.garage.rentalGarageid.garageId,
+                                type: "POST"
+
+                            }).done(function (data) {
+                                data.forEach(elem => {
+
+                                    let startDate = new Date(elem.rentalStart);
+                                    let endDate = new Date(elem.rentalEnd);
+                                    let formatted_startdate = startDate.getDate() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getFullYear() + " " + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds()
+                                    let formatted_enddate = endDate.getDate() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getFullYear() + " " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds();
+
+                                    if (elem.rentalUserid === null) {
+                                        window.parent.document.querySelector("#garageInfo").innerHTML += "<div style='border:1px solid black'>\n\
+                                        From: " + formatted_startdate + ", to: " + formatted_enddate + " at " + elem.rentalPriceperhour + "$ per hour\n\
+                                        <button>choose this one</button></div>";
+                                    }
+
+
+                                });
+
+                            });
+
                             //---------------------
 
                         });

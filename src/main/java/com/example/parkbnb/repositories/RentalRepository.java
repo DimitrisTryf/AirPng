@@ -17,4 +17,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RentalRepository extends CrudRepository<Rental,Integer>{
     Rental[] findByRentalGarageid(Garage rentalGarage);
+    
+    Rental findByRentalId(Integer rentalId);
 }

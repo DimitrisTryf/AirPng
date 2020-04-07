@@ -48,11 +48,9 @@ public class RentalServiceImplementation implements RentalServiceInterface{
 
     @Override
     public Rental getRentalById(Integer id) {
-        Optional<Rental> temp = rr.findById(id);
-        if(temp.isPresent()){
-            return temp.get();
-        }
-       return null;
+        Rental temp = rr.findByRentalId(id);
+        System.out.println("---------------------------------------------");
+            return temp;
     }
 
     

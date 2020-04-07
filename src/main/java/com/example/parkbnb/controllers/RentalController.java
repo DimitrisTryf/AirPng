@@ -29,52 +29,63 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class RentalController {
-    
+
     @Autowired
     GarageServiceInterface gsi;
     @Autowired
     RentalServiceInterface rsi;
-    
+
     @GetMapping(value = "/addDates/{id}")
     public String addAvailableDates(@PathVariable(name = "id") Integer garageId,
-            @RequestParam (name = "datetimes") String datetimes,
-            @RequestParam (name = "pph") String pph) {
+            @RequestParam(name = "datetimes") String datetimes,
+            @RequestParam(name = "pph") String pph) {
         Garage tempGarage = gsi.findById(garageId);
         double price = Double.parseDouble(pph);
         String[] dates = datetimes.split("-");
         LocalDateTime start = LocalDateTime.parse(dates[0].trim(), DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm"));
         LocalDateTime end = LocalDateTime.parse(dates[1].trim(), DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm"));
-        System.out.println("--------------------------------------------------------------------------------");
-        //TODO add new rental
-        Rental tempRental = new Rental();
-        tempRental.setRentalStart(Date.from(start.atZone( ZoneId.systemDefault()).toInstant()));
-        tempRental.setRentalEnd(Date.from(end.atZone( ZoneId.systemDefault()).toInstant()));
-        tempRental.setRentalPaydone((short)0);
-        BigDecimal bd = new BigDecimal(price);
-        tempRental.setRentalPriceperhour(bd);
-        tempRental.setRentalGarageid(tempGarage);
-        rsi.addNewRental(tempRental);
-        System.out.println("--------------------------------------------------------------------------------");
+
+        Rental[] garageRentals = rsi.getGarageRentals(tempGarage);
+        boolean isAlloweToAdd = true;
+
+        for (Rental r : garageRentals) {
+            LocalDateTime oldRentalStart = LocalDateTime.ofInstant(r.getRentalStart().toInstant(), ZoneId.systemDefault());
+            LocalDateTime oldRentalEnd = LocalDateTime.ofInstant(r.getRentalEnd().toInstant(), ZoneId.systemDefault());
+
+            if (start.isAfter(oldRentalStart) && start.isBefore(oldRentalEnd) || (end.isAfter(oldRentalStart) && end.isBefore(oldRentalEnd))) {
+                //TODO return error
+                isAlloweToAdd = false;
+            }
+        }
+
+        if (isAlloweToAdd) {
+            Rental tempRental = new Rental();
+            tempRental.setRentalStart(Date.from(start.atZone(ZoneId.systemDefault()).toInstant()));
+            tempRental.setRentalEnd(Date.from(end.atZone(ZoneId.systemDefault()).toInstant()));
+            tempRental.setRentalPaydone((short) 0);
+            BigDecimal bd = new BigDecimal(price);
+            tempRental.setRentalPriceperhour(bd);
+            tempRental.setRentalGarageid(tempGarage);
+            rsi.addNewRental(tempRental);
+        }
         return "redirect:/showUsersGarages";
     }
 
-    
     @ResponseBody
     @PostMapping(value = "/garageRentals/{garagaId}")
     public Rental[] getGarageRentals(@PathVariable(name = "garagaId") Integer garageId) {
         Garage temp = gsi.findById(garageId);
         return rsi.getGarageRentals(temp);
     }
-    
+
     @ResponseBody
     @GetMapping(value = "/getAvailableGarages")
-    public ArrayList<Rental> getAvailableGarages(){
+    public ArrayList<Rental> getAvailableGarages() {
         return rsi.getAvailable();
     }
-    
-    @GetMapping(value = "removeRental/{rentalid}")
-    public String removeRental(@PathVariable(name = "rentalid") Integer rentalid){
-        
+
+    @GetMapping(value = "/removeRental/{rentalid}")
+    public String removeRental(@PathVariable(name = "rentalid") Integer rentalid) {
         rsi.removeRental(rsi.getRentalById(rentalid));
         return "redirect:/showUsersGarages";
     }
