@@ -218,11 +218,11 @@
                                     let endDate = new Date(elem.rentalEnd);
                                     let formatted_startdate = startDate.getDate() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getFullYear() + " " + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds()
                                     let formatted_enddate = endDate.getDate() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getFullYear() + " " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds();
-
+                                    
                                     if (elem.rentalUserid === null) {
                                         window.parent.document.querySelector("#garageInfo").innerHTML += "<div style='border:1px solid black'>\n\
                                         From: " + formatted_startdate + ", to: " + formatted_enddate + " at " + elem.rentalPriceperhour + "$ per hour\n\
-                                        <button>choose this one</button></div>";
+                                        <a onClick='rentalRent("+elem.rentalId+")'>choose this one</a></div>";
                                     }
 
 
@@ -285,7 +285,9 @@
 
             });
 
+
         </script>
+        
         <script
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2jIaoEKQV45vIJjLC6WYE_hH8c4SbTc8&libraries=places&callback=initMap"
         async defer></script>

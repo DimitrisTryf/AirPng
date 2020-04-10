@@ -83,6 +83,12 @@ public class RentalController {
     public ArrayList<Rental> getAvailableGarages() {
         return rsi.getAvailable();
     }
+    
+    @ResponseBody
+    @PostMapping(value = "/getRental/{rentalId}")
+     public Rental getRental(@PathVariable(name = "rentalId") Integer rentalId) {
+        return rsi.getRentalById(rentalId);
+    }
 
     @GetMapping(value = "/removeRental/{rentalid}")
     public String removeRental(@PathVariable(name = "rentalid") Integer rentalid) {

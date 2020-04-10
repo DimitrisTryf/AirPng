@@ -20,20 +20,19 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Transactional
-public class RentalServiceImplementation implements RentalServiceInterface{
+public class RentalServiceImplementation implements RentalServiceInterface {
 
     @Autowired
     RentalRepository rr;
-    
+
     @Override
     public void addNewRental(Rental rental) {
         rr.save(rental);
     }
-    
-    
+
     @Override
     public ArrayList<Rental> getAvailable() {
-        return (ArrayList<Rental>)rr.findAll();
+        return (ArrayList<Rental>) rr.findAll();
     }
 
     @Override
@@ -49,9 +48,7 @@ public class RentalServiceImplementation implements RentalServiceInterface{
     @Override
     public Rental getRentalById(Integer id) {
         Rental temp = rr.findByRentalId(id);
-        System.out.println("---------------------------------------------");
-            return temp;
+        return temp;
     }
 
-    
 }

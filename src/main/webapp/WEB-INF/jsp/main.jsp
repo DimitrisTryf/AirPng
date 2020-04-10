@@ -8,6 +8,8 @@
 <html>
     <head>
 
+
+
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -114,7 +116,7 @@
                     <ul class="nav nav-tabs pt-3 mt-5" role="tablist">
                         <li class="nav-item mbr-fonts-style"><a class="nav-link show active display-7" role="tab"
                                                                 data-toggle="tab" href="#tabs3-i_tab0" aria-selected="true">1. Choose Parking Spot</a></li>
-                        <li class="nav-item mbr-fonts-style"><a class="nav-link  show active display-7" role="tab"
+                        <li class="nav-item mbr-fonts-style"><a id="dateTab" class="nav-link  show active display-7" role="tab"
                                                                 data-toggle="tab" href="#tabs3-i_tab1" aria-selected="true">
                                 2. Choose Parking Duration</a></li>
                         <li class="nav-item mbr-fonts-style"><a class="nav-link show active display-7" role="tab"
@@ -152,8 +154,8 @@
 
                                     </section>
                                     <div id="garageInfo"></div>
-                                    
-                                    
+
+
                                 </div>
 
 
@@ -171,12 +173,9 @@
                                         <span class="mbri-bootstrap mbr-iconfont"></span>
                                     </div>
                                     <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                                        IT'S EASY AND SIMPLE
+                                        PICK YOUR DATE AND TIME
                                     </h4>
-                                    <p class="mbr-section-text  align-center mbr-fonts-style display-7">
-                                        Cut down the development time with drag-and-drop website builder. Drop the blocks into
-                                        the page, edit content inline and publish - no technical skills required.
-                                    </p>
+                                    <div id="datePick"></div>
                                 </div>
 
 
@@ -357,7 +356,10 @@
 
 
         <jsp:include page = "includes_for_scripts_bottom.jsp"></jsp:include>  
-
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
         <script>
             $.fn.outerFind = function (selector) {
                 return this.find(selector).addBack(selector);
@@ -397,6 +399,42 @@
                     console.log('init tabs by plugin');
                     initTabs(document.body);
                 }
+            }
+
+            function rentalRent(rentalid) {
+
+                $.ajax({
+                    url: "/getRental/" + rentalid,
+                    type: "POST"
+
+                }).done(function (data) {
+                    console.log(data);
+                    let startDate = new Date(data.rentalStart);
+                    let endDate = new Date(data.rentalEnd);
+                    let formatted_startdate = startDate.getDate() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getFullYear() + " " + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds()
+                    let formatted_enddate = endDate.getDate() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getFullYear() + " " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds();
+
+                    document.getElementById("datePick").innerHTML = "<form action='/addDates/" + data.rentalId + "'>\n\
+                            <input type='text' name='datetimes' style='width:250px;'/>\n\
+                            <div><button type='submit'>Select these dates</button>\n\
+                            </div>   </form>";
+
+                    document.getElementById("dateTab").click();
+                    $(function () {
+                        $('input[name="datetimes"]').daterangepicker({
+                            timePicker: true,
+                            startDate: startDate,
+                            endDate: endDate,
+                            minDate: startDate,
+                            maxDate: endDate,
+                            locale: {
+                                format: 'DD/MM/YYYY HH:00'
+                            }
+                        });
+                    });
+
+                });
+
             }
         </script>
 
