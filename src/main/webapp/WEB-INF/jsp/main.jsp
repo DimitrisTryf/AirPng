@@ -119,7 +119,7 @@
                         <li class="nav-item mbr-fonts-style"><a id="dateTab" class="nav-link  show active display-7" role="tab"
                                                                 data-toggle="tab" href="#tabs3-i_tab1" aria-selected="true">
                                 2. Choose Parking Duration</a></li>
-                        <li class="nav-item mbr-fonts-style"><a class="nav-link show active display-7" role="tab"
+                        <li class="nav-item mbr-fonts-style"><a id="checkoutTab" class="nav-link show active display-7" role="tab"
                                                                 data-toggle="tab" href="#tabs3-i_tab2" aria-selected="true">
                                 3. Checkout</a></li>
 
@@ -199,6 +199,7 @@
                                         Choose from the large selection pre-made blocks - full-screen intro, bootstrap carousel,
                                         slider, responsive image gallery with, parallax scrolling, sticky header and more.
                                     </p>
+                                    <div id="checkout"></div>
                                 </div>
 
 
@@ -403,21 +404,21 @@
 
             function rentalRent(rentalid) {
 
+                let dates;
                 $.ajax({
                     url: "/getRental/" + rentalid,
                     type: "POST"
 
                 }).done(function (data) {
-                    console.log(data);
                     let startDate = new Date(data.rentalStart);
                     let endDate = new Date(data.rentalEnd);
-                    let formatted_startdate = startDate.getDate() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getFullYear() + " " + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds()
-                    let formatted_enddate = endDate.getDate() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getFullYear() + " " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds();
 
                     document.getElementById("datePick").innerHTML = "<form action='/addDates/" + data.rentalId + "'>\n\
-                            <input type='text' name='datetimes' style='width:250px;'/>\n\
-                            <div><button type='submit'>Select these dates</button>\n\
+                            <input type='text' name='datetimes' style='width:400px;'/>\n\
+                            <div><button type='submit' id='datesSelected'>Select these dates</button>\n\
                             </div>   </form>";
+
+
 
                     document.getElementById("dateTab").click();
                     $(function () {
@@ -431,6 +432,29 @@
                                 format: 'DD/MM/YYYY HH:00'
                             }
                         });
+                        document.getElementById("datesSelected").addEventListener("click", function (event) {
+                            event.preventDefault();
+                            dates = $('input[name="datetimes"]').val();
+                            console.log(dates);
+                            document.getElementById("checkoutTab").click();
+                            //if pay done
+                            document.getElementById("checkout").innerHTML = "<form method='post' action='/book/" + rentalid + "'>\n\
+                                                                            <input value='" + dates + "' name='dates' type='hidden'>\n\
+                                                                            <button type='submit'>Checkout</button>\n\
+                                                                            </form>";
+
+
+                            let bookDetails = {
+                                rentalId: rentalid,
+                                dates: dates
+                            };
+                            console.log(bookDetails);
+
+
+
+
+                        });
+
                     });
 
                 });

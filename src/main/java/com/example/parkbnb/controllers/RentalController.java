@@ -95,4 +95,11 @@ public class RentalController {
         rsi.removeRental(rsi.getRentalById(rentalid));
         return "redirect:/showUsersGarages";
     }
+    
+    @PostMapping("/book/{rentalId}")
+    public String bookRental(@PathVariable(name = "rentalId") Integer rentalId,
+            @RequestParam (name="dates") String dates){
+        System.out.println(dates);
+        return "redirect:/main";
+    }
 }
