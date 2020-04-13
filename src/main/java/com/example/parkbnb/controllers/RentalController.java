@@ -9,6 +9,7 @@ import com.example.parkbnb.models.Garage;
 import com.example.parkbnb.models.Rental;
 import com.example.parkbnb.services.GarageServiceInterface;
 import com.example.parkbnb.services.RentalServiceInterface;
+import com.example.parkbnb.utils.RentalUtils;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -99,7 +100,9 @@ public class RentalController {
     @PostMapping("/book/{rentalId}")
     public String bookRental(@PathVariable(name = "rentalId") Integer rentalId,
             @RequestParam (name="dates") String dates){
-        System.out.println(dates);
+        RentalUtils rentalUtils = new RentalUtils();
+        LocalDateTime[] fomatedDates = rentalUtils.handleRentalDates(dates);
+        
         return "redirect:/main";
     }
 }
