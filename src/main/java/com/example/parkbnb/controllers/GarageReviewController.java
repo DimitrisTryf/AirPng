@@ -3,7 +3,7 @@ package com.example.parkbnb.controllers;
 
 import com.example.parkbnb.models.GarageReview;
 import com.example.parkbnb.repositories.GarageReviewRepository;
-import javax.ws.rs.Consumes;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
