@@ -68,7 +68,7 @@
                                     <label for="datetimes">Select dates:</label>
                                     <input type="text" name="datetimes" style="width:250px;"/>
                                     <label for="pph">Price per Hour:</label>
-                                    <input type="number" step="0.01" name="pph">
+                                    <input type="number" step="0.01" name="pph" required>
                                     <button type="submit">Add dates</button>
                                 </form>
                                 <div style="border: 1px solid black;" id="${gar.garageId}"></div>
@@ -84,10 +84,12 @@
             $(function () {
                 $('input[name="datetimes"]').daterangepicker({
                     timePicker: true,
+                    timePicker24Hour: true,
                     startDate: moment().startOf('hour'),
                     endDate: moment().startOf('hour').add(32, 'hour'),
+                    minDate: moment().startOf('hour'),
                     locale: {
-                        format: 'MM/DD/YYYY HH:mm'
+                        format: 'DD/MM/YYYY HH:00'
                     }
                 });
             });

@@ -7,6 +7,7 @@ package com.example.parkbnb.controllers;
 
 import com.example.parkbnb.models.Garage;
 import com.example.parkbnb.models.Rental;
+import com.example.parkbnb.models.User;
 import com.example.parkbnb.services.GarageServiceInterface;
 import com.example.parkbnb.services.RentalServiceInterface;
 import com.example.parkbnb.utils.RentalUtils;
@@ -16,6 +17,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,8 +45,8 @@ public class RentalController {
         Garage tempGarage = gsi.findById(garageId);
         double price = Double.parseDouble(pph);
         String[] dates = datetimes.split("-");
-        LocalDateTime start = LocalDateTime.parse(dates[0].trim(), DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm"));
-        LocalDateTime end = LocalDateTime.parse(dates[1].trim(), DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm"));
+        LocalDateTime start = LocalDateTime.parse(dates[0].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        LocalDateTime end = LocalDateTime.parse(dates[1].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
         Rental[] garageRentals = rsi.getGarageRentals(tempGarage);
         boolean isAlloweToAdd = true;
@@ -84,10 +86,10 @@ public class RentalController {
     public ArrayList<Rental> getAvailableGarages() {
         return rsi.getAvailable();
     }
-    
+
     @ResponseBody
     @PostMapping(value = "/getRental/{rentalId}")
-     public Rental getRental(@PathVariable(name = "rentalId") Integer rentalId) {
+    public Rental getRental(@PathVariable(name = "rentalId") Integer rentalId) {
         return rsi.getRentalById(rentalId);
     }
 
@@ -96,13 +98,73 @@ public class RentalController {
         rsi.removeRental(rsi.getRentalById(rentalid));
         return "redirect:/showUsersGarages";
     }
-    
+
     @PostMapping("/book/{rentalId}")
     public String bookRental(@PathVariable(name = "rentalId") Integer rentalId,
-            @RequestParam (name="dates") String dates){
+            @RequestParam(name = "dates") String dates,
+            HttpSession session) {
         RentalUtils rentalUtils = new RentalUtils();
-        LocalDateTime[] fomatedDates = rentalUtils.handleRentalDates(dates);
-        
+        LocalDateTime[] formatedDates = rentalUtils.handleRentalDates(dates);
+        Rental existingRental = rsi.getRentalById(rentalId);
+        User user = (User) session.getAttribute("userSession");
+
+        LocalDateTime oldRentalStart = LocalDateTime.ofInstant(existingRental.getRentalStart().toInstant(), ZoneId.systemDefault());
+        LocalDateTime oldRentalEnd = LocalDateTime.ofInstant(existingRental.getRentalEnd().toInstant(), ZoneId.systemDefault());
+
+        if (oldRentalStart.equals(formatedDates[0])) {
+
+            Rental newRent = new Rental();
+            newRent.setRentalGarageid(existingRental.getRentalGarageid());
+            newRent.setRentalPaydone((short) 1);
+            newRent.setRentalPriceperhour(existingRental.getRentalPriceperhour());
+            newRent.setRentalUserid(user);
+            newRent.setRentalStart(existingRental.getRentalStart());
+            newRent.setRentalEnd(Date.from(formatedDates[1].atZone(ZoneId.systemDefault()).toInstant()));
+
+            existingRental.setRentalStart(Date.from(formatedDates[1].atZone(ZoneId.systemDefault()).toInstant()));
+
+            rsi.addNewRental(newRent);
+            rsi.addNewRental(existingRental);
+        } else if (oldRentalEnd.equals(formatedDates[1])) {
+            Rental newRent = new Rental();
+            newRent.setRentalGarageid(existingRental.getRentalGarageid());
+            newRent.setRentalPaydone((short) 1);
+            newRent.setRentalPriceperhour(existingRental.getRentalPriceperhour());
+            newRent.setRentalUserid(user);
+            newRent.setRentalStart(Date.from(formatedDates[0].atZone(ZoneId.systemDefault()).toInstant()));
+            newRent.setRentalEnd(existingRental.getRentalEnd());
+
+            existingRental.setRentalEnd(Date.from(formatedDates[0].atZone(ZoneId.systemDefault()).toInstant()));
+
+            rsi.addNewRental(newRent);
+            rsi.addNewRental(existingRental);
+        } else {
+            Rental newPreRent = new Rental();
+            Rental newPostRent = new Rental();
+            
+            newPreRent.setRentalGarageid(existingRental.getRentalGarageid());
+            newPreRent.setRentalPaydone((short) 0);
+            newPreRent.setRentalPriceperhour(existingRental.getRentalPriceperhour());
+            newPreRent.setRentalStart(existingRental.getRentalStart());
+            newPreRent.setRentalEnd(Date.from(formatedDates[0].atZone(ZoneId.systemDefault()).toInstant()));
+
+            newPostRent.setRentalGarageid(existingRental.getRentalGarageid());
+            newPostRent.setRentalPaydone((short) 0);
+            newPostRent.setRentalPriceperhour(existingRental.getRentalPriceperhour());
+            newPostRent.setRentalStart(Date.from(formatedDates[1].atZone(ZoneId.systemDefault()).toInstant()));
+            newPostRent.setRentalEnd(existingRental.getRentalEnd());
+            
+            existingRental.setRentalStart(Date.from(formatedDates[0].atZone(ZoneId.systemDefault()).toInstant()));
+            existingRental.setRentalEnd(Date.from(formatedDates[1].atZone(ZoneId.systemDefault()).toInstant()));
+            existingRental.setRentalPaydone((short)1);
+            existingRental.setRentalUserid(user);
+            
+            rsi.addNewRental(newPreRent);
+            rsi.addNewRental(newPostRent);
+            rsi.addNewRental(existingRental);
+
+        }
+
         return "redirect:/main";
     }
 }

@@ -424,6 +424,7 @@
                     $(function () {
                         $('input[name="datetimes"]').daterangepicker({
                             timePicker: true,
+                            timePicker24Hour: true,
                             startDate: startDate,
                             endDate: endDate,
                             minDate: startDate,
