@@ -105,6 +105,7 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sreviewUserid")
     private Collection<SiteReviews> siteReviewsCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ureviewFromuserid")
+    
     private Collection<UserReview> userReviewCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ureviewTouserid")
     private Collection<UserReview> userReviewCollection1;

@@ -7,6 +7,7 @@ package com.example.parkbnb.services;
 
 import com.example.parkbnb.models.User;
 import com.example.parkbnb.repositories.UserRepository;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -46,6 +47,17 @@ public class UserServiceImplementation implements UserServiceInterface {
     @Override
     public User getByEmail(String mail) {
         return ur.findByUserEmail(mail);
+    }
+
+    @Override
+    public User getUserByID(Integer id) {
+        Optional<User> temp = ur.findById(id);
+        if(temp.isPresent()){
+            return temp.get();
+        }else{
+            return null;
+        }
+                
     }
 
 }

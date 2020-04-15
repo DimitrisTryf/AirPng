@@ -23,4 +23,6 @@ public interface UserServiceInterface {
     public User getByGeneratedArray(String generatedArray);
 
     public User getByEmail(String mail);
+    
+    public User getUserByID(Integer id);
 }

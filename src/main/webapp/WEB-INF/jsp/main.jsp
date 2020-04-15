@@ -51,7 +51,7 @@
                         </div>
                     </a>
 
-                    <a href="#" id="Projects"> Projects</a>
+                    <a href="/myReviews" id="Projects"> My Reviews</a>
                     <a href="#" id="Contact2"> Contact</a>
 
 

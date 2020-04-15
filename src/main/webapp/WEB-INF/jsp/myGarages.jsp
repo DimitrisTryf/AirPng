@@ -55,7 +55,7 @@
     <body>
         <div class="container">
             <div class="row">
-                <h1 style="margin-top: 40px">A List Of All Products</h1>
+                <h1 style="margin-top: 40px">My Garages</h1>
 
                 <table class="table table-bordered">
 
@@ -129,14 +129,17 @@
                         let rentedhours = (endDate - startDate) / 1000 / 60 / 60;
                         let formatted_startdate = startDate.getDate() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getFullYear() + " " + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds()
                         let formatted_enddate = endDate.getDate() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getFullYear() + " " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds();
-                        let rented = "No";
-                        if (element.rentalUserid !== null) {
-                            rented = "Yes";
-                        }
 
-                        document.getElementById(divName).innerHTML += "<div>From: " + formatted_startdate + ", to: " + formatted_enddate + "  for " + rentedhours + " hours at " + element.rentalPriceperhour + "$ per hour</div>\n\
-                                                                        <div>Total price : " + rentedhours * element.rentalPriceperhour + "$   Rented: " + rented + "</div>\n\
+                        if (element.rentalUserid !== null) {
+                            document.getElementById(divName).innerHTML += "<div>From: " + formatted_startdate + ", to: " + formatted_enddate + "  for " + rentedhours + " hours at " + element.rentalPriceperhour + "$ per hour</div>\n\
+                                                                        <div>Total price : " + rentedhours * element.rentalPriceperhour + "$   Rented: Yes      By User:" + element.rentalUserid.userName+" "+ element.rentalUserid.userSurname+ "</div>\n\
+                                                                        <a href='removeRental/" + element.rentalId + "'>cancel</a>&nbsp<a href='reviewUser/"+element.rentalUserid.userId+"'>Review this user</a>";
+                        } else {
+
+                            document.getElementById(divName).innerHTML += "<div>From: " + formatted_startdate + ", to: " + formatted_enddate + "  for " + rentedhours + " hours at " + element.rentalPriceperhour + "$ per hour</div>\n\
+                                                                        <div>Total price : " + rentedhours * element.rentalPriceperhour + "$   Rented: No</div>\n\
                                                                         <a href='removeRental/" + element.rentalId + "'>cancel</a>";
+                        }
                     });
 
 
