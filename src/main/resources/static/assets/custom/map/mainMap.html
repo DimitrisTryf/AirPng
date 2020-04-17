@@ -96,7 +96,7 @@
             <div>
             </div>
             <div id="pac-container">
-                <input id="pac-input" type="text" placeholder="Enter a location">
+                <input class="form-control"  id="pac-input" type="text" placeholder="Enter a location">
                 <span style="margin-top: 55px; color: black;">
                     <button id="geo">geo</button>
                 </span>
@@ -205,7 +205,7 @@
                             //--------------------- with this to display details under the map for the selected 
                             //--------------------- garage with an ajax call for reviews
                             window.parent.document.querySelector("#garageInfo").innerHTML = `
-                            <h3>${this.garage.rentalGarageid.garageAddress}</h3>
+                            </br><h3>${this.garage.rentalGarageid.garageAddress}</h3>
                                 `;
                             $.ajax({
                                 url: "/garageRentals/" + this.garage.rentalGarageid.garageId,

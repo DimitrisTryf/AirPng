@@ -28,6 +28,7 @@ public class GarageServiceImplementation implements GarageServiceInterface{
     @Override
     public Garage addGarage(Garage garage) {
         return gr.save(garage);
+        
     }
 
     @Override

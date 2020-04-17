@@ -79,12 +79,12 @@
 
                                 <div class="form-group">
                                     <label for="userPassword1">Password</label>
-                                    <input  class="form-control" type="userPassword1" id="userPassword1_reg"  name="userPassword1" >
+                                    <input  class="form-control" type="password" id="userPassword1_reg"  name="userPassword1" >
                                 </div>
 
                                 <div class="form-group">
                                     <label for="userPassword2">Re-type Password</label>
-                                    <input  class="form-control" type="userPassword2" id="userPassword2_reg"  name="userPassword2" >
+                                    <input  class="form-control" type="password" id="userPassword2_reg"  name="userPassword2" >
                                 </div>
 
                                 <div class="text-center navbar-buttons mbr-section-btn"> ">

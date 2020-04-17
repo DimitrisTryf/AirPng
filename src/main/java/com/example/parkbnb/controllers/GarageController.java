@@ -50,7 +50,8 @@ public class GarageController {
     @GetMapping(value = "/addNewGarageForm")
     public String def() {
 
-        return "addGarage";
+        return "addNewGarage";
+        //return "addGarage";
     }
 
     @GetMapping(value = "/garageConfirm/{id}")
