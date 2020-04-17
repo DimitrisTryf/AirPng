@@ -138,7 +138,7 @@
                 <input class="form-control" id="pac-input" type="text" placeholder="Enter a location">
             </div>
         </div>
-        <div id="map"></div>
+        <div id="map" class="google-map rounded shadow"></div>
         <div id="infowindow-content">
             <img src="" width="16" height="16" id="place-icon">
             <span id="place-name" class="title"></span><br>
@@ -150,25 +150,7 @@
                 <h2 class="pb-3 align-left mbr-fonts-style display-2">
                     Add Your Garage!
                 </h2>
-<!--                <div>
-                    <div class="icon-block pb-3 align-left">
-                        <span class="icon-block__icon">
-                            <span class="mbri-letter mbr-iconfont"></span>
-                        </span>
-                        <h4 class="icon-block__title align-left mbr-fonts-style display-5">
-                            Don't hesitate to contact us
-                        </h4>
-                    </div>
-                    <div class="icon-contacts pb-3">
-                        <h5 class="align-left mbr-fonts-style display-7">
-                            Ready for offers and cooperation
-                        </h5>
-                        <p class="mbr-text align-left mbr-fonts-style display-7">
-                            Phone: +1 (0) 000 0000 001 <br>
-                            Email: youremail@mail.com
-                        </p>
-                    </div>
-                </div>-->
+
                 
  <input type="radio" id="spotType" name="spotType" value="single" checked>
         <label for="single">Single Spot Parking</label>
@@ -200,56 +182,6 @@
         </form>
         
         
-        
-<!--         <form action="/addGarage" method="POST"  enctype="multipart/form-data">
-            <input type="text" id="coordinates" required="required" name="coordinates" hidden>
-            <label for="address">Address: </label>
-            <input type="text" required="required" id="address" name="address">
-            <br/>
-            <label for="comment">Comments: </label>
-            <input type="text" id="comment" name="comment">
-            <br/>
-            <label for="entrancePic">Entrance Picture: </label>
-            <input type="file" required="required" id="entrancePic" name="entrancePic">
-                <br/>
-                <label for="spotPic">Spot Picture: </label>
-                <input type="file" required="required" id="spotPic" name="spotPic" disabled>
-            <br/>
-            <label for="billPhoto">Bill Photo: </label>
-            <input type="file" required="required" id="billPhoto" name="billPhoto">
-            <button id="click">
-                click
-            </button>
-        </form>-->
-        
-
-<!--                <div data-form-type="formoid">
-                    -Formbuilder Form-
-                    <form action="https://mobirise.com/" method="POST" class="mbr-form form-with-styler" data-form-title="Mobirise Form"><input type="hidden" name="email" data-form-email="true" value="ZUa3eyDkrAbqXq9409m64hNsUY5ZweYka8RpzrPpp5lLiho9+8QFHH7+PDapr2FtKLuICJ8MEixUM7JJOMUxpEXumBGmlIkJp0qpRvw7/aVelHJqhCztQ8ulAlEI2J1b">
-                        <div class="row">
-                            <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out the form!</div>
-                            <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
-                            </div>
-                        </div>
-                        <div class="dragArea row">
-                            <div class="col-md-6  form-group" data-for="name">
-                                <input type="text" name="name" placeholder="Your Name" data-form-field="Name" required="required" class="form-control input display-7" id="name-form4-m">
-                            </div>
-                            <div class="col-md-6  form-group" data-for="phone">
-                                <input type="text" name="phone" placeholder="Phone" data-form-field="Phone" required="required" class="form-control input display-7" id="phone-form4-m">
-                            </div>
-                            <div data-for="email" class="col-md-12  form-group">
-                                <input type="text" name="email" placeholder="Email" data-form-field="Email" class="form-control input display-7" required="required" id="email-form4-m">
-                            </div>
-                            <div data-for="message" class="col-md-12  form-group">
-                                <textarea name="message" placeholder="Message" data-form-field="Message" class="form-control input display-7" id="message-form4-m"></textarea>
-                            </div>
-                            <div class="col-md-12 input-group-btn  mt-2 align-center">
-                                <button type="submit" class="btn btn-primary btn-form display-4">SEND MESSAGE</button>
-                            </div>
-                        </div>
-                    </form>-Formbuilder Form-
-                </div>-->
 
             </div>
         </div>

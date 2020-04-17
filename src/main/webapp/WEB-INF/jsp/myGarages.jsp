@@ -17,8 +17,9 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-        <title>JSP Page</title>
-
+        <title>My Garages!</title>
+        
+   <jsp:include page = "includes_for_css.jsp"></jsp:include>  
         <style>
             body {
                 background-color: #f2f2f2;
@@ -53,7 +54,16 @@
 
     </head>
     <body>
-        <div class="container">
+        
+         <jsp:include page = "includes/navBarSide.jsp"></jsp:include>
+
+
+            <div class="preloader"></div>
+
+
+        <jsp:include page = "includes/navBar.jsp"></jsp:include>
+        
+        <div class="container" style="position: static ; padding-top: 120px">
             <div class="row">
                 <h1 style="margin-top: 40px">My Garages</h1>
 
@@ -80,6 +90,16 @@
 
             </div>
         </div>
+        
+            <%--<jsp:include page = "includes/footer.jsp"></jsp:include>--%>  
+
+        <jsp:include page = "includes_for_scripts_bottom.jsp"></jsp:include>  
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+      
+        
         <script>
             $(function () {
                 $('input[name="datetimes"]').daterangepicker({

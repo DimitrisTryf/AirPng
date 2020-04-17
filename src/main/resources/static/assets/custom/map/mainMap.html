@@ -6,6 +6,7 @@
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+          <link rel="stylesheet" href="../../../assets/bootstrap/css/bootstrap.min.css">
         <style>
             /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
@@ -51,8 +52,8 @@
             }
 
             #pac-container {
-                padding-bottom: 12px;
-                margin-right: 12px;
+                padding-bottom: 0px;
+                margin-right: 0px;
             }
 
             .pac-controls {
@@ -66,12 +67,27 @@
                 font-weight: 300;
             }
 
-            #pac-input {
+/*            #pac-input {
                 background-color: #fff;
                 font-family: Roboto;
                 font-size: 15px;
                 font-weight: 300;
                 margin-left: 12px;
+                padding: 0 11px 0 13px;
+                text-overflow: ellipsis;
+                width: 400px;
+            }
+
+            #pac-input:focus {
+                border-color: #4d90fe;
+            }*/
+            
+              #pac-input {
+                background-color: #fff;
+                font-family: Roboto;
+                font-size: 15px;
+                font-weight: 300;
+                margin-left: 0px;
                 padding: 0 11px 0 13px;
                 text-overflow: ellipsis;
                 width: 400px;
@@ -96,13 +112,17 @@
             <div>
             </div>
             <div id="pac-container">
-                <input class="form-control"  id="pac-input" type="text" placeholder="Enter a location">
+<!--                <input class="form-control"  id="pac-input" type="text" placeholder="Enter a location">
                 <span style="margin-top: 55px; color: black;">
                     <button id="geo">geo</button>
-                </span>
+                </span>-->
+                
+                 <div id="pac-container">
+                <input class="form-control" id="pac-input" type="text" placeholder="Enter a location">
+            </div>
             </div>
         </div>
-        <div id="map"></div>
+        <div id="map" class="rounded"></div>
         <div id="infowindow-content">
             <img src="" width="16" height="16" id="place-icon">
             <span id="place-name" class="title"></span><br>
@@ -220,9 +240,10 @@
                                     let formatted_enddate = endDate.getDate() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getFullYear() + " " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds();
                                     
                                     if (elem.rentalUserid === null) {
-                                        window.parent.document.querySelector("#garageInfo").innerHTML += "<div style='border:1px solid black'>\n\
-                                        From: " + formatted_startdate + ", to: " + formatted_enddate + " at " + elem.rentalPriceperhour + "$ per hour\n\
-                                        <a onClick='rentalRent("+elem.rentalId+")'>choose this one</a></div>";
+                                        window.parent.document.querySelector("#garageInfo").innerHTML += 
+                                        "<div class='border border-primary rounded bg-light'>\n\
+                        </br> <p class='mbr-fonts-style display-5' style='color:#d50c0c'>Available</p> <b>From:</b> " + formatted_startdate + "</br><b>To:</b> " + formatted_enddate + "</br><b> at " + elem.rentalPriceperhour + "$ per hour </b>\n\
+                                        <p><button onClick='rentalRent("+elem.rentalId+")' class='btn btn-primary btn-form display-4'>choose this one</button></p> </div>";
                                     }
 
 

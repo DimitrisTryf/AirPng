@@ -74,25 +74,21 @@
                             <div id="tab1" class="tab-pane in active mbr-table" role="tabpanel">
                                 <div class="row tab-content-row">
                                     <div class="col-xs-12 col-md-10">
-                                        <!--                                    <div class="card-img ">
-                                                                                <span class="mbri-responsive mbr-iconfont"></span>
-                                                                            </div>
-                                                                                                                <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                                                                                                                    MOBILE FRIENDLY
-                                                                                                                </h4>
-                                                                                                                <p class="mbr-section-text  align-center mbr-fonts-style display-7">
-                                                                                                                    No special actions required, all sites you make with Mobirise are mobile-friendly. You
-                                                                                                                    don't have to create a special mobile version of your site, it will adapt automagically.
-                                                                                                                </p>-->
+                                       
                                         <section class="map1 cid-rSzIQODBwc" id="map1-9">
 
 
 
-                                            <div class="google-map rounded"><iframe frameborder="0" style="border:0" 
+                                            <div class="google-map rounded shadow"><iframe frameborder="0" style="border:0" 
                                                                                     src="../assets/custom/map/mainMap.html" allowfullscreen=""></iframe></div>
 
+                                            <div id="garageInfo" class="align-center shadow"> </div>
                                         </section>
-                                        <div id="garageInfo"></div>
+                                        
+                                          
+                                           
+                                        
+                                       
 
 
                                     </div>
@@ -133,87 +129,17 @@
                                             <span class="mbri-extension mbr-iconfont"></span>
                                         </div>
                                         <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                                            TRENDY WEBSITE BLOCKS
+                                           Checkout
                                         </h4>
                                         <p class="mbr-section-text  align-center mbr-fonts-style display-7">
-                                            Choose from the large selection pre-made blocks - full-screen intro, bootstrap carousel,
-                                            slider, responsive image gallery with, parallax scrolling, sticky header and more.
+                                          CheckOut section
                                         </p>
                                         <div id="checkout"></div>
                                     </div>
 
 
-
-
-
-
                                 </div>
                             </div>
-
-<!--                            <div id="tab4" class="tab-pane  mbr-table" role="tabpanel">
-                                <div class="row tab-content-row">
-                                    <div class="col-xs-12 col-md-6">
-                                        <div class="card-img ">
-                                            <span class="mbri-responsive mbr-iconfont"></span>
-                                        </div>
-                                        <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                                            MOBILE FRIENDLY
-                                        </h4>
-                                        <p class="mbr-section-text  align-center mbr-fonts-style display-7">
-                                            No special actions required, all sites you make with Mobirise are mobile-friendly. You
-                                            don't have to create a special mobile version of your site, it will adapt automagically.
-                                        </p>
-                                    </div>
-
-
-
-
-
-
-                                </div>
-                            </div>
-
-                            <div id="tab5" class="tab-pane  mbr-table" role="tabpanel">
-                                <div class="row tab-content-row">
-                                    <div class="col-xs-12 col-md-6">
-                                        <div class="card-img ">
-                                            <span class="mbri-bootstrap mbr-iconfont"></span>
-                                        </div>
-                                        <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                                            IT'S EASY AND SIMPLE
-                                        </h4>
-                                        <p class="mbr-section-text  align-center mbr-fonts-style display-7">
-                                            Cut down the development time with drag-and-drop website builder. Drop the blocks into
-                                            the page, edit content inline and publish - no technical skills required.
-                                        </p>
-                                    </div>
-
-
-
-
-
-
-                                </div>
-                            </div>
-
-                            <div id="tab6" class="tab-pane  mbr-table" role="tabpanel">
-                                <div class="row tab-content-row">
-                                    <div class="col-xs-12 col-md-6">
-                                        <div class="card-img ">
-                                            <span class="mbri-extension mbr-iconfont"></span>
-                                        </div>
-                                        <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                                            TRENDY WEBSITE BLOCKS
-                                        </h4>
-                                        <p class="mbr-section-text  align-center mbr-fonts-style display-7">
-                                            Choose from the large selection pre-made blocks - full-screen intro, bootstrap carousel,
-                                            slider, responsive image gallery with, parallax scrolling, sticky header and more.
-                                        </p>
-                                    </div>-->
-
-
-
-
 
 
                                 </div>
@@ -223,77 +149,7 @@
                 </div>
             </section>
 
-            <!--        <section once="footers" class="cid-rSzz49kirZ" id="footer7-7">
-            
-            
-            
-            
-            
-                        <div class="container">
-                            <div class="media-container-row align-center mbr-white">
-                                <div class="row row-links">
-                                    <ul class="foot-menu">
-            
-            
-            
-            
-            
-                                        <li class="foot-menu-item mbr-fonts-style display-7">
-                                            <a class="text-white mbr-bold" href="#" target="_blank">About us</a>
-                                        </li><li class="foot-menu-item mbr-fonts-style display-7">
-                                            <a class="text-white mbr-bold" href="#" target="_blank">Services</a>
-                                        </li><li class="foot-menu-item mbr-fonts-style display-7">
-                                            <a class="text-white mbr-bold" href="#" target="_blank">Get In Touch</a>
-                                        </li><li class="foot-menu-item mbr-fonts-style display-7">
-                                            <a class="text-white mbr-bold" href="#" target="_blank">Careers</a>
-                                        </li><li class="foot-menu-item mbr-fonts-style display-7">
-                                            <a class="text-white mbr-bold" href="#" target="_blank">Work</a>
-                                        </li></ul>
-                                </div>
-                                <div class="row social-row">
-                                    <div class="social-list align-right pb-2">
-            
-            
-            
-            
-            
-            
-                                        <div class="soc-item">
-                                            <a href="#" target="_blank">
-                                                <span class="socicon-twitter socicon mbr-iconfont mbr-iconfont-social"></span>
-                                            </a>
-                                        </div><div class="soc-item">
-                                            <a href="#" target="_blank">
-                                                <span class="socicon-facebook socicon mbr-iconfont mbr-iconfont-social"></span>
-                                            </a>
-                                        </div><div class="soc-item">
-                                            <a href="#" target="_blank">
-                                                <span class="socicon-youtube socicon mbr-iconfont mbr-iconfont-social"></span>
-                                            </a>
-                                        </div><div class="soc-item">
-                                            <a href="#" target="_blank">
-                                                <span class="socicon-instagram socicon mbr-iconfont mbr-iconfont-social"></span>
-                                            </a>
-                                        </div><div class="soc-item">
-                                            <a href="#" target="_blank">
-                                                <span class="socicon-googleplus socicon mbr-iconfont mbr-iconfont-social"></span>
-                                            </a>
-                                        </div><div class="soc-item">
-                                            <a href="#" target="_blank">
-                                                <span class="socicon-behance socicon mbr-iconfont mbr-iconfont-social"></span>
-                                            </a>
-                                        </div></div>
-                                </div>
-                                <div class="row row-copirayt">
-                                    <p class="mbr-text mb-0 mbr-fonts-style mbr-white align-center display-7">
-                                        © Copyright 2019 AirPnG - All Rights Reserved
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-            
-                    </section>-->
-
+      
         <jsp:include page = "includes/footer.jsp"></jsp:include>  
 
         <jsp:include page = "includes_for_scripts_bottom.jsp"></jsp:include>  

@@ -56,7 +56,13 @@
                     </div>
                 </div>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item">
+                    <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+                         <li class="nav-item">
+                            <a class="nav-link link text-black display-4" href="/main">
+                                Book Now</a>
+                        </li>
+                        
+                        <li class="nav-item">
                             <a class="nav-link link text-black display-4" href="index.html#features15-5">
                                 How it works</a>
                         </li></ul>
