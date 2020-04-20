@@ -6,7 +6,7 @@
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-          <link rel="stylesheet" href="../../../assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../../assets/bootstrap/css/bootstrap.min.css">
         <style>
             /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
@@ -67,22 +67,22 @@
                 font-weight: 300;
             }
 
-/*            #pac-input {
-                background-color: #fff;
-                font-family: Roboto;
-                font-size: 15px;
-                font-weight: 300;
-                margin-left: 12px;
-                padding: 0 11px 0 13px;
-                text-overflow: ellipsis;
-                width: 400px;
-            }
-
-            #pac-input:focus {
-                border-color: #4d90fe;
-            }*/
+            /*            #pac-input {
+                            background-color: #fff;
+                            font-family: Roboto;
+                            font-size: 15px;
+                            font-weight: 300;
+                            margin-left: 12px;
+                            padding: 0 11px 0 13px;
+                            text-overflow: ellipsis;
+                            width: 400px;
+                        }
             
-              #pac-input {
+                        #pac-input:focus {
+                            border-color: #4d90fe;
+                        }*/
+
+            #pac-input {
                 background-color: #fff;
                 font-family: Roboto;
                 font-size: 15px;
@@ -112,14 +112,14 @@
             <div>
             </div>
             <div id="pac-container">
-<!--                <input class="form-control"  id="pac-input" type="text" placeholder="Enter a location">
-                <span style="margin-top: 55px; color: black;">
-                    <button id="geo">geo</button>
-                </span>-->
-                
-                 <div id="pac-container">
-                <input class="form-control" id="pac-input" type="text" placeholder="Enter a location">
-            </div>
+                <!--                <input class="form-control"  id="pac-input" type="text" placeholder="Enter a location">
+                                <span style="margin-top: 55px; color: black;">
+                                    <button id="geo">geo</button>
+                                </span>-->
+
+                <div id="pac-container">
+                    <input class="form-control" id="pac-input" type="text" placeholder="Enter a location">
+                </div>
             </div>
         </div>
         <div id="map" class="rounded"></div>
@@ -224,8 +224,13 @@
 
                             //--------------------- with this to display details under the map for the selected 
                             //--------------------- garage with an ajax call for reviews
+                            window.parent.$('#garageInfo').fadeOut();
+
+                            
                             window.parent.document.querySelector("#garageInfo").innerHTML = `
                             </br><h3>${this.garage.rentalGarageid.garageAddress}</h3>
+
+                           
                                 `;
                             $.ajax({
                                 url: "/garageRentals/" + this.garage.rentalGarageid.garageId,
@@ -238,12 +243,21 @@
                                     let endDate = new Date(elem.rentalEnd);
                                     let formatted_startdate = startDate.getDate() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getFullYear() + " " + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds()
                                     let formatted_enddate = endDate.getDate() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getFullYear() + " " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds();
-                                    
+
                                     if (elem.rentalUserid === null) {
-                                        window.parent.document.querySelector("#garageInfo").innerHTML += 
-                                        "<div class='border border-primary rounded bg-light'>\n\
+
+//                                        $("#garageInfo").text(txt).fadeIn('slow');
+//                                        
+//                                        $('#garageInfo', window.parent.document).html();
+//                                        
+
+                                      window.parent.document.querySelector("#garageInfo").innerHTML +=
+                                                "<div class='border border-primary rounded bg-light'>\n\
                         </br> <p class='mbr-fonts-style display-5' style='color:#d50c0c'>Available</p> <b>From:</b> " + formatted_startdate + "</br><b>To:</b> " + formatted_enddate + "</br><b> at " + elem.rentalPriceperhour + "$ per hour </b>\n\
-                                        <p><button onClick='rentalRent("+elem.rentalId+")' class='btn btn-primary btn-form display-4'>choose this one</button></p> </div>";
+                                        <p><button onClick='rentalRent(" + elem.rentalId + ")' class='btn btn-primary btn-form display-4'>choose this one</button></p> </div> ";
+
+                                        window.parent.$('#garageInfo').fadeIn();
+
                                     }
 
 
@@ -308,7 +322,7 @@
 
 
         </script>
-        
+
         <script
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2jIaoEKQV45vIJjLC6WYE_hH8c4SbTc8&libraries=places&callback=initMap"
         async defer></script>

@@ -78,12 +78,13 @@ public class GarageController {
     }
 
     @RequestMapping(value = "addGarage", method = RequestMethod.POST)
-    public ResponseEntity<String> fileUpload(@RequestParam("entrancePic") MultipartFile entrancePic,
+    public String fileUpload(@RequestParam("entrancePic") MultipartFile entrancePic,
             @RequestParam("billPhoto") MultipartFile billPhoto,
             @RequestParam("coordinates") String coordinates,
             @RequestParam("address") String address,
             @RequestParam("comment") String comment,
-            HttpSession session)
+            HttpSession session,
+            ModelMap mm)
             throws IOException {
 
         User sessionUser = (User) session.getAttribute("userSession");
@@ -113,7 +114,12 @@ public class GarageController {
         temp.setGarageEntranceimageurl("\\garageImages\\" + temp.getGarageId() + "\\" + "entrance" + entrancePicName);
 
         gsi.addGarage(temp);
-        return new ResponseEntity<>("File Uploaded Successfully.", HttpStatus.OK);
+       
+        
+        mm.addAttribute("newGarageEntryMessage", "true");
+        
+        return "addNewGarage";
+//        return new ResponseEntity<>("File Uploaded Successfully.", HttpStatus.OK);
     }
 
     @RequestMapping(value = "addGarageMultiSpot", method = RequestMethod.POST)

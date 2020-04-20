@@ -5,6 +5,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
     <head>
 
@@ -19,104 +20,114 @@
 
 
         <jsp:include page = "includes_for_css.jsp"></jsp:include>  
- <style>
-            /* Always set the map height explicitly to define the size of the div
-   * element that contains the map. */
-            #map {
-                height: 100%;
-                margin: 40px;
-                height: 700px;
-            }
+            <style>
+                /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+                #map {
+                    height: 100%;
+                    margin: 40px;
+                    height: 700px;
+                }
 
-            /* Optional: Makes the sample page fill the window. */
-            html,
-            body {
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
+                /* Optional: Makes the sample page fill the window. */
+                html,
+                body {
+                    height: 100%;
+                    margin: 0;
+                    padding: 0;
+                }
 
-            #description {
-                font-family: Roboto;
-                font-size: 15px;
-                font-weight: 300;
-            }
+                #description {
+                    font-family: Roboto;
+                    font-size: 15px;
+                    font-weight: 300;
+                }
 
-            #infowindow-content .title {
-                font-weight: bold;
-            }
+                #infowindow-content .title {
+                    font-weight: bold;
+                }
 
-            #infowindow-content {
-                display: none;
-            }
+                #infowindow-content {
+                    display: none;
+                }
 
-            #map #infowindow-content {
-                display: inline;
-            }
+                #map #infowindow-content {
+                    display: inline;
+                }
 
-            .pac-card {
-                margin: 10px 10px 0 0;
-                border-radius: 2px 0 0 2px;
-                box-sizing: border-box;
-                -moz-box-sizing: border-box;
-                outline: none;
-                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-                background-color: #fff;
-                font-family: Roboto;
-            }
+                .pac-card {
+                    margin: 10px 10px 0 0;
+                    border-radius: 2px 0 0 2px;
+                    box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    outline: none;
+                    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+                    background-color: #fff;
+                    font-family: Roboto;
+                }
 
-            #pac-container {
-                padding-bottom: 0px;
-                margin-right: 0px;
-            }
+                #pac-container {
+                    padding-bottom: 0px;
+                    margin-right: 0px;
+                }
 
-            .pac-controls {
-                display: inline-block;
-                padding: 5px 11px;
-            }
+                .pac-controls {
+                    display: inline-block;
+                    padding: 5px 11px;
+                }
 
-            .pac-controls label {
-                font-family: Roboto;
-                font-size: 13px;
-                font-weight: 300;
-            }
+                .pac-controls label {
+                    font-family: Roboto;
+                    font-size: 13px;
+                    font-weight: 300;
+                }
 
-            #pac-input {
-                background-color: #fff;
-                font-family: Roboto;
-                font-size: 15px;
-                font-weight: 300;
-                margin-left: 0px;
-                padding: 0 11px 0 13px;
-                text-overflow: ellipsis;
-                width: 400px;
-            }
+                #pac-input {
+                    background-color: #fff;
+                    font-family: Roboto;
+                    font-size: 15px;
+                    font-weight: 300;
+                    margin-left: 0px;
+                    padding: 0 11px 0 13px;
+                    text-overflow: ellipsis;
+                    width: 400px;
+                }
 
-            #pac-input:focus {
-                border-color: #4d90fe;
-            }
+                #pac-input:focus {
+                    border-color: #4d90fe;
+                }
 
-            #title {
-                color: #fff;
-                background-color: #4d90fe;
-                font-size: 25px;
-                font-weight: 500;
-                padding: 6px 12px;
-            }
+                #title {
+                    color: #fff;
+                    background-color: #4d90fe;
+                    font-size: 25px;
+                    font-weight: 500;
+                    padding: 6px 12px;
+                }
 
-        </style>
-        
+            </style>
+
 
             <title>Add new Garage | AirPnG | Park & GO!</title>
 
 
         </head>
         <body>
-            
-           <jsp:include page = "includes/navBarSide.jsp"></jsp:include>
+
+    
+        
+        <c:if test = "${newGarageEntryMessage == true}">
+            <div class="alert alert-success align-center" style="position:relative ;top: 100px" role="alert">
+                <h4> Your garage has been saved successfully! <p>Our Team will check and confirm your entry soon!</p></h4>
+        </div>
+        </c:if>
+
+ 
+
+        <jsp:include page = "includes/navBarSide.jsp"></jsp:include>
 
 
-           
+
 
             <div class="preloader"></div>
 
@@ -124,71 +135,71 @@
 
         <jsp:include page = "includes/navBar.jsp"></jsp:include>
 
-         <section class="mbr-section form4 cid-rWleKTVY8c cid-rU8UTzIOoj" id="form4-m" style="position: static ; padding-top: 120px">
+            <section class="mbr-section form4 cid-rWleKTVY8c cid-rU8UTzIOoj" id="form4-m" style="position: static ; padding-top: 120px">
 
-    
 
-    
-    <div class="container-fluid" style="position: static">
-        <div class="row">
-            <div class="col-md-6 " >
-                <!--<div class="google-map"><iframe frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAEIpgj38KyLFELm2bK9Y7krBkz1K-cMq8&amp;q=place_id:ChIJn6wOs6lZwokRLKy1iqRcoKw" allowfullscreen=""></iframe></div>-->
-                 <div class="pac-card" id="pac-card">
-            <div id="pac-container">
-                <input class="form-control" id="pac-input" type="text" placeholder="Enter a location">
-            </div>
-        </div>
-        <div id="map" class="google-map rounded shadow"></div>
-        <div id="infowindow-content">
-            <img src="" width="16" height="16" id="place-icon">
-            <span id="place-name" class="title"></span><br>
-            <span id="place-address"></span>
-        </div>
-               
-            </div>
-            <div class="col-md-5"  style="position: static">
-                <h2 class="pb-3 align-left mbr-fonts-style display-2">
-                    Add Your Garage!
-                </h2>
 
-                
- <input type="radio" id="spotType" name="spotType" value="single" checked>
-        <label for="single">Single Spot Parking</label>
-        <input type="radio" id="spotType" name="spotType" value="multi">
-        <label for="multi">Multiple Spot Parking</label><br>
-        
-        <form action="/addGarage" method="POST"  enctype="multipart/form-data">
-            <input type="text" id="coordinates" required="required" name="coordinates" hidden >
-            <!--<label for="address">Address: </label>-->
-            <input class="form-control" type="text" required="required" id="address" name="address" placeholder="Choosed Address" hidden >
-            <input class="form-control" type="text" required="required" id="choosedAdress" name="choosedAdress" placeholder="Choosed Address from Map" disabled >
-            
-            <br/>
-            <!--<label for="comment">Comments: </label>-->
-            <input class="form-control" type="text" id="comment" name="comment"  placeholder="Comments">
-            <br/>
-            <label for="entrancePic">Entrance Picture: </label>
-            <input class="form-control" type="file" required="required" id="entrancePic" name="entrancePic">
-                <br/>
-                <label for="spotPic">Spot Picture: </label>
-                <input class="form-control" type="file" required="required" id="spotPic" name="spotPic" disabled>
-            <br/>
-            <label for="billPhoto">Bill Photo: </label>
-            <input  class="form-control" type="file" required="required" id="billPhoto" name="billPhoto">
-           
-            <div class="col-md-12 input-group-btn  mt-2 align-center">
-                                <button  id="click"  class="btn btn-primary btn-form display-4">Save</button>
+
+                <div class="container-fluid" style="position: static">
+                    <div class="row">
+                        <div class="col-md-6 " >
+                            <!--<div class="google-map"><iframe frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAEIpgj38KyLFELm2bK9Y7krBkz1K-cMq8&amp;q=place_id:ChIJn6wOs6lZwokRLKy1iqRcoKw" allowfullscreen=""></iframe></div>-->
+                            <div class="pac-card" id="pac-card">
+                                <div id="pac-container">
+                                    <input class="form-control" id="pac-input" type="text" placeholder="Enter a location">
+                                </div>
                             </div>
-        </form>
-        
-        
+                            <div id="map" class="google-map rounded shadow"></div>
+                            <div id="infowindow-content">
+                                <img src="" width="16" height="16" id="place-icon">
+                                <span id="place-name" class="title"></span><br>
+                                <span id="place-address"></span>
+                            </div>
 
-            </div>
-        </div>
-    </div>
-</section>
+                        </div>
+                        <div class="col-md-5"  style="position: static">
+                            <h2 class="pb-3 align-left mbr-fonts-style display-2">
+                                Add Your Garage!
+                            </h2>
 
-       <jsp:include page = "includes/footer.jsp"></jsp:include>  
+
+                            <input type="radio" id="spotType" name="spotType" value="single" checked>
+                            <label for="single">Single Spot Parking</label>
+                            <input type="radio" id="spotType" name="spotType" value="multi">
+                            <label for="multi">Multiple Spot Parking</label><br>
+
+                            <form action="/addGarage" method="POST"  enctype="multipart/form-data">
+                                <input type="text" id="coordinates" required="required" name="coordinates" hidden >
+                                <!--<label for="address">Address: </label>-->
+                                <input class="form-control" type="text" required="required" id="address" name="address" placeholder="Choosed Address" hidden >
+                                <input class="form-control" type="text" required="required" id="choosedAdress" name="choosedAdress" placeholder="Choosed Address from Map" disabled >
+
+                                <br/>
+                                <!--<label for="comment">Comments: </label>-->
+                                <input class="form-control" type="text" id="comment" name="comment"  placeholder="Comments">
+                                <br/>
+                                <label for="entrancePic">Entrance Picture: </label>
+                                <input class="form-control" type="file" required="required" id="entrancePic" name="entrancePic">
+                                <br/>
+                                <label for="spotPic">Spot Picture: </label>
+                                <input class="form-control" type="file" required="required" id="spotPic" name="spotPic" disabled>
+                                <br/>
+                                <label for="billPhoto">Bill Photo: </label>
+                                <input  class="form-control" type="file" required="required" id="billPhoto" name="billPhoto">
+
+                                <div class="col-md-12 input-group-btn  mt-2 align-center">
+                                    <button  id="click"  class="btn btn-primary btn-form display-4">Save</button>
+                                </div>
+                            </form>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        <jsp:include page = "includes/footer.jsp"></jsp:include>  
 
         <jsp:include page = "includes_for_scripts_bottom.jsp"></jsp:include>  
         <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -196,7 +207,7 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
- <script>
+        <script>
             // This example requires the Places library. Include the libraries=places
             // parameter when you first load the API. For example:
             // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
@@ -294,8 +305,8 @@
             }
         </script>
         <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2jIaoEKQV45vIJjLC6WYE_hH8c4SbTc8&callback=initMap&libraries=places">
-    </script>
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2jIaoEKQV45vIJjLC6WYE_hH8c4SbTc8&callback=initMap&libraries=places">
+        </script>
 
         <script type="text/javascript">
             $(document).ready((function () {
@@ -306,11 +317,11 @@
                     var form = document.forms[0];
                     var formData = new FormData(form);
                     var url;
-                    if($("input[name='spotType']:checked").val()==="multi"){
-                        url='/fileUploadMultiSpot';
+                    if ($("input[name='spotType']:checked").val() === "multi") {
+                        url = '/fileUploadMultiSpot';
                     }
-                    if($("input[name='spotType']:checked").val()==="single"){
-                        url='/fileUpload';
+                    if ($("input[name='spotType']:checked").val() === "single") {
+                        url = '/fileUpload';
                     }
                     //alert(formData);
                     // Ajax call for file uploaling
@@ -350,18 +361,18 @@
         <script>
             //enable/disable for radio button of multispot garage
             $(document).ready(function () {
-              $('input[type=radio][name=spotType]').change(function (){
-                  var radioValue = $("input[name='spotType']:checked").val();
-                  if(radioValue==="multi"){
-                      $('#spotPic').removeAttr("disabled");
-                  }else{
-                      $('#spotPic').attr('disabled',"true");
-                  }
-              });  
+                $('input[type=radio][name=spotType]').change(function () {
+                    var radioValue = $("input[name='spotType']:checked").val();
+                    if (radioValue === "multi") {
+                        $('#spotPic').removeAttr("disabled");
+                    } else {
+                        $('#spotPic').attr('disabled', "true");
+                    }
+                });
             });
-            
+
         </script>
-        
+
 
 
 

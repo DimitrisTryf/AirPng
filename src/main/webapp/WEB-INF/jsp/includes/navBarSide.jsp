@@ -23,8 +23,28 @@
                         </div>
                     </a>
 
-                    <a href="/myReviews" id="Projects"> My Reviews</a>
-                    <a href="#" id="Contact2"> Contact</a>
+                    <a href="/myReviews" id="myReview">
+                        <div class=row>
+                            <div class="col-2 padding-left-1 ">
+                               <i class="fas fa-pencil-alt"></i>
+                            </div>
+                            <div class="col-10 align-right">
+                                My Reviews</div>
+                        </div>
+                        
+                        </a>
+                    <a href="/confirmGarages" id="confirmGarages">
+                        <div class=row>
+                            <div class="col-2 padding-left-1 ">
+                           <i class="far fa-check-circle"></i>
+                            </div>
+                            <div class="col-10 align-right">
+                               Confirm New</div>
+                        </div>
+                        
+                        
+                        
+                        </a>
 
 
 
