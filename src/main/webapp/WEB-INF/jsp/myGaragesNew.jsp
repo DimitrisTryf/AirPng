@@ -95,7 +95,7 @@
 
                 <div class="container" style="position:static">
                     <div class="media-container-row pt-5">
-                        <div class="accordion-content">
+                        <div class="accordion-content  shadow rounded">
                             <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">
                                 My Garages
                             </h2>
