@@ -5,6 +5,7 @@
  */
 package com.example.parkbnb.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -52,9 +53,11 @@ public class GarageReview implements Serializable {
     private String greviewComment;
     @JoinColumn(name = "greview_garageid", referencedColumnName = "garage_id")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Garage greviewGarageid;
     @JoinColumn(name = "greview_userid", referencedColumnName = "user_id")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private User greviewUserid;
 
     public GarageReview() {

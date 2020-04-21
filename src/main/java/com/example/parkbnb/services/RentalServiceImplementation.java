@@ -7,6 +7,7 @@ package com.example.parkbnb.services;
 
 import com.example.parkbnb.models.Garage;
 import com.example.parkbnb.models.Rental;
+import com.example.parkbnb.models.User;
 import com.example.parkbnb.repositories.RentalRepository;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -49,6 +50,11 @@ public class RentalServiceImplementation implements RentalServiceInterface {
     public Rental getRentalById(Integer id) {
         Rental temp = rr.findByRentalId(id);
         return temp;
+    }
+
+    @Override
+    public Rental[] findByRentalUser(User user) {
+        return rr.findByRentalUserid(user);
     }
 
 }

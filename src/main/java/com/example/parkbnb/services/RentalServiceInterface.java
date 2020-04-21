@@ -7,6 +7,7 @@ package com.example.parkbnb.services;
 
 import com.example.parkbnb.models.Garage;
 import com.example.parkbnb.models.Rental;
+import com.example.parkbnb.models.User;
 import java.util.ArrayList;
 
 /**
@@ -24,4 +25,6 @@ public interface RentalServiceInterface {
     public void removeRental(Rental rental);
     
     public Rental getRentalById(Integer id);
+    
+    public Rental[] findByRentalUser(User user);
 }

@@ -226,10 +226,10 @@
                             //--------------------- garage with an ajax call for reviews
                             window.parent.$('#garageInfo').fadeOut();
 
-                            
+
                             window.parent.document.querySelector("#garageInfo").innerHTML = `
                             </br><h3>${this.garage.rentalGarageid.garageAddress}</h3>
-
+                            <br/><a href="showGarageReviews/${this.garage.rentalGarageid.garageId}">Show reviews</a>
                            
                                 `;
                             $.ajax({
@@ -251,7 +251,7 @@
 //                                        $('#garageInfo', window.parent.document).html();
 //                                        
 
-                                      window.parent.document.querySelector("#garageInfo").innerHTML +=
+                                        window.parent.document.querySelector("#garageInfo").innerHTML +=
                                                 "<div class='border border-primary rounded bg-light'>\n\
                         </br> <p class='mbr-fonts-style display-5' style='color:#d50c0c'>Available</p> <b>From:</b> " + formatted_startdate + "</br><b>To:</b> " + formatted_enddate + "</br><b> at " + elem.rentalPriceperhour + "$ per hour </b>\n\
                                         <p><button onClick='rentalRent(" + elem.rentalId + ")' class='btn btn-primary btn-form display-4'>choose this one</button></p> </div> ";

@@ -1,52 +1,64 @@
-  <section>
-                <div id="mysidenav" class="sidenav" >
+<section>
+    <div id="mysidenav" class="sidenav" >
 
 
-                    <a href="/addNewGarageForm" id="addNewGarageForm">
-                        <div class=row>
-                            <div class="col-2 padding-left-1 ">
-                                <i class="fas fa-plus"></i>
-                            </div>
-                            <div class="col-10 align-right">
-                                Add Garage </div>
-                        </div>
-                    </a>
+        <a href="/addNewGarageForm" id="addNewGarageForm">
+            <div class=row>
+                <div class="col-2 padding-left-1 ">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="col-10 align-right">
+                    Add Garage </div>
+            </div>
+        </a>
 
 
-                    <a href="/showUsersGarages" id="showUsersGarages">
-                        <div class=row>
-                            <div class="col-2 padding-left-1 ">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <div class="col-10 align-right">
-                                Show Garages</div>
-                        </div>
-                    </a>
+        <a href="/showUsersGarages" id="showUsersGarages">
+            <div class=row>
+                <div class="col-2 padding-left-1 ">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="col-10 align-right">
+                    Show Garages</div>
+            </div>
+        </a>
 
-                    <a href="/myReviews" id="myReview">
-                        <div class=row>
-                            <div class="col-2 padding-left-1 ">
-                               <i class="fas fa-pencil-alt"></i>
-                            </div>
-                            <div class="col-10 align-right">
-                                My Reviews</div>
-                        </div>
-                        
-                        </a>
-                    <a href="/confirmGarages" id="confirmGarages">
-                        <div class=row>
-                            <div class="col-2 padding-left-1 ">
-                           <i class="far fa-check-circle"></i>
-                            </div>
-                            <div class="col-10 align-right">
-                               Confirm New</div>
-                        </div>
-                        
-                        
-                        
-                        </a>
+        <a href="/myReviews" id="myReview">
+            <div class=row>
+                <div class="col-2 padding-left-1 ">
+                    <i class="fas fa-pencil-alt"></i>
+                </div>
+                <div class="col-10 align-right">
+                    My Reviews</div>
+            </div>
+
+        </a>
+
+        <a href="/rentalHistory" id="rentalHistory">
+            <div class=row>
+                <div class="col-2 padding-left-1 ">
+                    <i class="far fa-check-circle"></i>
+                </div>
+                <div class="col-10 align-right">
+                    My rental history</div>
+            </div>
 
 
 
-                </div> 
-  </section>
+        </a>
+
+        <a href="/confirmGarages" id="confirmGarages">
+            <div class=row>
+                <div class="col-2 padding-left-1 ">
+                    <i class="far fa-check-circle"></i>
+                </div>
+                <div class="col-10 align-right">
+                    Confirm New</div>
+            </div>
+
+
+
+        </a>
+
+    </div> 
+</section>
