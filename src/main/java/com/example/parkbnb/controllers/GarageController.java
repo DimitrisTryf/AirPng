@@ -69,6 +69,14 @@ public class GarageController {
         mm.addAttribute("userGarages", gsi.getUserGarages(sessionUser));
         return "myGarages";
     }
+    
+     @GetMapping(value = "/showUsersGaragesNew")
+    public String garageConfNew(ModelMap mm,
+            HttpSession session) {
+        User sessionUser = (User) session.getAttribute("userSession");
+        mm.addAttribute("userGarages", gsi.getUserGarages(sessionUser));
+        return "myGaragesNew";
+    }
 
     @GetMapping(value = "/confirmGarages")
     public String confGarages(ModelMap mm) {

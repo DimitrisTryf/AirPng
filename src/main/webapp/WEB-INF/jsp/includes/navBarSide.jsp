@@ -13,7 +13,7 @@
         </a>
 
 
-        <a href="/showUsersGarages" id="showUsersGarages">
+        <a href="/showUsersGaragesNew" id="showUsersGarages">
             <div class=row>
                 <div class="col-2 padding-left-1 ">
                     <i class="fas fa-eye"></i>
