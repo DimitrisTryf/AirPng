@@ -19,7 +19,7 @@
                     <i class="fas fa-eye"></i>
                 </div>
                 <div class="col-10 align-right">
-                    Show Garages</div>
+                    My Garages</div>
             </div>
         </a>
 

@@ -72,7 +72,7 @@ public class RentalController {
             tempRental.setRentalGarageid(tempGarage);
             rsi.addNewRental(tempRental);
         }
-        return "redirect:/showUsersGarages";
+        return "redirect:/showUsersGaragesNew";
     }
     
     @ResponseBody
@@ -97,7 +97,7 @@ public class RentalController {
     @GetMapping(value = "/removeRental/{rentalid}")
     public String removeRental(@PathVariable(name = "rentalid") Integer rentalid) {
         rsi.removeRental(rsi.getRentalById(rentalid));
-        return "redirect:/showUsersGarages";
+        return "redirect:/showUsersGaragesNew";
     }
     
     @PostMapping("/book/{rentalId}")

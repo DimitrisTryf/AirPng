@@ -93,14 +93,14 @@
 
             <section class="accordion2 cid-rWPbspIEeg" id="accordion2-v" style="position: static">
 
-                <div class="container" style="position:static">
-                    <div class="media-container-row pt-5">
-                        <div class="accordion-content  shadow rounded">
-                            <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">
+                <div class="container-fluid" style="position:static">
+                    <div class="media-container-row pt-5" style="position: static">
+                        <div class="accordion-content col-4 shadow rounded" style="position: static">
+                            <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2"  style="position: static">
                                 My Garages
                             </h2>
 
-                            <c:forEach items="${userGarages}" var="gar">
+                        <c:forEach items="${userGarages}" var="gar">
                             <div id="bootstrap-accordion_${gar.garageId}" class="panel-group accordionStyles accordion pt-5 mt-3 " role="tablist" aria-multiselectable="true">
                                 <div class="card">
                                     <div class="card-header" role="tab" id="heading${gar.garageId}">
@@ -142,9 +142,18 @@
                         </c:forEach>
 
                     </div>
-                    <div class="mbr-figure" style="width: 105%;">
-                        <img class="shadow rounded" src="https://shawglobalnews.files.wordpress.com/2019/12/01.jpeg?quality=70&strip=all" alt="ParkingSpot">
+                    <div class="mbr-figure col-5" style="width: 105%; ">
+                        <div id="garageImageWrap" style='display:none'>
+                            <div id="garageImage" ></div>
+                        </div>
+                        <div  id="garageDetails">
+
+                            <div style="border: 1px solid black;"></div>
+                        </div>
+
                     </div>
+
+
                 </div>
             </div>
             </br></br></br></br></br></br> </section>
@@ -204,6 +213,20 @@
                                                 function handleSuccess(data) {
                                                     let divName = garageId;
                                                     document.getElementById(divName).innerHTML = "";
+
+
+
+                                                    $('#garageImageWrap').fadeOut(function () {
+                                                        document.getElementById('garageImage').innerHTML = "<img class='shadow rounded'  src=" + data[0].rentalGarageid.garageBillimageurl + " alt='ParkingSpot'>"
+
+
+                                                    });
+
+                                                    $('#garageImageWrap').fadeIn();
+
+
+                                                    document.getElementById('garageDetails').innerHTML = "";
+
                                                     $.each(data, function (i, element) {
                                                         let startDate = new Date(element.rentalStart);
                                                         let endDate = new Date(element.rentalEnd);
@@ -211,15 +234,69 @@
                                                         let formatted_startdate = startDate.getDate() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getFullYear() + " " + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds()
                                                         let formatted_enddate = endDate.getDate() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getFullYear() + " " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds();
 
+
                                                         if (element.rentalUserid !== null) {
-                                                            document.getElementById(divName).innerHTML += "<div>From: " + formatted_startdate + ", to: " + formatted_enddate + "  for " + rentedhours + " hours at " + element.rentalPriceperhour + "$ per hour</div>\n\
-                                                                              <div>Total price : " + rentedhours * element.rentalPriceperhour + "$   Rented: Yes      By User:" + element.rentalUserid.userName + " " + element.rentalUserid.userSurname + "</div>\n\
-                                                                              <a href='removeRental/" + element.rentalId + "'>cancel</a>&nbsp<a href='reviewUser/" + element.rentalUserid.userId + "'>Review this user</a>";
+
+                                                            document.getElementById('garageDetails').innerHTML += "<table class='table shadow rounded'>\n\
+                                                                                                                                <thead>\n\
+                                                                                                                             <tr><th colspan='7'><h4>RENTALS</h4></th></tr>\n\
+                                                                                                                                    <tr>\n\
+                                                                                                                                        <th scope='col'>From</th>\n\
+                                                                                                                                        <th scope='col'>To</th>\n\
+                                                                                                                                        <th scope='col'>Price/Hour</th>\n\
+                                                                                                                                        <th scope='col'>Total</th>\n\
+                                                                                                                                     <th scope='col'>By User</th>\n\
+                                                                                                                                        <th scope='col'></th>\n\
+                                                                                                                                        <th scope='col'></th>\n\
+                                                                                                                                 </tr>\n\
+                                                                                                                                </thead>\n\
+                                                                                                                                <tbody>\n\
+                                                                                                                                    <tr>\n\
+                                                                                                                                        <td>" + formatted_startdate + "</td>\n\
+                                                                                                                                        <td>" + formatted_enddate + "</td>\n\
+                                                                                                                                        <td>" + element.rentalPriceperhour + "</td>\n\
+                                                                                                                                     <td>" + rentedhours * element.rentalPriceperhour + "$</td>\n\
+                                                                                                                                     <td>" + element.rentalUserid.userName + " " + element.rentalUserid.userSurname + "</td>\n\
+                                                                                                                                     <td><a href='reviewUser/" + element.rentalUserid.userId + "'> <i class='fas fa-star' style='color:yellow' title='Review User'></i></a></td>\n\
+                                                                                                                                     <td><a href='removeRental/" + element.rentalId + "'><i class='fas fa-minus-circle' style='color:red' title='Cancel'></i></a></td>\n\
+                                                                                                                                    </tr>\n\
+                                                                                                                                </tbody>\n\
+                                                                                                                            </table>";
+                                                                                                                                        
+
+
+
+
+
+
                                                         } else {
 
-                                                            document.getElementById(divName).innerHTML += "<div>From: " + formatted_startdate + ", to: " + formatted_enddate + "  for " + rentedhours + " hours at " + element.rentalPriceperhour + "$ per hour</div>\n\
-                                                                              <div>Total price : " + rentedhours * element.rentalPriceperhour + "$   Rented: No</div>\n\
-                                                                              <a href='removeRental/" + element.rentalId + "'>cancel</a>";
+//                                                            document.getElementById('garageDetails').innerHTML += "<div>From: " + formatted_startdate + ", to: " + formatted_enddate + "  for " + rentedhours + " hours at " + element.rentalPriceperhour + "$ per hour</div>\n\
+//                                                                              <div>Total price : " + rentedhours * element.rentalPriceperhour + "$   Rented: No</div>\n\
+//                                                                              <a href='removeRental/" + element.rentalId + "'>cancel</a>";
+    
+                                                              document.getElementById('garageDetails').innerHTML +="<table class='table shadow rounded'>\n\
+                                                                                                                                <thead>\n\
+                                                                                                                             <tr><th colspan='7'><h4>AVAILABILITIES</h4></th></tr>\n\
+                                                                                                                                    <tr>\n\
+                                                                                                                                        <th scope='col'>From</th>\n\
+                                                                                                                                        <th scope='col'>To</th>\n\
+                                                                                                                                        <th scope='col'>Price/Hour</th>\n\
+                                                                                                                                        <th scope='col'>Total</th>\n\
+                                                                                                                                        <th scope='col'></th>\n\
+                                                                                                                                 </tr>\n\
+                                                                                                                                </thead>\n\
+                                                                                                                                <tbody>\n\
+                                                                                                                                    <tr>\n\
+                                                                                                                                        <td>" + formatted_startdate + "</td>\n\
+                                                                                                                                        <td>" + formatted_enddate + "</td>\n\
+                                                                                                                                        <td>" + element.rentalPriceperhour + "</td>\n\
+                                                                                                                                     <td>" + rentedhours * element.rentalPriceperhour + "$</td>\n\
+                                                                                                                                     <td><a href='removeRental/" + element.rentalId + "'><i class='fas fa-minus-circle' style='color:red' title='Cancel'></i></a></td>\n\
+                                                                                                                                    </tr>\n\
+                                                                                                                                </tbody>\n\
+                                                                                                                            </table>";
+
                                                         }
                                                     });
 
