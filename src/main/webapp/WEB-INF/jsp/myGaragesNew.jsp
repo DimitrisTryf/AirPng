@@ -212,10 +212,11 @@
                                                 $.ajax(settings);
                                                 function handleSuccess(data) {
                                                     let divName = garageId;
+                                                    console.log(data);
                                                     document.getElementById(divName).innerHTML = "";
+                                                    
 
-
-
+                                                    if(data.length > 0){
                                                     $('#garageImageWrap').fadeOut(function () {
                                                         document.getElementById('garageImage').innerHTML = "<img class='shadow rounded'  src=" + data[0].rentalGarageid.garageBillimageurl + " alt='ParkingSpot'>"
 
@@ -223,7 +224,7 @@
                                                     });
 
                                                     $('#garageImageWrap').fadeIn();
-
+                                                    }
 
                                                     document.getElementById('garageDetails').innerHTML = "";
 
