@@ -29,7 +29,16 @@
 
         </head>
         <body>
-
+            
+         <% if (session.getAttribute("userSession") == null || session.getAttribute("userSession").equals("")){
+                
+                     response.sendRedirect("/");
+           }
+       
+       
+       %>
+         
+      
         <jsp:include page = "includes/navBarSide.jsp"></jsp:include>
 
 
