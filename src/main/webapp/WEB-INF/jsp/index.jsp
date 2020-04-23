@@ -63,6 +63,13 @@
                         </li>
                         
                         <li class="nav-item">
+                             <a id="skt" class="nav-link link text-black display-4" href="/chat">
+                               
+                              
+                                Chat</a>
+                        </li>
+                        
+                        <li class="nav-item">
                             <a class="nav-link link text-black display-4" href="index.html#features15-5">
                                 How it works</a>
                         </li></ul>
