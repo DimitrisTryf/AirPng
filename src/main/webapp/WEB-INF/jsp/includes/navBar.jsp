@@ -32,23 +32,24 @@
                         How it works</a>
                 </li>
             </ul>
+            <div class="navbar-buttons mbr-section-btn">
+
+                <% if (session.getAttribute("userSession") == null || session.getAttribute("userSession").equals("")) {%>
+                <a  class="btn btn-sm btn-primary display-4" data-toggle="modal" data-target="#modalLRForm">
+                    <span class="mbrib-login mbr-iconfont mbr-iconfont-btn"></span>Login</a>
+
+
+
+                <% } else { %>
+
                 <div class="navbar-buttons mbr-section-btn">
-                    
-                    <% if (session.getAttribute("userSession") == null || session.getAttribute("userSession").equals("")) {%>
-                    <a  class="btn btn-sm btn-primary display-4" data-toggle="modal" data-target="#modalLRForm">
-                        <span class="mbrib-login mbr-iconfont mbr-iconfont-btn"></span>Login</a>
+                    <a class="btn btn-sm btn-primary display-4" href="/main"><span class="mbri-user mbr-iconfont mbr-iconfont-btn"></span>
 
-
-                   
-                   <% } else { %>
-       
-                    <div class="navbar-buttons mbr-section-btn">
-                   <a class="btn btn-sm btn-primary display-4" href="#"><span class="mbri-user mbr-iconfont mbr-iconfont-btn"></span>
-
-                    Hello ${userSession.userName}!</a>
-                    </div>
-                    <% } %>
-                   
+                        Hello ${userSession.userName}!</a>
+                        <a class="display-4" href="/logoutUser">logout</a>
+                </div>
+                <% }%>
+            </div>
         </div>
     </nav>
 </section>

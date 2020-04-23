@@ -1,6 +1,15 @@
 <section>
     <div id="mysidenav" class="sidenav" >
 
+        <a href="/main" id="mainPage">
+            <div class=row>
+                <div class="col-2 padding-left-1 ">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="col-10 align-right">
+                    Book Garage </div>
+            </div>
+        </a>
 
         <a href="/addNewGarageForm" id="addNewGarageForm">
             <div class=row>

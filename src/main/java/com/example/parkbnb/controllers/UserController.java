@@ -160,4 +160,10 @@ public class UserController {
     public String forTest_delete_after(){
         return "main";
     } 
+    
+    @GetMapping(value="/logoutUser")
+    public String logoutUser(HttpSession session){
+        session.setAttribute("userSession", null);
+        return "index";
+    } 
 }

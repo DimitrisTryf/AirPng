@@ -201,77 +201,91 @@
                     url: URL,
                     success: handleSuccess
                 };
+
+                var markers = [];
                 $.ajax(settings);
                 function handleSuccess(data) {
+                    window.parent.document.querySelector("#maxPph").addEventListener("change", function () {
+                        console.log(markers);
+                        for (var i = 0; i < markers.length; i++) {
+                            markers[i].setMap(null);
+                            markers = [];
+                        }
+                        data.forEach(obj => {
+                            if (obj.rentalPriceperhour >= this.value) {
+                                showMarkers(obj);
+                            }
+
+                        });
+
+                    });
                     data.forEach(obj => {
-                        let contentString = obj.rentalGarageid.garageAddress;
-                        const marker = new google.maps.Marker({
+                        showMarkers(obj);
+                    });
+                }
+                ;
 
-                            position: {lat: parseFloat(obj.rentalGarageid.garageLatitude), lng: parseFloat(obj.rentalGarageid.garageLongtitude)}, //lat,long
-                            map: map,
-                            title: obj.rentalGarageid.garageAddress,
-                            garage: obj
-                        });
-                        const infowindow = new google.maps.InfoWindow({
-                            content: contentString,
-                            maxWidth: 200
-                        });
+                function showMarkers(obj) {
+                    let contentString = obj.rentalGarageid.garageAddress;
+                    var marker = new google.maps.Marker({
 
-                        marker.addListener('click', function () {
-                            closeOtherInfo();
-                            infowindow.open(marker.get('map'), marker);
-                            InforObj[0] = infowindow;
+                        position: {lat: parseFloat(obj.rentalGarageid.garageLatitude), lng: parseFloat(obj.rentalGarageid.garageLongtitude)}, //lat,long
+                        map: map,
+                        title: obj.rentalGarageid.garageAddress,
+                        garage: obj
+                    });
+                    markers.push(marker);
 
-                            //--------------------- with this to display details under the map for the selected 
-                            //--------------------- garage with an ajax call for reviews
-                            window.parent.$('#garageInfo').fadeOut();
+                    marker.addListener('click', function () {
 
 
-                            window.parent.document.querySelector("#garageInfo").innerHTML = `
+                        //--------------------- with this to display details under the map for the selected 
+                        //--------------------- garage with an ajax call for reviews
+                        window.parent.$('#garageInfo').fadeOut();
+
+
+                        window.parent.document.querySelector("#garageInfo").innerHTML = `
                             </br><h3>${this.garage.rentalGarageid.garageAddress}</h3>
                             <br/><a href="showGarageReviews/${this.garage.rentalGarageid.garageId}">Show reviews</a>
                            
                                 `;
-                            $.ajax({
-                                url: "/garageRentals/" + this.garage.rentalGarageid.garageId,
-                                type: "POST"
+                        $.ajax({
+                            url: "/garageRentals/" + this.garage.rentalGarageid.garageId,
+                            type: "POST"
 
-                            }).done(function (data) {
-                                data.forEach(elem => {
+                        }).done(function (data) {
+                            data.forEach(elem => {
 
-                                    let startDate = new Date(elem.rentalStart);
-                                    let endDate = new Date(elem.rentalEnd);
-                                    let formatted_startdate = startDate.getDate() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getFullYear() + " " + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds()
-                                    let formatted_enddate = endDate.getDate() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getFullYear() + " " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds();
+                                let startDate = new Date(elem.rentalStart);
+                                let endDate = new Date(elem.rentalEnd);
+                                let formatted_startdate = startDate.getDate() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getFullYear() + " " + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds()
+                                let formatted_enddate = endDate.getDate() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getFullYear() + " " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds();
 
-                                    if (elem.rentalUserid === null) {
+                                if (elem.rentalUserid === null) {
 
 //                                        $("#garageInfo").text(txt).fadeIn('slow');
 //                                        
 //                                        $('#garageInfo', window.parent.document).html();
 //                                        
 
-                                        window.parent.document.querySelector("#garageInfo").innerHTML +=
-                                                "<div class='border border-primary rounded bg-light'>\n\
+                                    window.parent.document.querySelector("#garageInfo").innerHTML +=
+                                            "<div class='border border-primary rounded bg-light'>\n\
                         </br> <p class='mbr-fonts-style display-5' style='color:#d50c0c'>Available</p> <b>From:</b> " + formatted_startdate + "</br><b>To:</b> " + formatted_enddate + "</br><b> at " + elem.rentalPriceperhour + "$ per hour </b>\n\
                                         <p><button onClick='rentalRent(" + elem.rentalId + ")' class='btn btn-primary btn-form display-4'>choose this one</button></p> </div> ";
 
-                                        window.parent.$('#garageInfo').fadeIn();
+                                    window.parent.$('#garageInfo').fadeIn();
 
-                                    }
+                                }
 
-
-                                });
 
                             });
 
-                            //---------------------
-
                         });
-                    });
 
+                        //---------------------
+
+                    });
                 }
-                ;
 
                 function closeOtherInfo() {
                     if (InforObj.length > 0) {

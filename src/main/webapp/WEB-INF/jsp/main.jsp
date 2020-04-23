@@ -29,16 +29,16 @@
 
         </head>
         <body>
-            
-         <% if (session.getAttribute("userSession") == null || session.getAttribute("userSession").equals("")){
-                
-                     response.sendRedirect("/");
-           }
-       
-       
-       %>
-         
-      
+
+        <% if (session.getAttribute("userSession") == null || session.getAttribute("userSession").equals("")) {
+
+                response.sendRedirect("/");
+            }
+
+
+        %>
+
+
         <jsp:include page = "includes/navBarSide.jsp"></jsp:include>
 
 
@@ -87,49 +87,35 @@
                                         <section class="map1 cid-rSzIQODBwc" id="map1-9">
 
 
-
+                                            <div>Filter your options:
+                                                <div>
+                                                    <label for="pph">Max price per Hour:</label></br>
+                                                    <input id="maxPph" type="number" step="0.1" name="pph" min="0">
+                                                </div>
+                                            </div>
                                             <div class="google-map rounded shadow"><iframe frameborder="0" style="border:0" 
                                                                                            src="../assets/custom/map/mainMap.html" allowfullscreen=""></iframe></div>
 
                                             <div id="garageInfo" class="align-center shadow" style='display:none'> </div>
-                                            
+
                                         </section>
                                         </br></br>
-
-
-
-
-
-
-
                                     </div>
-
-
-
-
-
-
                                 </div>
                             </div>
 
                             <div id="tab2" class="tab-pane  mbr-table" role="tabpanel">
                                 <div class="row tab-content-row">
                                     <div class="col-xs-12 col-md-6">
-<!--                                        <div class="card-img ">
-                                            <span class="mbri-bootstrap mbr-iconfont"></span>
-                                        </div>
-                                        <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                                            PICK YOUR DATE AND TIME
-                                        </h4>-->
+                                        <!--                                        <div class="card-img ">
+                                                                                    <span class="mbri-bootstrap mbr-iconfont"></span>
+                                                                                </div>
+                                                                                <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
+                                                                                    PICK YOUR DATE AND TIME
+                                                                                </h4>-->
                                         <div id="datePick"  class="align-center"></div></br></br></br></br></br></br>
 
                                     </div>
-
-
-
-
-
-
                                 </div>
                             </div>
 
@@ -159,9 +145,9 @@
             </div>
         </div>
     </section>
-        
- 
- 
+
+
+
 
 <jsp:include page = "includes/footer.jsp"></jsp:include>  
 
@@ -213,7 +199,7 @@
 
     function rentalRent(rentalid) {
 
-    
+
         document.getElementById("parkTab").className = "nav-link show display-7";
         document.getElementById("tabs3-i_tab0").className = "tab-pane in mbr-table show";
         document.getElementById("dateTab").className = "nav-link  show display-7 active";
@@ -254,13 +240,13 @@
                 });
                 document.getElementById("datesSelected").addEventListener("click", function (event) {
                     event.preventDefault();
-                     setTimeout(function() {
-                    document.getElementById("dateTab").className = "nav-link show display-7";
-                    document.getElementById("tabs3-i_tab1").className = "tab-pane in mbr-table show";
-                    document.getElementById("checkoutTab").className = "nav-link  show display-7 active";
-                    document.getElementById("tabs3-i_tab2").className = "tab-pane  mbr-table show active";
+                    setTimeout(function () {
+                        document.getElementById("dateTab").className = "nav-link show display-7";
+                        document.getElementById("tabs3-i_tab1").className = "tab-pane in mbr-table show";
+                        document.getElementById("checkoutTab").className = "nav-link  show display-7 active";
+                        document.getElementById("tabs3-i_tab2").className = "tab-pane  mbr-table show active";
                     }, 100);
-                    
+
                     dates = $('input[name="datetimes"]').val();
                     console.log(dates);
                     document.getElementById("checkoutTab").click();

@@ -14,31 +14,37 @@
     right: 0;
 }
 
-#addNewGarageForm  {
+#mainPage   {
     top: 105px;
     background-color: gray;
     text-align:end
 }
-#showUsersGarages  {
+
+#addNewGarageForm  {
     top: 165px;
     background-color: gray;
     text-align:end
 }
-
-#myReview  {
+#showUsersGarages  {
     top: 225px;
     background-color: gray;
     text-align:end
 }
 
-#confirmGarages  {
+#myReview  {
     top: 285px;
     background-color: gray;
     text-align:end
 }
 
-#rentalHistory  {
+#confirmGarages  {
     top: 345px;
+    background-color: gray;
+    text-align:end
+}
+
+#rentalHistory  {
+    top: 405px;
     background-color: gray;
     text-align:end
 }
