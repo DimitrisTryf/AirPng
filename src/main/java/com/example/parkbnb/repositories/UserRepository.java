@@ -22,5 +22,6 @@ public interface UserRepository extends CrudRepository<User,Integer> {
     User findByUserGeneratedarray(String userGeneratedarray);
 
     User findByUserEmail(String userEmail);
-    
+
+    User[] findByUserType(short userType);
 }

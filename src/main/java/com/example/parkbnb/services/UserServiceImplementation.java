@@ -60,4 +60,9 @@ public class UserServiceImplementation implements UserServiceInterface {
                 
     }
 
+    @Override
+    public User[] findByUserType(short type) {
+        return ur.findByUserType(type);
+    }
+
 }

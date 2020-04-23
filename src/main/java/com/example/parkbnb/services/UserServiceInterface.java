@@ -25,4 +25,6 @@ public interface UserServiceInterface {
     public User getByEmail(String mail);
     
     public User getUserByID(Integer id);
+    
+    public User[] findByUserType(short type);
 }

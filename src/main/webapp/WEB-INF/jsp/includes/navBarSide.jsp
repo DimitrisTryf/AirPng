@@ -46,10 +46,10 @@
         <a href="/rentalHistory" id="rentalHistory">
             <div class=row>
                 <div class="col-2 padding-left-1 ">
-                    <i class="far fa-check-circle"></i>
+                    <i class="fas fa-history"></i>
                 </div>
                 <div class="col-10 align-right">
-                    My rental history</div>
+                    My history</div>
             </div>
 
 
@@ -64,10 +64,19 @@
                 <div class="col-10 align-right">
                     Confirm New</div>
             </div>
-
-
-
         </a>
+
+        <a href="/customerService" id="custService">
+            <div class=row>
+                <div class="col-2 padding-left-1 ">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <div class="col-10 align-right">
+                    Help</div>
+            </div>
+        </a>
+
+
 
     </div> 
 </section>
