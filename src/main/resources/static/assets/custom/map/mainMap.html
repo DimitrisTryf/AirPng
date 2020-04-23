@@ -209,10 +209,11 @@
                         console.log(markers);
                         for (var i = 0; i < markers.length; i++) {
                             markers[i].setMap(null);
-                            markers = [];
+                            
                         }
+                        markers = [];
                         data.forEach(obj => {
-                            if (obj.rentalPriceperhour >= this.value) {
+                            if (obj.rentalPriceperhour <= this.value) {
                                 showMarkers(obj);
                             }
 
