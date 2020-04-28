@@ -37,11 +37,6 @@ public class UserReviewController {
         User temp = usi.getUserByID(userId);
         mm.addAttribute("userToReview", temp);
         mm.addAttribute("toUserReviews",ursi.findAllByToUser(temp));
-        System.out.println("---------------------------------------------");
-        for(UserReview ur:ursi.findAllByToUser(temp)){
-            System.out.println("----------------------------");
-            System.out.println(ur);
-        }
         return "reviewForm";
     }
     
@@ -72,5 +67,52 @@ public class UserReviewController {
          mm.addAttribute("userReviews", ursi.findAllByToUser(currentUser));
          return "myReviews";
     }
+    
+    @GetMapping(value="/manageUser/{id}")
+    public String manageUser(HttpSession session,
+    @PathVariable(name = "id") Integer id,
+    ModelMap mm){
+        User user = (User) session.getAttribute("userSession");
+        if(user.getUserType()==2){
+            User userToReview = usi.getUserByID(id);
+            mm.addAttribute("userToManage", userToReview);
+            mm.addAttribute("userReviews", ursi.findAllByToUser(userToReview));
+            return "managePage";
+        }
+        session.setAttribute("userSession", null);
+        return "index";
+    } 
+    
+    @GetMapping(value="/manageUser/addReportPoint/{id}")
+    public String addReportPoint(HttpSession session,
+    @PathVariable(name = "id") Integer id,
+    ModelMap mm){
+        User user = (User) session.getAttribute("userSession");
+        if(user.getUserType()==2){
+            User userToReview = usi.getUserByID(id);
+            userToReview.setUserReportpoints(userToReview.getUserReportpoints()+1);
+            usi.insertNewUser(userToReview);
+            return "redirect:/manageUser/"+userToReview.getUserId();
+        }
+        session.setAttribute("userSession", null);
+        return "index";
+    } 
+    
+    @GetMapping(value="/manageUser/ban/{id}")
+    public String banUser(HttpSession session,
+    @PathVariable(name = "id") Integer id,
+    ModelMap mm){
+        User user = (User) session.getAttribute("userSession");
+        if(user.getUserType()==2){
+            User userToReview = usi.getUserByID(id);
+            userToReview.setUserActive((short)3);
+            usi.insertNewUser(userToReview);
+            
+            return "redirect:/manageUser/"+userToReview.getUserId();
+        }
+        session.setAttribute("userSession", null);
+        return "index";
+    } 
+        
     
 }

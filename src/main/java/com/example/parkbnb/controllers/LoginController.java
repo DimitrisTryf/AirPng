@@ -71,7 +71,7 @@ public class LoginController {
         } else {
 
             session.setAttribute("userSession", usi.getUserByUsername(loginUserDto.getUsername()));
-
+            
             res.setStatus("");
 
         }

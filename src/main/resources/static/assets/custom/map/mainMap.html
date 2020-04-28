@@ -7,6 +7,8 @@
         <meta charset="utf-8">
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <link rel="stylesheet" href="../../../assets/bootstrap/css/bootstrap.min.css">
+
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <style>
             /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
@@ -111,16 +113,22 @@
         <div class="pac-card" id="pac-card">
             <div>
             </div>
-            <div id="pac-container">
-                <!--                <input class="form-control"  id="pac-input" type="text" placeholder="Enter a location">
-                                <span style="margin-top: 55px; color: black;">
-                                    <button id="geo">geo</button>
-                                </span>-->
+            <!--<div id="pac-container">-->
+            <!--                <input class="form-control"  id="pac-input" type="text" placeholder="Enter a location">
+                            <span style="margin-top: 55px; color: black;">
+                            </span>-->
 
-                <div id="pac-container">
-                    <input class="form-control" id="pac-input" type="text" placeholder="Enter a location">
+            <div id="pac-container" class="row" style="width: 400px">
+                <div class="col-11 p-0 m-0">
+                    <input class="form-control" id="pac-input" type="text" style="width: 100%" placeholder="Enter a location">
+
+                </div>
+                <div class="col-1 p-0 m-0">
+                    <button class="btn btn-light" id="geo"><i class="fa fa-bullseye" aria-hidden="true"></i></button>
+
                 </div>
             </div>
+            <!--</div>-->
         </div>
         <div id="map" class="rounded"></div>
         <div id="infowindow-content">
@@ -137,7 +145,7 @@
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: 37.9715323, lng: 23.7257492},
-                    zoom: 7
+                    zoom: 10
                 });
                 infoWindow = new google.maps.InfoWindow;
 
@@ -181,15 +189,7 @@
                     marker.setPosition(place.geometry.location);
 
                 });
-                // Sets a listener on a radio button to change the filter type on Places
-                // Autocomplete.
-                function setupClickListener(id, types) {
-                    var radioButton = document.getElementById(id);
-                    radioButton.addEventListener('click', function () {
-                        autocomplete.setTypes(types);
 
-                    });
-                }
                 var infowindow = new google.maps.InfoWindow();
 
 
@@ -206,25 +206,42 @@
                 $.ajax(settings);
                 function handleSuccess(data) {
                     window.parent.document.querySelector("#maxPph").addEventListener("change", function () {
-                        console.log(markers);
+                        filter();
+
+                    });
+                    window.parent.document.querySelector("#minPph").addEventListener("change", function () {
+                        filter();
+
+                    });
+                    function filter() {
+                        window.parent.document.querySelector("#minPph").setAttribute("max", window.parent.document.querySelector("#maxPph").value);
+                        if (window.parent.document.querySelector("#minPph").value > window.parent.document.querySelector("#maxPph").value) {
+
+                            window.parent.document.querySelector("#minPph").value = window.parent.document.querySelector("#maxPph").value;
+                        }
                         for (var i = 0; i < markers.length; i++) {
                             markers[i].setMap(null);
-                            
+
                         }
                         markers = [];
                         data.forEach(obj => {
-                            if (obj.rentalPriceperhour <= this.value) {
+                            if (obj.rentalPriceperhour <= window.parent.document.querySelector("#maxPph").value &&
+                                    obj.rentalPriceperhour >= window.parent.document.querySelector("#minPph").value) {
                                 showMarkers(obj);
                             }
 
                         });
+                    }
 
-                    });
                     data.forEach(obj => {
                         showMarkers(obj);
                     });
                 }
                 ;
+
+
+
+
 
                 function showMarkers(obj) {
                     let contentString = obj.rentalGarageid.garageAddress;
@@ -314,7 +331,7 @@
                         infoWindow.setPosition(pos);
                         infoWindow.setContent('Location found.');
                         map.setCenter(pos);
-                        map.setZoom(17);
+                        map.setZoom(12);
                     }, function () {
                         handleLocationError(true, infoWindow, map.getCenter());
                     });

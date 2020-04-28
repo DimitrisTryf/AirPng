@@ -1,6 +1,8 @@
 
 
 
+<%@page import="com.example.parkbnb.models.User"%>
+<%@page import="java.util.Objects"%>
 <!DOCTYPE html>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -30,7 +32,14 @@
         </head>
         <body>
 
-        <% if (session.getAttribute("userSession") == null || session.getAttribute("userSession").equals("")) {
+        <%  User current = (User)session.getAttribute("userSession");
+            if(Objects.nonNull(current)){
+                if(current.getUserType()==2){
+                    response.sendRedirect("/confirmGarages");
+                }
+            }
+            
+            if (session.getAttribute("userSession") == null || session.getAttribute("userSession").equals("")) {
 
                 response.sendRedirect("/");
             }
@@ -86,13 +95,18 @@
 
                                         <section class="map1 cid-rSzIQODBwc" id="map1-9">
 
-
-                                            <div>Filter your options:
-                                                <div>
+                                            <div class="row">
+                                                <div class="col-4"style="margin-top: 17px;padding-left: 25px">Filter your options:</div>
+                                                <div class="col-4">
+                                                    <label for="minpph">Min price per Hour:</label></br>
+                                                    <input id="minPph" type="number" value="0" step="0.1" name="minpph" min="0" max="0" style="width: 80%">
+                                                </div>
+                                                <div class="col-4">
                                                     <label for="pph">Max price per Hour:</label></br>
-                                                    <input id="maxPph" type="number" step="0.1" name="pph" min="0">
+                                                    <input id="maxPph" type="number" value="0" step="0.1" name="pph" min="0" style="width: 80%">
                                                 </div>
                                             </div>
+
                                             <div class="google-map rounded shadow"><iframe frameborder="0" style="border:0" 
                                                                                            src="../assets/custom/map/mainMap.html" allowfullscreen=""></iframe></div>
 

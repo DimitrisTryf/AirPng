@@ -10,31 +10,35 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>MyReviews</h1>
-        
-         <table class="table table-bordered">
+        <h1 align="center">MyReviews</h1>
 
-            <thead style="font-weight: bold;">
-            <td>#</td>
-            <td>name</td>
-            <td>quantity</td>
-            <td colspan="2">Actions</td>
-            </thead>
-            <tbody>
+        
+        <div class="container">
             <c:forEach items="${userReviews}" var="gar">
-                <tr>
-                    <td>${gar.ureviewRating}</td>
-                    <td>${gar.ureviewComment}</td>
-                    
-                </tr>
+                <div class="row" style="border: 1px solid black; margin-top: 3px">
+                    <div class="col-3">
+                        
+                    <c:forEach var = "i" begin = "1" end = "${gar.ureviewRating}">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        </c:forEach>
+                    </div>
+                        <br/>
+                        <div class="col-8">
+                            
+                        ${gar.ureviewComment}
+                        </div>
+                </div>
+
             </c:forEach>
-            </tbody>
-        </table>
-    </body>
+        </div>
+    </table>
+</body>
 </html>

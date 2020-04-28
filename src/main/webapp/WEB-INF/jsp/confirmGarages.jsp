@@ -4,6 +4,8 @@
     Author     : dimit
 --%>
 
+<%@page import="java.util.Objects"%>
+<%@page import="com.example.parkbnb.models.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -45,6 +47,14 @@
 
         </head>
         <body>
+            <%  User current = (User) session.getAttribute("userSession");
+                if (Objects.nonNull(current)) {
+                    if (current.getUserType() == 2) {
+
+
+
+            %>
+
             <div class="container">
                 <div class="row">
                     <h1 style="margin-top: 40px">A List Of All Products</h1>
@@ -118,7 +128,7 @@
                         userIds = removeDups(userIds);
                         console.log(userIds);
                         $.each(userIds, function (i, user) {
-                            document.getElementById("messages").innerHTML += "<div>From " + user + "</div><form action='/adminSendMessage/" + user + "' method='post'>\n\
+                            document.getElementById("messages").innerHTML += "<div style='border: 1px solid black'><div>From " + user + " <a href='manageUser/"+user+"'>Manage this user</a></div><form action='/adminSendMessage/" + user + "' method='post'>\n\
                         <input type='text' name='message'><input type='submit'></form>\n\
                         <table class='table table-bordered'><thead style='font-weight: bold;'><td>message</td><td>date</td></thead>\n\
                         <tbody id='mesbody" + user + "'></tbody></table>";
@@ -127,15 +137,15 @@
                             let date = new Date(element.cmessageDaytime);
                             let formatted_date = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
                             let divname = "";
-                            let fromAdmin="";
+                            let fromAdmin = "";
                             if (element.cmessageFromuserid === null) {
                                 divname = "mesbody" + element.cmessageTouserid.userId;
-                                fromAdmin="(fromAdmin)"
+                                fromAdmin = "(fromAdmin)"
                             } else {
                                 divname = "mesbody" + element.cmessageFromuserid.userId;
                             }
 
-                            document.getElementById(divname).innerHTML += "<tr><td>" +fromAdmin+ element.cmessageMessage + "</td><td>" + formatted_date + "</td></tr>";
+                            document.getElementById(divname).innerHTML += "<tr><td>" + fromAdmin + element.cmessageMessage + "</td><td>" + formatted_date + "</td></tr>";
                         });
                     }
 
@@ -150,6 +160,10 @@
                     return Object.keys(unique);
                 }
             </script>
+
+            <%  }
+                }
+            %>
         </body>
     </html>
 

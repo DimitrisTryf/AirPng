@@ -7,6 +7,7 @@ package com.example.parkbnb.controllers;
 
 import com.example.parkbnb.dtos.NewUserDto;
 import com.example.parkbnb.models.User;
+import com.example.parkbnb.services.UserReviewServiceInterface;
 import com.example.parkbnb.services.UserServiceInterface;
 import com.example.parkbnb.utils.MailUtils;
 import com.example.parkbnb.validators.ErrorMessage;
