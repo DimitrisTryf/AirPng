@@ -56,13 +56,14 @@
 
         </a>
 
-        <a href="/confirmGarages" id="confirmGarages">
+        <!--<a href="/confirmGarages" id="confirmGarages">-->
+        <a href="#" id="myWallet">
             <div class=row>
                 <div class="col-2 padding-left-1 ">
-                    <i class="far fa-check-circle"></i>
+                    <i class="fas fa-wallet"></i>
                 </div>
                 <div class="col-10 align-right">
-                    Confirm New</div>
+                   My Wallet</div>
             </div>
         </a>
 

@@ -30,7 +30,7 @@
             <style>
                 .cid-rWPbspIEeg {
                     padding-top: 105px;
-                    padding-bottom: 350px;
+                    padding-bottom: 300px;
                     background-color: #f9f9f9;
 
                 }
@@ -130,7 +130,7 @@
                 </div>
 
             </div>
-            </br></br></br></br></br></br> </section>
+            </br></br> </section>
 
 
 

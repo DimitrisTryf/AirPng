@@ -95,7 +95,7 @@
 
                 <div class="container-fluid" style="position:static">
                     <div class="media-container-row pt-5" style="position: static">
-                        <div class="accordion-content col-4 shadow rounded" style="position: static">
+                        <div class="accordion-content col-4 shadow rounded pb-3" style="position: static">
                             <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2"  style="position: static">
                                 My Garages
                             </h2>
@@ -117,16 +117,22 @@
 
                                             <div class="content">
                                                 <div class="container">
+
+
                                                     <form action="/addDates/${gar.garageId}">
-                                                        <label for="datetimes">Select dates:</label>
-                                                        <input type="text" name="datetimes" style="width:250px;"/>
-                                                        <label for="pph">Price per Hour:</label>
-                                                        <input type="number" step="0.01" name="pph" required>
-                                                        <button type="submit">Add dates</button>
+                                                        <div class="form-group">
+                                                            <label for="datetimes">Select dates:</label>
+                                                            <input type="text" class="form-control" name="datetimes">
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                           <label for="pph">Price per Hour:</label>
+                                                            <input type="number" class="form-control"  step="0.01" name="pph" required>
+                                                        </div>
+
+                                                        <button type="submit" class="btn btn-primary">Save</button>
                                                     </form>
-                                                    <div style="border: 1px solid black;" id="${gar.garageId}"></div>
-
-
+                                                        <div style="border: 1px solid black;" id="${gar.garageId}"></div>
                                                 </div>	
                                             </div>
 
@@ -214,16 +220,16 @@
                                                     let divName = garageId;
                                                     console.log(data);
                                                     document.getElementById(divName).innerHTML = "";
-                                                    
-
-                                                    if(data.length > 0){
-                                                    $('#garageImageWrap').fadeOut(function () {
-                                                        document.getElementById('garageImage').innerHTML = "<img class='shadow rounded'  src=" + data[0].rentalGarageid.garageBillimageurl + " alt='ParkingSpot'>"
 
 
-                                                    });
+                                                    if (data.length > 0) {
+                                                        $('#garageImageWrap').fadeOut(function () {
+                                                            document.getElementById('garageImage').innerHTML = "<img class='shadow rounded'  src=" + data[0].rentalGarageid.garageBillimageurl + " alt='ParkingSpot'>"
 
-                                                    $('#garageImageWrap').fadeIn();
+
+                                                        });
+
+                                                        $('#garageImageWrap').fadeIn();
                                                     }
 
                                                     document.getElementById('garageDetails').innerHTML = "";
@@ -263,7 +269,7 @@
                                                                                                                                     </tr>\n\
                                                                                                                                 </tbody>\n\
                                                                                                                             </table>";
-                                                                                                                                        
+
 
 
 
@@ -275,8 +281,8 @@
 //                                                            document.getElementById('garageDetails').innerHTML += "<div>From: " + formatted_startdate + ", to: " + formatted_enddate + "  for " + rentedhours + " hours at " + element.rentalPriceperhour + "$ per hour</div>\n\
 //                                                                              <div>Total price : " + rentedhours * element.rentalPriceperhour + "$   Rented: No</div>\n\
 //                                                                              <a href='removeRental/" + element.rentalId + "'>cancel</a>";
-    
-                                                              document.getElementById('garageDetails').innerHTML +="<table class='table shadow rounded'>\n\
+
+                                                            document.getElementById('garageDetails').innerHTML += "<table class='table shadow rounded'>\n\
                                                                                                                                 <thead>\n\
                                                                                                                              <tr><th colspan='7'><h4>AVAILABILITIES</h4></th></tr>\n\
                                                                                                                                     <tr>\n\

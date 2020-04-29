@@ -264,8 +264,7 @@
 
                         window.parent.document.querySelector("#garageInfo").innerHTML = `
                             </br><h3>${this.garage.rentalGarageid.garageAddress}</h3>
-                            <br/><a href="showGarageReviews/${this.garage.rentalGarageid.garageId}">Show reviews</a>
-                           
+                            <br/><a data-fancybox data-type="iframe" data-src="showGarageReviews/${this.garage.rentalGarageid.garageId}" href="javascript:;">Show reviews</a>
                                 `;
                         $.ajax({
                             url: "/garageRentals/" + this.garage.rentalGarageid.garageId,
