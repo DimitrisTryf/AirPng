@@ -46,7 +46,7 @@
                     <a class="btn btn-sm btn-primary display-4" href="/main"><span class="mbri-user mbr-iconfont mbr-iconfont-btn"></span>
 
                         Hello ${userSession.userName}!</a>
-                        <a class="display-4" href="/logoutUser">logout</a>
+                        <a class="display-4" href="/logoutUser" alt="Logout"><i class="fas fa-lock-open"></i></a>
                 </div>
                 <% }%>
             </div>
