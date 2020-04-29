@@ -42,7 +42,6 @@ public class SiteReviews implements Serializable {
     @Column(name = "sreview_id")
     private Integer sreviewId;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "sreview_rating")
     private int sreviewRating;
     @Size(max = 250)

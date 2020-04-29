@@ -32,13 +32,13 @@
         </head>
         <body>
 
-        <%  User current = (User)session.getAttribute("userSession");
-            if(Objects.nonNull(current)){
-                if(current.getUserType()==2){
+        <%  User current = (User) session.getAttribute("userSession");
+            if (Objects.nonNull(current)) {
+                if (current.getUserType() == 2) {
                     response.sendRedirect("/confirmGarages");
                 }
             }
-            
+
             if (session.getAttribute("userSession") == null || session.getAttribute("userSession").equals("")) {
 
                 response.sendRedirect("/");
@@ -63,102 +63,106 @@
 
 
                 <div class="container" >
+
                     <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">
                         <br>Three Steps Away!</h2>
+
                     <h3 class="mbr-section-subtitle  display-5 align-center mbr-light mbr-fonts-style">
-                        Make your selections below and enjoy your parking spot!</h3>
+                        Make your selections below and enjoy your parking spot!
+                        <div>Your Waller has ${userSession.userWalletmoney} €</div></h3>
+
+            </div>
+            <div class="container-fluid" style="position:static">
+                <div class="row tabcont" >
+                    <ul class="nav nav-tabs pt-3 mt-5" role="tablist">
+                        <li class="nav-item mbr-fonts-style"><a id="parkTab" class="nav-link show active display-7" role="tab"
+                                                                data-toggle="tab" href="#tabs3-i_tab0" aria-selected="true">1. Choose Parking Spot</a></li>
+                        <li class="nav-item mbr-fonts-style"><a  id="dateTab" class="nav-link  show active display-7 disabled" role="tab"
+                                                                 data-toggle="tab" href="#tabs3-i_tab1" aria-selected="true">
+                                2. Choose Parking Duration</a></li>
+                        <li class="nav-item mbr-fonts-style"><a  id="checkoutTab" class="nav-link show active display-7 disabled" role="tab"
+                                                                 data-toggle="tab" href="#tabs3-i_tab2" aria-selected="true">
+                                3. Checkout</a></li>
+
+
+
+                    </ul>
                 </div>
-                <div class="container-fluid" style="position:static">
-                    <div class="row tabcont" >
-                        <ul class="nav nav-tabs pt-3 mt-5" role="tablist">
-                            <li class="nav-item mbr-fonts-style"><a id="parkTab" class="nav-link show active display-7" role="tab"
-                                                                    data-toggle="tab" href="#tabs3-i_tab0" aria-selected="true">1. Choose Parking Spot</a></li>
-                            <li class="nav-item mbr-fonts-style"><a  id="dateTab" class="nav-link  show active display-7 disabled" role="tab"
-                                                                     data-toggle="tab" href="#tabs3-i_tab1" aria-selected="true">
-                                    2. Choose Parking Duration</a></li>
-                            <li class="nav-item mbr-fonts-style"><a  id="checkoutTab" class="nav-link show active display-7 disabled" role="tab"
-                                                                     data-toggle="tab" href="#tabs3-i_tab2" aria-selected="true">
-                                    3. Checkout</a></li>
+            </div>
 
+            <div class="container">
+                <div class="row px-1">
+                    <div class="tab-content">
+                        <div id="tab1" class="tab-pane in active mbr-table" role="tabpanel">
+                            <div class="row tab-content-row">
+                                <div class="col-xs-12 col-md-10">
 
+                                    <section class="map1 cid-rSzIQODBwc" id="map1-9">
 
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="container">
-                    <div class="row px-1">
-                        <div class="tab-content">
-                            <div id="tab1" class="tab-pane in active mbr-table" role="tabpanel">
-                                <div class="row tab-content-row">
-                                    <div class="col-xs-12 col-md-10">
-
-                                        <section class="map1 cid-rSzIQODBwc" id="map1-9">
-
-                                            <div class="row">
-                                                <div class="col-4"style="margin-top: 17px;padding-left: 25px">Filter your options:</div>
-                                                <div class="col-4">
-                                                    <label for="minpph">Min price per Hour:</label></br>
-                                                    <input id="minPph" type="number" value="0" step="0.1" name="minpph" min="0" max="0" style="width: 80%">
-                                                </div>
-                                                <div class="col-4">
-                                                    <label for="pph">Max price per Hour:</label></br>
-                                                    <input id="maxPph" type="number" value="0" step="0.1" name="pph" min="0" style="width: 80%">
-                                                </div>
+                                        <div class="row">
+                                            <div class="col-4"style="margin-top: 17px;padding-left: 25px">Filter your options:</div>
+                                            <div class="col-4">
+                                                <label for="minpph">Min price per Hour:</label></br>
+                                                <input id="minPph" type="number" value="0" step="0.1" name="minpph" min="0" max="0" style="width: 80%">
                                             </div>
-
-                                            <div class="google-map rounded shadow"><iframe frameborder="0" style="border:0" 
-                                                                                           src="../assets/custom/map/mainMap.html" allowfullscreen=""></iframe></div>
-
-                                            <div id="garageInfo" class="align-center shadow" style='display:none'> </div>
-
-                                        </section>
-                                        </br></br>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="tab2" class="tab-pane  mbr-table" role="tabpanel">
-                                <div class="row tab-content-row">
-                                    <div class="col-xs-12 col-md-6">
-                                        <!--                                        <div class="card-img ">
-                                                                                    <span class="mbri-bootstrap mbr-iconfont"></span>
-                                                                                </div>
-                                                                                <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                                                                                    PICK YOUR DATE AND TIME
-                                                                                </h4>-->
-                                        <div id="datePick"  class="align-center"></div></br></br></br></br></br></br>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="tab3" class="tab-pane  mbr-table" role="tabpanel">
-                                <div class="row tab-content-row">
-                                    <div class="col-xs-12 col-md-6">
-                                        <div class="card-img ">
-                                            <span class="mbri-extension mbr-iconfont"></span>
+                                            <div class="col-4">
+                                                <label for="pph">Max price per Hour:</label></br>
+                                                <input id="maxPph" type="number" value="0" step="0.1" name="pph" min="0" style="width: 80%">
+                                            </div>
                                         </div>
-                                        <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                                            Checkout
-                                        </h4>
-                                        <p class="mbr-section-text  align-center mbr-fonts-style display-7">
-                                            CheckOut section
-                                        </p>
-                                        <div id="checkout"></div>
-                                    </div>
 
+                                        <div class="google-map rounded shadow"><iframe frameborder="0" style="border:0" 
+                                                                                       src="../assets/custom/map/mainMap.html" allowfullscreen=""></iframe></div>
+
+                                        <div id="garageInfo" class="align-center shadow" style='display:none'> </div>
+
+                                    </section>
+                                    </br></br>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="tab2" class="tab-pane  mbr-table" role="tabpanel">
+                            <div class="row tab-content-row">
+                                <div class="col-xs-12 col-md-6">
+                                    <!--                                        <div class="card-img ">
+                                                                                <span class="mbri-bootstrap mbr-iconfont"></span>
+                                                                            </div>
+                                                                            <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
+                                                                                PICK YOUR DATE AND TIME
+                                                                            </h4>-->
+                                    <div id="datePick"  class="align-center"></div></br></br></br></br></br></br>
 
                                 </div>
                             </div>
-
-
                         </div>
+
+                        <div id="tab3" class="tab-pane  mbr-table" role="tabpanel">
+                            <div class="row tab-content-row">
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="card-img ">
+                                        <span class="mbri-extension mbr-iconfont"></span>
+                                    </div>
+                                    <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
+                                        Checkout
+                                    </h4>
+                                    <p class="mbr-section-text  align-center mbr-fonts-style display-7">
+                                        CheckOut section
+                                    </p>
+                                    <div id="checkout"></div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 
 
@@ -262,11 +266,24 @@
                     }, 100);
 
                     dates = $('input[name="datetimes"]').val();
-                    console.log(dates);
+                    var res = dates.split("-");
+
+                    var sd = res[0].trim().split(" ");
+                    var sday = sd[0].split("/");
+                    var sdates = sday[2] + "-" + sday[1] + "-" + sday[0] + "T" + sd[1];
+                    let startDate = new Date(sdates);
+                    var ed = res[1].trim().split(" ");
+                    var eday = ed[0].split("/");
+                    var edates = eday[2] + "-" + eday[1] + "-" + eday[0] + "T" + ed[1];
+                    let endDate = new Date(edates);
+
+                    let totalPrice = data.rentalPriceperhour * ((endDate - startDate) / 1000 / 60 / 60);
+
                     document.getElementById("checkoutTab").click();
                     //if pay done
                     document.getElementById("checkout").innerHTML = "<form method='post' action='/book/" + rentalid + "'>\n\
                                                                     <input value='" + dates + "' name='dates' type='hidden'>\n\
+\                                                                   <input value='" + totalPrice + "' name='totalPrice' type='hidden'>\n\
                                                                     <button type='submit'>Checkout</button>\n\
                                                                     </form>";
 

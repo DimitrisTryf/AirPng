@@ -10,11 +10,13 @@ import com.example.parkbnb.models.Rental;
 import com.example.parkbnb.models.User;
 import com.example.parkbnb.services.GarageServiceInterface;
 import com.example.parkbnb.services.RentalServiceInterface;
+import com.example.parkbnb.services.UserServiceInterface;
 import com.example.parkbnb.utils.RentalUtils;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.http.HttpSession;
@@ -38,6 +40,9 @@ public class RentalController {
     GarageServiceInterface gsi;
     @Autowired
     RentalServiceInterface rsi;
+    @Autowired
+    UserServiceInterface usi;
+    
     
     @GetMapping(value = "/addDates/{id}")
     public String addAvailableDates(@PathVariable(name = "id") Integer garageId,
@@ -95,14 +100,28 @@ public class RentalController {
     }
     
     @GetMapping(value = "/removeRental/{rentalid}")
-    public String removeRental(@PathVariable(name = "rentalid") Integer rentalid) {
-        rsi.removeRental(rsi.getRentalById(rentalid));
+    public String removeRental(@PathVariable(name = "rentalid") Integer rentalid,
+            HttpSession session) {
+         User user = (User) session.getAttribute("userSession");
+
+         Rental existingRental = rsi.getRentalById(rentalid);
+        
+        User tempu = usi.getUserByID(user.getUserId());
+        tempu.setUserWalletmoney(tempu.getUserWalletmoney().subtract(existingRental.getRentalTotalpayed()));
+        usi.insertNewUser(tempu);
+        
+        User temp = usi.getUserByID(existingRental.getRentalUserid().getUserId());
+        temp.setUserWalletmoney(temp.getUserWalletmoney().add(existingRental.getRentalTotalpayed()));
+        usi.insertNewUser(temp);
+        
+        rsi.removeRental(existingRental);
         return "redirect:/showUsersGaragesNew";
     }
     
     @PostMapping("/book/{rentalId}")
     public String bookRental(@PathVariable(name = "rentalId") Integer rentalId,
             @RequestParam(name = "dates") String dates,
+            @RequestParam(name = "totalPrice") double totalPrice,
             HttpSession session) {
         RentalUtils rentalUtils = new RentalUtils();
         LocalDateTime[] formatedDates = rentalUtils.handleRentalDates(dates);
@@ -111,6 +130,14 @@ public class RentalController {
         
         LocalDateTime oldRentalStart = LocalDateTime.ofInstant(existingRental.getRentalStart().toInstant(), ZoneId.systemDefault());
         LocalDateTime oldRentalEnd = LocalDateTime.ofInstant(existingRental.getRentalEnd().toInstant(), ZoneId.systemDefault());
+        
+        User tempu = usi.getUserByID(user.getUserId());
+        tempu.setUserWalletmoney(tempu.getUserWalletmoney().subtract(BigDecimal.valueOf(totalPrice)));
+        usi.insertNewUser(tempu);
+        
+        User temp = usi.getUserByID(existingRental.getRentalGarageid().getGarageUserid().getUserId());
+        temp.setUserWalletmoney(temp.getUserWalletmoney().add(BigDecimal.valueOf(totalPrice)));
+        usi.insertNewUser(temp);
         
         if (oldRentalStart.equals(formatedDates[0]) && oldRentalEnd.equals(formatedDates[1])) {
             existingRental.setRentalUserid(user);
@@ -124,6 +151,7 @@ public class RentalController {
             newRent.setRentalUserid(user);
             newRent.setRentalStart(existingRental.getRentalStart());
             newRent.setRentalEnd(Date.from(formatedDates[1].atZone(ZoneId.systemDefault()).toInstant()));
+            newRent.setRentalTotalpayed(BigDecimal.valueOf(totalPrice));
             
             existingRental.setRentalStart(Date.from(formatedDates[1].atZone(ZoneId.systemDefault()).toInstant()));
             
@@ -137,6 +165,7 @@ public class RentalController {
             newRent.setRentalUserid(user);
             newRent.setRentalStart(Date.from(formatedDates[0].atZone(ZoneId.systemDefault()).toInstant()));
             newRent.setRentalEnd(existingRental.getRentalEnd());
+            newRent.setRentalTotalpayed(BigDecimal.valueOf(totalPrice));
             
             existingRental.setRentalEnd(Date.from(formatedDates[0].atZone(ZoneId.systemDefault()).toInstant()));
             
@@ -162,6 +191,7 @@ public class RentalController {
             existingRental.setRentalEnd(Date.from(formatedDates[1].atZone(ZoneId.systemDefault()).toInstant()));
             existingRental.setRentalPaydone((short) 1);
             existingRental.setRentalUserid(user);
+            existingRental.setRentalTotalpayed(BigDecimal.valueOf(totalPrice));
             
             rsi.addNewRental(newPreRent);
             rsi.addNewRental(newPostRent);

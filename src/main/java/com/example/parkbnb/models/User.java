@@ -6,8 +6,8 @@
 package com.example.parkbnb.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -45,21 +45,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByUserEmail", query = "SELECT u FROM User u WHERE u.userEmail = :userEmail"),
     @NamedQuery(name = "User.findByUserUsername", query = "SELECT u FROM User u WHERE u.userUsername = :userUsername"),
     @NamedQuery(name = "User.findByUserPassword", query = "SELECT u FROM User u WHERE u.userPassword = :userPassword"),
-    @NamedQuery(name = "User.findByUserGeneratedarray", query = "SELECT u FROM User u WHERE u.userGeneratedarray = :userGeneratedarray")})
+    @NamedQuery(name = "User.findByUserGeneratedarray", query = "SELECT u FROM User u WHERE u.userGeneratedarray = :userGeneratedarray"),
+    @NamedQuery(name = "User.findByUserWalletmoney", query = "SELECT u FROM User u WHERE u.userWalletmoney = :userWalletmoney")})
 public class User implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "user_id")
-    private Integer userId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "user_active")
     private short userActive;
     @Basic(optional = false)
-    @NotNull
+    @NotNull()
     @Column(name = "user_type")
     private short userType;
     @Basic(optional = false)
@@ -75,15 +70,15 @@ public class User implements Serializable {
     @Size(max = 45)
     @Column(name = "user_paypal")
     private String userPaypal;
-    @Lob
+    @Lob()
     @Column(name = "user_billphoto")
     private byte[] userBillphoto;
     @Basic(optional = false)
-    @NotNull
+    @NotNull()
     @Column(name = "user_reportpoints")
     private int userReportpoints;
     @Basic(optional = false)
-    @NotNull
+    @NotNull()
     @Size(min = 1, max = 45)
     @Column(name = "user_email")
     private String userEmail;
@@ -100,22 +95,30 @@ public class User implements Serializable {
     @Size(max = 45)
     @Column(name = "user_generatedarray")
     private String userGeneratedarray;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "user_id")
+    private Integer userId;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "user_walletmoney")
+    private BigDecimal userWalletmoney;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "greviewUserid")
     private Collection<GarageReview> garageReviewCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sreviewUserid")
+    @OneToMany(mappedBy = "sreviewUserid")
     private Collection<SiteReviews> siteReviewsCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ureviewFromuserid")
-    
     private Collection<UserReview> userReviewCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ureviewTouserid")
     private Collection<UserReview> userReviewCollection1;
     @OneToMany(mappedBy = "garageUserid")
     private Collection<Garage> garageCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cmessageFromuserid")
+    @OneToMany(mappedBy = "cmessageFromuserid")
     private Collection<ChatMessages> chatMessagesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cmessageTouserid")
+    @OneToMany(mappedBy = "cmessageTouserid")
     private Collection<ChatMessages> chatMessagesCollection1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rentalUserid")
+    @OneToMany(mappedBy = "rentalUserid")
     @JsonBackReference
     private Collection<Rental> rentalCollection;
 
@@ -234,6 +237,14 @@ public class User implements Serializable {
         this.userGeneratedarray = userGeneratedarray;
     }
 
+    public BigDecimal getUserWalletmoney() {
+        return userWalletmoney;
+    }
+
+    public void setUserWalletmoney(BigDecimal userWalletmoney) {
+        this.userWalletmoney = userWalletmoney;
+    }
+
     @XmlTransient
     public Collection<GarageReview> getGarageReviewCollection() {
         return garageReviewCollection;
@@ -330,5 +341,5 @@ public class User implements Serializable {
     public String toString() {
         return "com.example.parkbnb.models.User[ userId=" + userId + " ]";
     }
-    
+
 }

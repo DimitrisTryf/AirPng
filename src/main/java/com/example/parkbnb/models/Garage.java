@@ -47,19 +47,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Garage.findByGarageEntranceimageurl", query = "SELECT g FROM Garage g WHERE g.garageEntranceimageurl = :garageEntranceimageurl")})
 public class Garage implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "garage_id")
-    private Integer garageId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "garage_address")
     private String garageAddress;
     @Basic(optional = false)
-    @NotNull
+    @NotNull()
     @Size(min = 1, max = 45)
     @Column(name = "garage_longtitude")
     private String garageLongtitude;
@@ -84,6 +78,12 @@ public class Garage implements Serializable {
     @Size(max = 200)
     @Column(name = "garage_entranceimageurl")
     private String garageEntranceimageurl;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "garage_id")
+    private Integer garageId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "greviewGarageid")
     private Collection<GarageReview> garageReviewCollection;
     @JoinColumn(name = "garage_userid", referencedColumnName = "user_id")
@@ -231,5 +231,5 @@ public class Garage implements Serializable {
     public String toString() {
         return "com.example.parkbnb.models.Garage[ garageId=" + garageId + " ]";
     }
-    
+
 }

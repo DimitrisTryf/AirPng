@@ -39,7 +39,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Rental.findByRentalStart", query = "SELECT r FROM Rental r WHERE r.rentalStart = :rentalStart"),
     @NamedQuery(name = "Rental.findByRentalEnd", query = "SELECT r FROM Rental r WHERE r.rentalEnd = :rentalEnd"),
     @NamedQuery(name = "Rental.findByRentalPaydone", query = "SELECT r FROM Rental r WHERE r.rentalPaydone = :rentalPaydone"),
-    @NamedQuery(name = "Rental.findByRentalPriceperhour", query = "SELECT r FROM Rental r WHERE r.rentalPriceperhour = :rentalPriceperhour")})
+    @NamedQuery(name = "Rental.findByRentalPriceperhour", query = "SELECT r FROM Rental r WHERE r.rentalPriceperhour = :rentalPriceperhour"),
+    @NamedQuery(name = "Rental.findByRentalTotalpayed", query = "SELECT r FROM Rental r WHERE r.rentalTotalpayed = :rentalTotalpayed")})
 public class Rental implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,12 +66,14 @@ public class Rental implements Serializable {
     @NotNull
     @Column(name = "rental_priceperhour")
     private BigDecimal rentalPriceperhour;
+    @Column(name = "rental_totalpayed")
+    private BigDecimal rentalTotalpayed;
     @JoinColumn(name = "rental_garageid", referencedColumnName = "garage_id")
     @ManyToOne(optional = false)
     @JsonManagedReference
     private Garage rentalGarageid;
     @JoinColumn(name = "rental_userid", referencedColumnName = "user_id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JsonManagedReference
     private User rentalUserid;
 
@@ -126,6 +129,14 @@ public class Rental implements Serializable {
 
     public void setRentalPriceperhour(BigDecimal rentalPriceperhour) {
         this.rentalPriceperhour = rentalPriceperhour;
+    }
+
+    public BigDecimal getRentalTotalpayed() {
+        return rentalTotalpayed;
+    }
+
+    public void setRentalTotalpayed(BigDecimal rentalTotalpayed) {
+        this.rentalTotalpayed = rentalTotalpayed;
     }
 
     public Garage getRentalGarageid() {

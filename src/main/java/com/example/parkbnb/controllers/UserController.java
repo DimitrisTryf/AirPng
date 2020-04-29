@@ -12,6 +12,7 @@ import com.example.parkbnb.services.UserServiceInterface;
 import com.example.parkbnb.utils.MailUtils;
 import com.example.parkbnb.validators.ErrorMessage;
 import com.example.parkbnb.validators.NewUserDtoValidator;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,6 +111,7 @@ public class UserController {
         tempUser.setUserActive((byte) 2);
         tempUser.setUserType((byte) 1);
         tempUser.setUserReportpoints(0);
+        tempUser.setUserWalletmoney(BigDecimal.valueOf(1500.00));
 
         MailUtils mailUtils = new MailUtils();
         String generated = mailUtils.generateRandomArray();
