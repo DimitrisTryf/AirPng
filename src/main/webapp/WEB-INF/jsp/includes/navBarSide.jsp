@@ -57,7 +57,7 @@
         </a>
 
         <!--<a href="/confirmGarages" id="confirmGarages">-->
-        <a href="#" id="myWallet">
+        <a href="/wallet" id="myWallet">
             <div class=row>
                 <div class="col-2 padding-left-1 ">
                     <i class="fas fa-wallet"></i>

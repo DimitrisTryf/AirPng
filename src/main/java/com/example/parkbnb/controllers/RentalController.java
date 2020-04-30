@@ -211,5 +211,8 @@ public class RentalController {
         return "myRentalHistory";
     }
     
-
+  @GetMapping(value="/wallet")
+    public String goToWallet(){
+        return "wallet";
+    } 
 }
