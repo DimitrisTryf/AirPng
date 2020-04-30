@@ -43,7 +43,7 @@ public class UserController {
 
     @GetMapping(value = "/")
     public String def() {
-        
+
         return "index";
     }
 
@@ -54,8 +54,8 @@ public class UserController {
 
     @PostMapping(value = "/login")
     public String login(@RequestParam(name = "username") String username,
-                        @RequestParam(name = "password") String password,
-                        HttpSession session) {
+            @RequestParam(name = "password") String password,
+            HttpSession session) {
         User user = usi.getUserByUsername(username);
         if (user == null || user.getUserActive() == 3) {//useractive==1 active/2 not mail confirmation/ 3 banned
             return "error";
@@ -87,43 +87,40 @@ public class UserController {
     }
 
     @PostMapping(value = "/addUser")
-    public @ResponseBody NewUserDtoValidator addUser(@RequestBody @Valid NewUserDto temp,
-            BindingResult br , HttpServletRequest request) throws MessagingException  {
+    public @ResponseBody
+    NewUserDtoValidator addUser(@RequestBody @Valid NewUserDto temp,
+            BindingResult br, HttpServletRequest request) throws MessagingException {
         if (br.hasErrors()) {
-           
-            
+
             val.setStatus("FAIL");
-             List<FieldError> allErrors = br.getFieldErrors();
-              
-		  final List<ErrorMessage> errorMesages = new ArrayList<ErrorMessage>();
-		  for (FieldError objectError : allErrors) {
-			  errorMesages.add(new ErrorMessage(objectError.getField(), objectError.getCode() ));	
-		  }			
-		  val.setErrorMessageList(errorMesages);
-        }
-        else{
-        User tempUser = new User();
-        tempUser.setUserName(temp.getUserNameRegisterForm());
-        tempUser.setUserSurname(temp.getUserSurname());
-        tempUser.setUserUsername(temp.getUserUsername());
-        tempUser.setUserEmail(temp.getUserEmail());
-        tempUser.setUserPassword(passwordEncoder.encode(temp.getUserPassword1()));
-        tempUser.setUserActive((byte) 2);
-        tempUser.setUserType((byte) 1);
-        tempUser.setUserReportpoints(0);
-        tempUser.setUserWalletmoney(BigDecimal.valueOf(1500.00));
+            List<FieldError> allErrors = br.getFieldErrors();
 
-        MailUtils mailUtils = new MailUtils();
-        String generated = mailUtils.generateRandomArray();
-        tempUser.setUserGeneratedarray(generated);
-        mailUtils.sendConfirmationMail(tempUser.getUserEmail(), generated);
+            final List<ErrorMessage> errorMesages = new ArrayList<ErrorMessage>();
+            for (FieldError objectError : allErrors) {
+                errorMesages.add(new ErrorMessage(objectError.getField(), objectError.getCode()));
+            }
+            val.setErrorMessageList(errorMesages);
+        } else {
+            User tempUser = new User();
+            tempUser.setUserName(temp.getUserNameRegisterForm());
+            tempUser.setUserSurname(temp.getUserSurname());
+            tempUser.setUserUsername(temp.getUserUsername());
+            tempUser.setUserEmail(temp.getUserEmail());
+            tempUser.setUserPassword(passwordEncoder.encode(temp.getUserPassword1()));
+            tempUser.setUserActive((byte) 2);
+            tempUser.setUserType((byte) 1);
+            tempUser.setUserReportpoints(0);
+            tempUser.setUserWalletmoney(BigDecimal.valueOf(1500.00));
 
-        usi.insertNewUser(tempUser);
-        
+            MailUtils mailUtils = new MailUtils();
+            String generated = mailUtils.generateRandomArray();
+            tempUser.setUserGeneratedarray(generated);
+            mailUtils.sendConfirmationMail(tempUser.getUserEmail(), generated);
 
+            usi.insertNewUser(tempUser);
 
-        val.setStatus("Success");
-        return val;
+            val.setStatus("Success");
+            return val;
         }
         val.setStatus("FAIL");
         return val;
@@ -143,7 +140,7 @@ public class UserController {
 
     @GetMapping(value = "/resendConfirmation")
     public String resendConfirmation(HttpSession session) throws MessagingException {
-        User user = (User)session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
         if (user == null) {
             return "error";
         }
@@ -154,19 +151,37 @@ public class UserController {
         usi.insertNewUser(user);
         return "login";
     }
-    
-   @GetMapping(value="/main")
-    public String goToMain(){
+
+    @GetMapping(value = "/main")
+    public String goToMain() {
         return "main";
-    } 
- @GetMapping(value="/forTest_delete_after")
-    public String forTest_delete_after(){
+    }
+
+    @GetMapping(value = "/forTest_delete_after")
+    public String forTest_delete_after() {
         return "main";
-    } 
-    
-    @GetMapping(value="/logoutUser")
-    public String logoutUser(HttpSession session){
+    }
+
+    @GetMapping(value = "/logoutUser")
+    public String logoutUser(HttpSession session) {
         session.setAttribute("userSession", null);
         return "index";
-    } 
+    }
+
+    @PostMapping("/addUserBalance")
+    public String addBalance(@RequestParam("money") double money,
+            @RequestParam("payee") String payee,
+            HttpSession session) {
+
+        if (payee.equals("sb-5li9g1605065@personal.example.com")) {
+            User user = (User) session.getAttribute("userSession");
+            User temp = usi.getUserByID(user.getUserId());
+            temp.setUserWalletmoney(temp.getUserWalletmoney().add(BigDecimal.valueOf(money)));
+            usi.insertNewUser(temp);
+            session.setAttribute("userSession", temp);
+        }
+
+        return "/wallet";
+    }
+
 }

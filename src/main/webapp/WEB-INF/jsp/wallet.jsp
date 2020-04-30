@@ -18,7 +18,7 @@
         <link rel="shortcut icon" href="assets/images/logo-102x121.png" type="image/x-icon">
         <meta name="description" content="">
         <script
-            src="https://www.paypal.com/sdk/js?client-id=AaPVJsgzTdDgEIzSCLbfDUFb7lYnIOhoGkuv10aNmEv-J5QNw-9r_gh0rNXKPbrAddF0_yeRtysAeHIy"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+            src="https://www.paypal.com/sdk/js?client-id=AQaVvib9w5SsriyfrYqq0qfFyqq22sXGP22FGhxGbXGN6G1jIypM9icFvvJ_6jxXa7bUJfwPaF2HZmSb"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
         </script>
 
         <jsp:include page = "includes_for_css.jsp"></jsp:include>  
@@ -105,7 +105,9 @@
 
                     <div class="container align-center" style="position:static">
                         <h1>My Wallet</h1>
-
+                        <input type="number" step="0.01" name="money" required id="money">
+                        
+                        <div>Your Balance : ${userSession.userWalletmoney} €</div>
                         <div id="paypal-button-container"></div>
                     </div>
 
@@ -113,7 +115,11 @@
                 </br></br> </section>
 
 
-
+                        <form id="hid" method="POST" action="/addUserBalance" hidden>
+                            <input type="number" name="money" id="mon">
+                            <input type="text" name="payee" id="pay">
+                            <input type="submit" id="sub">
+                        </form>
 
         <jsp:include page = "includes/footer.jsp"></jsp:include>  
 
@@ -131,7 +137,7 @@
                         return actions.order.create({
                             purchase_units: [{
                                     amount: {
-                                        value: '0.01'
+                                        value: document.getElementById("money").value
                                     }
                                 }]
                         });
@@ -140,6 +146,11 @@
                         // This function captures the funds from the transaction.
                         return actions.order.capture().then(function (details) {
                             // This function shows a transaction success message to your buyer.
+                            document.getElementById("money").value="";
+                            document.getElementById("mon").value=details.purchase_units[0].amount.value;
+                            document.getElementById("pay").value = details.purchase_units[0].payee.email_address;
+                            document.getElementById("sub").click();
+console.log(details);
                             alert('Transaction completed by ' + details.payer.name.given_name);
                         });
                     }
