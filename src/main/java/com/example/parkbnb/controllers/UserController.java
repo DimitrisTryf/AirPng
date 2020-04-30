@@ -110,7 +110,7 @@ public class UserController {
             tempUser.setUserActive((byte) 2);
             tempUser.setUserType((byte) 1);
             tempUser.setUserReportpoints(0);
-            tempUser.setUserWalletmoney(BigDecimal.valueOf(1500.00));
+            tempUser.setUserWalletmoney(BigDecimal.valueOf(0.00));
 
             MailUtils mailUtils = new MailUtils();
             String generated = mailUtils.generateRandomArray();
@@ -135,7 +135,7 @@ public class UserController {
         user.setUserActive((byte) 1);
         user.setUserGeneratedarray(null);
         usi.insertNewUser(user);
-        return "login";
+        return "/";
     }
 
     @GetMapping(value = "/resendConfirmation")

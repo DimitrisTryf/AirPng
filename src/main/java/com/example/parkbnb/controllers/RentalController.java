@@ -106,6 +106,11 @@ public class RentalController {
 
          Rental existingRental = rsi.getRentalById(rentalid);
         
+         if(existingRental.getRentalUserid()==null){
+             rsi.removeRental(existingRental);
+             return "redirect:/showUsersGaragesNew";
+         }
+         
         User tempu = usi.getUserByID(user.getUserId());
         tempu.setUserWalletmoney(tempu.getUserWalletmoney().subtract(existingRental.getRentalTotalpayed()));
         usi.insertNewUser(tempu);
@@ -113,6 +118,7 @@ public class RentalController {
         User temp = usi.getUserByID(existingRental.getRentalUserid().getUserId());
         temp.setUserWalletmoney(temp.getUserWalletmoney().add(existingRental.getRentalTotalpayed()));
         usi.insertNewUser(temp);
+        session.setAttribute("userSession", temp);
         
         rsi.removeRental(existingRental);
         return "redirect:/showUsersGaragesNew";
@@ -134,6 +140,7 @@ public class RentalController {
         User tempu = usi.getUserByID(user.getUserId());
         tempu.setUserWalletmoney(tempu.getUserWalletmoney().subtract(BigDecimal.valueOf(totalPrice)));
         usi.insertNewUser(tempu);
+        session.setAttribute("userSession", tempu);
         
         User temp = usi.getUserByID(existingRental.getRentalGarageid().getGarageUserid().getUserId());
         temp.setUserWalletmoney(temp.getUserWalletmoney().add(BigDecimal.valueOf(totalPrice)));
