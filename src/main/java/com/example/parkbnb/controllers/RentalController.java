@@ -133,7 +133,9 @@ public class RentalController {
         LocalDateTime[] formatedDates = rentalUtils.handleRentalDates(dates);
         Rental existingRental = rsi.getRentalById(rentalId);
         User user = (User) session.getAttribute("userSession");
-        
+        if(user.getUserWalletmoney().subtract(BigDecimal.valueOf(totalPrice)).compareTo(BigDecimal.ZERO)<0){
+            return "redirect:/";
+        }
         LocalDateTime oldRentalStart = LocalDateTime.ofInstant(existingRental.getRentalStart().toInstant(), ZoneId.systemDefault());
         LocalDateTime oldRentalEnd = LocalDateTime.ofInstant(existingRental.getRentalEnd().toInstant(), ZoneId.systemDefault());
         
@@ -148,6 +150,7 @@ public class RentalController {
         
         if (oldRentalStart.equals(formatedDates[0]) && oldRentalEnd.equals(formatedDates[1])) {
             existingRental.setRentalUserid(user);
+            existingRental.setRentalTotalpayed(BigDecimal.valueOf(totalPrice));
             rsi.addNewRental(existingRental);
         } else if (oldRentalStart.equals(formatedDates[0])) {
             
